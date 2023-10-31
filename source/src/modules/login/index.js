@@ -13,16 +13,21 @@ import useFetch from '@hooks/useFetch';
 import useFetchAction from '@hooks/useFetchAction';
 import Title from 'antd/es/typography/Title';
 import { showErrorMessage } from '@services/notifyService';
-import { brandName } from '@constants';
+import { appAccount, brandName } from '@constants';
 import { commonMessage } from '@locales/intl';
-
+import { Buffer } from 'buffer';
+window.Buffer = window.Buffer || Buffer;
 const message = defineMessages({
     copyRight: '{brandName} - © Copyright {year}. All Rights Reserved',
 });
 
 const LoginPage = () => {
     const intl = useIntl();
-    const { execute, loading } = useFetch(apiConfig.account.login, {});
+    const base64Credentials = Buffer.from(`${appAccount.APP_USERNAME}:${appAccount.APP_PASSWORD}`).toString('base64');
+    const { execute, loading } = useFetch({
+        ...apiConfig.account.loginBasic,
+        authorization: `Basic ${base64Credentials}`,
+    });
     const { execute: executeGetProfile } = useFetchAction(accountActions.getProfile, {
         loading: useFetchAction.LOADING_TYPE.APP,
     });
@@ -30,9 +35,9 @@ const LoginPage = () => {
 
     const onFinish = (values) => {
         execute({
-            data: values,
+            data: { ...values, grant_type: 'password' },
             onCompleted: (res) => {
-                setCacheAccessToken(res.data?.token);
+                setCacheAccessToken(res.access_token);
                 executeGetProfile();
             },
             onError: ({ message }) => showErrorMessage(message),
