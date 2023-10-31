@@ -10,8 +10,8 @@ const multipartFormHeader = {
 
 const apiConfig = {
     account: {
-        login: {
-            baseURL: `${apiUrl}v1/account/login`,
+        loginBasic: {
+            baseURL: `${apiUrl}api/token`,
             method: 'POST',
             headers: baseHeader,
         },

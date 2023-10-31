@@ -27,7 +27,7 @@ const UserAdminListPage = ({ pageOptions }) => {
             funcs.mappingData = (response) => {
                 if (response.result === true) {
                     return {
-                        data: response.data.data,
+                        data: response.data.content,
                         total: response.data.totalElements,
                     };
                 }

@@ -102,3 +102,8 @@ export const formSize = {
     normal: '700px',
     big: '900px',
 };
+
+export const appAccount = {
+    APP_USERNAME: process.env.REACT_APP_USERNAME,
+    APP_PASSWORD: process.env.REACT_APP_PASSWORD,
+};

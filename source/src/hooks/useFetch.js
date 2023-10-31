@@ -8,7 +8,6 @@ const useFetch = (apiConfig, { immediate = false, mappingData, params = {}, path
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
     const isMounted = useIsMounted();
-
     const execute = useCallback(
         async ({ onCompleted, onError, ...payload } = {}, cancelType) => {
             if (isMounted()) {
@@ -17,8 +16,7 @@ const useFetch = (apiConfig, { immediate = false, mappingData, params = {}, path
             }
             try {
                 const { data } = await sendRequest(apiConfig, { params, pathParams, ...payload }, cancelType);
-
-                if (!data.result && data.statusCode !== 200) {
+                if (!data.result && data.statusCode !== 200 && apiConfig.baseURL != apiUrl.account.loginBasic.baseURL) {
                     throw data;
                 }
                 if (isMounted()) {
@@ -40,7 +38,6 @@ const useFetch = (apiConfig, { immediate = false, mappingData, params = {}, path
         },
         [apiConfig],
     );
-
     useEffect(() => {
         if (immediate) {
             execute();
