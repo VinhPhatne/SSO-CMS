@@ -1,4 +1,4 @@
-import { apiUrl } from '.';
+import { AppConstants, apiUrl } from '.';
 
 const baseHeader = {
     'Content-Type': 'application/json',
@@ -70,17 +70,17 @@ const apiConfig = {
     },
     file: {
         upload: {
-            path: `${apiUrl}v1/file/upload`,
+            path: `${AppConstants.mediaRootUrl}v1/file/upload`,
             method: 'POST',
             headers: multipartFormHeader,
         },
         image: {
-            path: `${apiUrl}admin/v1/image/upload`,
+            path: `${AppConstants.mediaRootUrl}admin/v1/image/upload`,
             method: 'POST',
             headers: multipartFormHeader,
         },
         video: {
-            path: `${apiUrl}admin/v1/video/upload`,
+            path: `${AppConstants.mediaRootUrl}admin/v1/video/upload`,
             method: 'POST',
             headers: multipartFormHeader,
         },

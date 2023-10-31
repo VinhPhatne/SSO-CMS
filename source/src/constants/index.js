@@ -1,4 +1,5 @@
 export const apiUrl = process.env.REACT_APP_API;
+export const apiUrlMedia = process.env.REACT_APP_API_MEDIA;
 export const enableExposure = process.env.REACT_APP_ENABLE_EXPOSURE === 'true';
 
 export const fixedPath = {
@@ -19,6 +20,7 @@ export const storageKeys = {
 export const AppConstants = {
     apiRootUrl: process.env.REACT_APP_API,
     contentRootUrl: `${process.env.REACT_APP_API}v1/file/download`,
+    mediaRootUrl: `${process.env.REACT_APP_API_MEDIA}/`,
     langKey: 'vi',
 };
 

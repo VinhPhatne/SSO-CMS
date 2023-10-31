@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import useBasicForm from '@hooks/useBasicForm';
 import TextField from '@components/common/form/TextField';
 import CropImageField from '@components/common/form/CropImageField';
-import { AppConstants } from '@constants';
+import { AppConstants, apiUrlMedia } from '@constants';
 import useFetch from '@hooks/useFetch';
 import apiConfig from '@constants/apiConfig';
 import SelectField from '@components/common/form/SelectField';
@@ -86,7 +86,7 @@ const NewsForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormValue
                             required
                             label={<FormattedMessage defaultMessage="Avatar" />}
                             name="categoryImage"
-                            imageUrl={avatarUrl && `${AppConstants.contentRootUrl}${avatarUrl}`}
+                            imageUrl={avatarUrl && `${apiUrlMedia}${avatarUrl}`}
                             aspect={1 / 1}
                             uploadFile={(...args) => uploadFile(...args, setAvatarUrl)}
                         />
@@ -96,7 +96,7 @@ const NewsForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormValue
                             required
                             label={<FormattedMessage defaultMessage="Banner" />}
                             name="banner"
-                            imageUrl={bannerUrl && `${AppConstants.contentRootUrl}${bannerUrl}`}
+                            imageUrl={bannerUrl && `${apiUrlMedia}${bannerUrl}`}
                             aspect={16 / 9}
                             uploadFile={(...args) => uploadFile(...args, setBannerUrl)}
                         />

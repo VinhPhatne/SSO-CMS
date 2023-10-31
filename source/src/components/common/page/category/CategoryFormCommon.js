@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import useBasicForm from '@hooks/useBasicForm';
 import TextField from '@components/common/form/TextField';
 import CropImageField from '@components/common/form/CropImageField';
-import { AppConstants } from '@constants';
+import { AppConstants, apiUrlMedia } from '@constants';
 import useFetch from '@hooks/useFetch';
 import apiConfig from '@constants/apiConfig';
 import SelectField from '@components/common/form/SelectField';
@@ -64,7 +64,7 @@ const CategoryFormCommon = (props) => {
                 <CropImageField
                     label={<FormattedMessage defaultMessage="Avatar" />}
                     name="categoryImage"
-                    imageUrl={imageUrl && `${AppConstants.contentRootUrl}${imageUrl}`}
+                    imageUrl={imageUrl && `${apiUrlMedia}${imageUrl}`}
                     aspect={1 / 1}
                     uploadFile={uploadFile}
                 />
