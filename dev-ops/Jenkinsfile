@@ -5,10 +5,10 @@ TIMEZONE = "GMT+7"
 APP_BOOT_TIME_SECOND = 5
 SLACK_CHANNEL_NAME = "GMQ6JQ1FT"
 
-TARGET_FOLDER="/data/deploy/ilearning"
-APP_NAME = "elms-portal"
+TARGET_FOLDER="/data/deploy/tam"
+APP_NAME = "react-cms-base"
 
-APP_DEV_PORT=6108
+APP_DEV_PORT=6301
 
 node {
     try {
