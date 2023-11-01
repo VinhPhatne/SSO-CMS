@@ -5,7 +5,7 @@ import useBasicForm from '@hooks/useBasicForm';
 import CropImageField from '@components/common/form/CropImageField';
 import useFetch from '@hooks/useFetch';
 import apiConfig from '@constants/apiConfig';
-import { AppConstants, apiUrlMedia } from '@constants';
+import { AppConstants } from '@constants';
 import { defineMessages } from 'react-intl';
 import useTranslate from '@hooks/useTranslate';
 import { commonMessage } from '@locales/intl';
@@ -78,7 +78,7 @@ const ProfileForm = (props) => {
                 <CropImageField
                     label={translate.formatMessage(commonMessage.avatar)}
                     name="avatar"
-                    imageUrl={imageUrl && `${apiUrlMedia}${imageUrl}`}
+                    imageUrl={imageUrl && `${AppConstants.mediaRootUrl}${imageUrl}`}
                     aspect={1 / 1}
                     uploadFile={uploadFile}
                 />

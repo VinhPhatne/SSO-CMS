@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import useBasicForm from '@hooks/useBasicForm';
 import TextField from '@components/common/form/TextField';
 import CropImageField from '@components/common/form/CropImageField';
-import { AppConstants, apiUrlMedia } from '@constants';
+import { AppConstants } from '@constants';
 import useFetch from '@hooks/useFetch';
 import apiConfig from '@constants/apiConfig';
 import SelectField from '@components/common/form/SelectField';
@@ -54,17 +54,12 @@ const CategoryFormCommon = (props) => {
     }, [dataDetail]);
 
     return (
-        <BaseForm
-            id={formId}
-            onFinish={handleSubmit}
-            form={form}
-            onValuesChange={onValuesChange}
-        >
+        <BaseForm id={formId} onFinish={handleSubmit} form={form} onValuesChange={onValuesChange}>
             <Card className="card-form" bordered={false}>
                 <CropImageField
                     label={<FormattedMessage defaultMessage="Avatar" />}
                     name="categoryImage"
-                    imageUrl={imageUrl && `${apiUrlMedia}${imageUrl}`}
+                    imageUrl={imageUrl && `${AppConstants.mediaRootUrl}${imageUrl}`}
                     aspect={1 / 1}
                     uploadFile={uploadFile}
                 />

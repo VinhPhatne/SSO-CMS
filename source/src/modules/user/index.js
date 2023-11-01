@@ -5,7 +5,7 @@ import React from 'react';
 import BaseTable from '@components/common/table/BaseTable';
 
 import { UserOutlined } from '@ant-design/icons';
-import { AppConstants, DEFAULT_TABLE_ITEM_SIZE, apiUrlMedia } from '@constants';
+import { AppConstants, DEFAULT_TABLE_ITEM_SIZE } from '@constants';
 import PageWrapper from '@components/common/layout/PageWrapper';
 import ListPage from '@components/common/layout/ListPage';
 import { defineMessages } from 'react-intl';
@@ -37,20 +37,20 @@ const UserAdminListPage = ({ pageOptions }) => {
     const columns = [
         {
             title: '#',
-            dataIndex: 'avatar',
+            dataIndex: 'avatarPath',
             align: 'center',
             width: 100,
             render: (avatar) => (
                 <AvatarField
                     size="large"
                     icon={<UserOutlined />}
-                    src={avatar ? `${apiUrlMedia}${avatar}` : null}
+                    src={avatar ? `${AppConstants.contentRootUrl}${avatar}` : null}
                 />
             ),
         },
         { title: translate.formatMessage(commonMessage.username), dataIndex: 'username' },
         isAdmin() && { title: translate.formatMessage(commonMessage.fullName), dataIndex: 'fullName' },
-        { title: translate.formatMessage(commonMessage.phone), dataIndex: 'phone', width: '130px' },
+        // { title: translate.formatMessage(commonMessage.phone), dataIndex: 'phone', width: '130px' },
         {
             title: translate.formatMessage(commonMessage.group),
             dataIndex: 'group',
