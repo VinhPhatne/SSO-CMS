@@ -159,6 +159,7 @@ const useListBase = ({
     }
 
     const handleDeleteItemError = (error) => {
+        console.log(error);
         notification({ type: 'error', message: error.message || `Delete ${options.objectName} failed` });
     };
 

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import useBasicForm from '@hooks/useBasicForm';
 import TextField from '@components/common/form/TextField';
 import CropImageField from '@components/common/form/CropImageField';
-import { AppConstants, apiUrlMedia } from '@constants';
+import { AppConstants } from '@constants';
 import useFetch from '@hooks/useFetch';
 import apiConfig from '@constants/apiConfig';
 import { defineMessages } from 'react-intl';
@@ -37,6 +37,7 @@ const UserAdminForm = (props) => {
                 if (response.result === true) {
                     onSuccess();
                     setImageUrl(response.data.filePath);
+                    setIsChangedFormValues();
                 }
             },
             onError: (error) => {
@@ -55,7 +56,6 @@ const UserAdminForm = (props) => {
         });
         setImageUrl(dataDetail.avatar);
     }, [dataDetail]);
-
     return (
         <BaseForm id={formId} onFinish={handleSubmit} form={form} onValuesChange={onValuesChange}>
             <Card className="card-form" bordered={false}>
@@ -64,7 +64,7 @@ const UserAdminForm = (props) => {
                         <CropImageField
                             label={translate.formatMessage(commonMessage.avatar)}
                             name="avatar"
-                            imageUrl={imageUrl && `${apiUrlMedia}${imageUrl}`}
+                            imageUrl={imageUrl && `${AppConstants.contentRootUrl}${imageUrl}`}
                             aspect={1 / 1}
                             uploadFile={uploadFile}
                         />
@@ -72,7 +72,11 @@ const UserAdminForm = (props) => {
                 </Row>
                 <Row gutter={16}>
                     <Col span={12}>
-                        <TextField  disabled={isEditing} label={translate.formatMessage(commonMessage.username)} name="username" />
+                        <TextField
+                            disabled={isEditing}
+                            label={translate.formatMessage(commonMessage.username)}
+                            name="username"
+                        />
                     </Col>
                     <Col span={12}>
                         <TextField label={translate.formatMessage(commonMessage.fullName)} required name="fullName" />
@@ -129,7 +133,14 @@ const UserAdminForm = (props) => {
                         <TextField label={translate.formatMessage(commonMessage.email)} name="email" type="email" />
                     </Col>
                     <Col span={12}>
-                        <SelectField disabled={isEditing} required name={['group', 'id']} label="Group" allowClear={false} options={groups} />
+                        <SelectField
+                            disabled={isEditing}
+                            required
+                            name={['group', 'id']}
+                            label="Group"
+                            allowClear={false}
+                            options={groups}
+                        />
                     </Col>
                 </Row>
                 <div className="footer-card-form">{actions}</div>

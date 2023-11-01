@@ -5,7 +5,7 @@ import React from 'react';
 import BaseTable from '@components/common/table/BaseTable';
 
 import { UserOutlined } from '@ant-design/icons';
-import { AppConstants, DEFAULT_TABLE_ITEM_SIZE, apiUrlMedia } from '@constants';
+import { AppConstants, DEFAULT_TABLE_ITEM_SIZE } from '@constants';
 import PageWrapper from '@components/common/layout/PageWrapper';
 import ListPage from '@components/common/layout/ListPage';
 import useTranslate from '@hooks/useTranslate';
@@ -56,7 +56,7 @@ const CategoryListPageCommon = ({ routes, kind }) => {
                 <AvatarField
                     size="large"
                     icon={<UserOutlined />}
-                    src={avatar ? `${apiUrlMedia}${avatar}` : null}
+                    src={avatar ? `${AppConstants.mediaRootUrl}${avatar}` : null}
                 />
             ),
         },

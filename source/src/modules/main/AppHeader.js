@@ -18,7 +18,7 @@ import useFetch from '@hooks/useFetch';
 import apiConfig from '@constants/apiConfig';
 import { removeCacheToken } from '@services/userService';
 import { useNavigate } from 'react-router-dom';
-import { AppConstants, apiUrlMedia } from '@constants';
+import { AppConstants } from '@constants';
 import { defineMessages } from 'react-intl';
 import useTranslate from '@hooks/useTranslate';
 import useLocale from '@hooks/useLocale';
@@ -62,7 +62,7 @@ const AppHeader = ({ collapsed, onCollapse }) => {
                             <Space>
                                 <Avatar
                                     icon={<UserOutlined />}
-                                    src={profile.avatar && `${apiUrlMedia}${profile.avatar}`}
+                                    src={profile.avatar && `${AppConstants.mediaRootUrl}${profile.avatar}`}
                                 />
                                 {profile?.fullName}
                                 <DownOutlined />

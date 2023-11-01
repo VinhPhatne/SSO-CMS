@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import BaseTable from '@components/common/table/BaseTable';
 
 import { UserOutlined } from '@ant-design/icons';
-import { apiUrlMedia, AppConstants, categoryKind, DEFAULT_TABLE_ITEM_SIZE } from '@constants';
+import { AppConstants, categoryKind, DEFAULT_TABLE_ITEM_SIZE } from '@constants';
 import PageWrapper from '@components/common/layout/PageWrapper';
 import ListPage from '@components/common/layout/ListPage';
 import useFetch from '@hooks/useFetch';
@@ -118,7 +118,7 @@ const NewsListPage = () => {
                 <AvatarField
                     size="large"
                     icon={<UserOutlined />}
-                    src={avatar ? `${apiUrlMedia}${avatar}` : null}
+                    src={avatar ? `${AppConstants.mediaRootUrl}${avatar}` : null}
                 />
             ),
         },
@@ -195,11 +195,8 @@ const NewsListPage = () => {
     return (
         <PageWrapper
             loading={getNewsLoading}
-            routes={[
-                { breadcrumbName: translate.formatMessage(commonMessage.news) },
-            ]}
+            routes={[{ breadcrumbName: translate.formatMessage(commonMessage.news) }]}
         >
-
             <ListPage
                 searchForm={mixinFuncs.renderSearchForm({ fields: searchFields, initialValues: queryFilter })}
                 actionBar={mixinFuncs.renderActionBar()}
