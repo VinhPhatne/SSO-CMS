@@ -99,13 +99,15 @@ export const categoryKind = {
     news: 1,
 };
 
-export const formSize = {
-    small: '600px',
-    normal: '700px',
-    big: '900px',
-};
-
 export const appAccount = {
     APP_USERNAME: process.env.REACT_APP_USERNAME,
     APP_PASSWORD: process.env.REACT_APP_PASSWORD,
 };
+
+export const GROUP_KIND_ADMIN = 1;
+export const GROUP_KIND_MANAGER = 2;
+
+export const groupPermissionKindsOptions = [
+    { label: 'Admin', value: GROUP_KIND_ADMIN },
+    { label: 'Manager', value: GROUP_KIND_MANAGER },
+];

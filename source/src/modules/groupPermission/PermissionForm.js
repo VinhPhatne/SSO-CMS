@@ -2,14 +2,10 @@ import { Card, Checkbox, Col, Form, Row } from 'antd';
 import React, { useEffect, useState } from 'react';
 import useBasicForm from '@hooks/useBasicForm';
 import TextField from '@components/common/form/TextField';
-import { defineMessages } from 'react-intl';
-import useTranslate from '@hooks/useTranslate';
-import { commonMessage } from '@locales/intl';
-import { BaseForm } from '@components/common/form/BaseForm';
+import { formSize } from '@constants/masterData';
 
 const PermissionForm = (props) => {
-    const translate = useTranslate();
-    const { formId, actions, dataDetail, onSubmit, setIsChangedFormValues, isEditing, permissions } = props;
+    const { formId, actions, dataDetail, onSubmit, setIsChangedFormValues, isEditing, permissions, size='small' } = props;
     const [ group, setGroup ] = useState([]);
     const { form, mixinFuncs, onValuesChange } = useBasicForm({
         onSubmit,
@@ -44,19 +40,21 @@ const PermissionForm = (props) => {
     }, [ permissions ]);
 
     return (
-        <BaseForm
+        <Form
+            style={{ width: formSize[size] ?? size }}
             id={formId}
             onFinish={handleSubmit}
             form={form}
+            layout="vertical"
             onValuesChange={onValuesChange}
         >
             <Card className="card-form" bordered={false}>
                 <Row gutter={16}>
                     <Col span={12}>
-                        <TextField label={translate.formatMessage(commonMessage.name)} required name="name" />
+                        <TextField label="Name" required name="name" />
                     </Col>
                     <Col span={12}>
-                        <TextField label={translate.formatMessage(commonMessage.description)} type="textarea" name="description" />
+                        <TextField label="Description" type="textarea" name="description" />
                     </Col>
                 </Row>
 
@@ -64,7 +62,7 @@ const PermissionForm = (props) => {
                     <Col span={24}>
                         <Form.Item
                             name="permissions"
-                            label={translate.formatMessage(commonMessage.groupPermission)}
+                            label={'GroupPermission'}
                             rules={[ { required: true, message: 'permission' } ]}
                         >
                             <Checkbox.Group
@@ -95,7 +93,7 @@ const PermissionForm = (props) => {
                 </Row>
                 <div className="footer-card-form">{actions}</div>
             </Card>
-        </BaseForm>
+        </Form>
     );
 };
 

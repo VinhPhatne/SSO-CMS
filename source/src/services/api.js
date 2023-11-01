@@ -57,7 +57,6 @@ axiosInstance.interceptors.response.use(
 const sendRequest = (options, payload, cancelToken) => {
     const { params = {}, pathParams = {}, data = {} } = payload;
     let { method, baseURL, headers, ignoreAuth, authorization } = options;
-    console.log(options);
     const userAccessToken = getCacheAccessToken();
     if (!ignoreAuth && userAccessToken) {
         headers.Authorization = `Bearer ${userAccessToken}`;
