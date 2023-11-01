@@ -1,6 +1,7 @@
 import qs from 'query-string';
-import { DATE_SHORT_MONTH_FORMAT, THEMES, apiUrl } from '@constants';
+import { DATE_FORMAT_DISPLAY, DATE_SHORT_MONTH_FORMAT, DEFAULT_FORMAT, THEMES, apiUrl } from '@constants';
 import dayjs from 'dayjs';
+import moment from 'moment/moment';
 
 export const convertGlobImportToObject = (modules) =>
     modules
@@ -29,6 +30,18 @@ export const destructCamelCaseString = (string) => {
     });
     return newArrString.join('');
 };
+
+export const convertUtcToLocalTime = (utcTime, inputFormat = DATE_FORMAT_DISPLAY, format = DATE_FORMAT_DISPLAY) => {
+    try {
+        if (utcTime) return moment(moment.utc(utcTime, inputFormat).toDate()).format(format);
+        return '';
+    } catch (err) {
+        return '';
+    }
+};
+export function convertUtcToIso(date) {
+    return dayjs(convertUtcToLocalTime(date, DEFAULT_FORMAT, DEFAULT_FORMAT), DEFAULT_FORMAT);
+}
 
 export const getBrowserTheme = () => {
     const isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
