@@ -5,7 +5,7 @@ import React from 'react';
 import BaseTable from '@components/common/table/BaseTable';
 
 import { UserOutlined } from '@ant-design/icons';
-import { AppConstants, DEFAULT_TABLE_ITEM_SIZE } from '@constants';
+import { AppConstants, DEFAULT_TABLE_ITEM_SIZE, apiUrlMedia } from '@constants';
 import PageWrapper from '@components/common/layout/PageWrapper';
 import ListPage from '@components/common/layout/ListPage';
 import { defineMessages } from 'react-intl';
@@ -44,7 +44,7 @@ const UserAdminListPage = ({ pageOptions }) => {
                 <AvatarField
                     size="large"
                     icon={<UserOutlined />}
-                    src={avatar ? `${AppConstants.contentRootUrl}${avatar}` : null}
+                    src={avatar ? `${apiUrlMedia}${avatar}` : null}
                 />
             ),
         },

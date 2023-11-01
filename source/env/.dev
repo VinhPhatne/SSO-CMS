@@ -1,4 +1,5 @@
 REACT_APP_API = https://spring-api-template.developteam.net/
+REACT_APP_API_MEDIA = https://org-media-template.developteam.net
 REACT_APP_ENV = dev
 GENERATE_SOURCEMAP = false
 CI = false

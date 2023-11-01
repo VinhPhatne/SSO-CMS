@@ -94,7 +94,7 @@ const RichTextField = (props) => {
     //                                 _this3.insertEmbed(
     //                                     index,
     //                                     'image',
-    //                                     `${AppConstants.contentRootUrl}${result.data.filePath}`,
+    //                                     `${apiUrlMedia}${result.data.filePath}`,
     //                                 );
     //                             }
     //                             _this3.setSelection(index + 1);

@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import BaseTable from '@components/common/table/BaseTable';
 
 import { UserOutlined } from '@ant-design/icons';
-import { AppConstants, categoryKind, DEFAULT_TABLE_ITEM_SIZE } from '@constants';
+import { apiUrlMedia, AppConstants, categoryKind, DEFAULT_TABLE_ITEM_SIZE } from '@constants';
 import PageWrapper from '@components/common/layout/PageWrapper';
 import ListPage from '@components/common/layout/ListPage';
 import useFetch from '@hooks/useFetch';
@@ -118,7 +118,7 @@ const NewsListPage = () => {
                 <AvatarField
                     size="large"
                     icon={<UserOutlined />}
-                    src={avatar ? `${AppConstants.contentRootUrl}${avatar}` : null}
+                    src={avatar ? `${apiUrlMedia}${avatar}` : null}
                 />
             ),
         },

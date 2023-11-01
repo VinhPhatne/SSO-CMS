@@ -50,7 +50,7 @@
   "hooks.useSaveBase.update": "Update",
   "hooks.useSaveBase.updateSuccess": "Update {objectName} success",
   "hooks.useSaveBase.yes": "Yes",
-  "locales.intl.commonMessage.admins": "Admins asd",
+  "locales.intl.commonMessage.admins": "Admins",
   "locales.intl.commonMessage.avatar": "Avatar",
   "locales.intl.commonMessage.category": "Category",
   "locales.intl.commonMessage.confirmPassword": "Confirm password",
