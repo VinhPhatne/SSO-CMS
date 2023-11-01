@@ -48,19 +48,19 @@ const navMenuConfig = [
             },
         ],
     },
-    // {
-    //     label: <FormattedMessage  defaultMessage='System management'/>,
-    //     key: 'system-management',
-    //     icon: <ControlOutlined />,
-    //     children: [
-    //         {
-    //             label: <FormattedMessage  defaultMessage='Role'/>,
-    //             key: 'role',
-    //             path: routes.groupPermissionPage.path,
-    //             permission: [apiConfig.groupPermission.getGroupList.baseURL],
-    //         },
-    //     ],
-    // },
+    {
+        label: <FormattedMessage  defaultMessage='Settings'/>,
+        key: 'system-management',
+        icon: <ControlOutlined />,
+        children: [
+            {
+                label: <FormattedMessage  defaultMessage='Role'/>,
+                key: 'role',
+                path: routes.groupPermissionPage.path,
+                permission: [apiConfig.groupPermission.getGroupList.baseURL],
+            },
+        ],
+    },
 ];
 
 export default navMenuConfig;

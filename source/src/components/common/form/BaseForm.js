@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form } from 'antd';
-import { formSize } from '@constants/index';
+import { formSize } from '@constants/masterData';
+
 
 export const BaseForm = ({
     formId,

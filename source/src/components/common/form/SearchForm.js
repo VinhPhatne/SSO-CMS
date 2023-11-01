@@ -1,19 +1,26 @@
+import { ClearOutlined, SearchOutlined } from '@ant-design/icons';
 import { FieldTypes } from '@constants/formConfig';
 import { Button, Col, Form, Row } from 'antd';
-import React, { useCallback, useEffect } from 'react';
-import SelectField from './SelectField';
+import React, { useCallback, useEffect, useRef } from 'react';
+import { defineMessages, useIntl } from 'react-intl';
 import DatePickerField from './DatePickerField';
 import DateRangePickerField from './DateRangePickerField';
 import InputTextField from './InputTextField';
-import { SearchOutlined, ClearOutlined } from '@ant-design/icons';
-import { defineMessages, useIntl } from 'react-intl';
+import SelectField from './SelectField';
 
+import dayjs from 'dayjs';
+import AutoCompleteField from './AutoCompleteField';
 import styles from './SearchForm.module.scss';
+
+const disabledDate = (current) => {
+    return current && current > dayjs().endOf('day');
+};
 
 const searchFields = {
     [FieldTypes.SELECT]: SelectField,
     [FieldTypes.DATE]: DatePickerField,
-    [FieldTypes.DATE_RANGE]: DateRangePickerField,
+    [FieldTypes.DATE_RANGE]: (props) => <DateRangePickerField disabledDate={disabledDate} {...props} />,
+    [FieldTypes.AUTOCOMPLETE]: AutoCompleteField,
     default: InputTextField,
 };
 
@@ -22,15 +29,39 @@ const message = defineMessages({
     clear: 'Clear',
 });
 
-function SearchForm({ fields = [], hiddenAction, onSearch, className, onReset, initialValues, width = 1100 }) {
-    const [ form ] = Form.useForm();
+function SearchForm({
+    fields = [],
+    hiddenAction,
+    onSearch,
+    className,
+    onReset,
+    initialValues,
+    width = 1100,
+    alignSearchField,
+    getFormInstance,
+}) {
+    const [form] = Form.useForm();
     const intl = useIntl();
+    const dateRangeKey = useRef({});
 
     const handleSearchSubmit = useCallback(
         (values) => {
+            // const dateRangeValues = Object.keys(dateRangeKey.current).reduce((acc, key) => {
+            //     if (!values[key]) return acc;
+
+            //     acc[dateRangeKey.current[key][1]] = formatDateToUtc(values[key][0]) + ' 00:00:00';
+            //     acc[dateRangeKey.current[key][2]] = formatDateToUtc(values[key][1]) + ' 23:59:59';
+
+            //     delete values[key];
+
+            //     console.log('acc', acc);
+
+            //     return acc;
+            // }, {});
+            // onSearch?.({ ...values, ...dateRangeValues });
             onSearch?.(values);
         },
-        [ form, onSearch ],
+        [form, onSearch],
     );
 
     const handleClearSearch = () => {
@@ -39,7 +70,7 @@ function SearchForm({ fields = [], hiddenAction, onSearch, className, onReset, i
     };
 
     const renderField = useCallback(
-        ({ type, submitOnChanged, onChange, key, renderItem, ...props }) => {
+        ({ type, submitOnChanged, onChange, key, renderItem, style, component, ...props }) => {
             if (renderItem) {
                 return (
                     <Form.Item {...props} name={key} style={{ marginBottom: '0px' }}>
@@ -48,23 +79,70 @@ function SearchForm({ fields = [], hiddenAction, onSearch, className, onReset, i
                 );
             }
 
-            const Field = searchFields[type] || searchFields.default;
-            return <Field {...props} name={key} onChange={submitOnChanged ? handleSearchSubmit : onChange} />;
+            const Field = component || searchFields[type] || searchFields.default;
+            return (
+                <Field
+                    {...props}
+                    name={key}
+                    fieldProps={{
+                        style: { ...style, width: '100%', height: 32 },
+                    }}
+                    style={{ ...style, width: '100%', height: 32 }}
+                    onChange={(e) => {
+                        if (submitOnChanged) {
+                            form.submit();
+                        } else {
+                            onChange?.(e);
+                        }
+                    }}
+                />
+            );
         },
-        [ handleSearchSubmit ],
+        [handleSearchSubmit],
     );
 
     useEffect(() => {
-        form.setFieldsValue(initialValues);
-    }, [ initialValues ]);
+        getFormInstance?.(form);
+    }, [form]);
+
+    useEffect(() => {
+        // fields.forEach((field) => {
+        //     if (field.type === FieldTypes.DATE_RANGE) {
+        //         dateRangeKey.current[field.key[0]] = field.key;
+        //     }
+        // });
+
+        // const dateRangeValues = Object.keys(dateRangeKey.current).reduce((acc, key) => {
+        //     if (!initialValues[dateRangeKey.current[key][1]] || !initialValues[dateRangeKey.current[key][2]]) return acc;
+
+        //     acc[key] = [
+        //         dayjs(formatDateToLocal(initialValues[dateRangeKey.current[key][1]]), DATE_FORMAT_DISPLAY),
+        //         dayjs(formatDateToLocal(initialValues[dateRangeKey.current[key][2]]), DATE_FORMAT_DISPLAY),
+        //     ];
+
+        //     return acc;
+        // }, {});
+
+        // form.setFieldsValue({
+        //     ...initialValues,
+        //     ...dateRangeValues,
+        // });
+        const normalizeValues = { ...initialValues };
+        Object.keys(normalizeValues).forEach((key) => {
+            if (!isNaN(normalizeValues[key])) {
+                normalizeValues[key] = Number(normalizeValues[key]);
+            }
+        });
+        form.setFieldsValue(normalizeValues);
+    }, [initialValues]);
 
     return (
         <Form form={form} layout="horizontal" className={className || styles.searchForm} onFinish={handleSearchSubmit}>
-            <Row gutter={10} style={{ maxWidth: width }}>
+            <Row align={alignSearchField} gutter={10} style={{ maxWidth: width }}>
                 {fields.map((field) => {
                     const { key, colSpan, className, ...props } = field;
                     return (
-                        <Col key={key} span={colSpan || 5} className={className}>
+                        <Col key={key} span={colSpan || 4} className={className}>
                             {renderField({ ...props, key })}
                         </Col>
                     );

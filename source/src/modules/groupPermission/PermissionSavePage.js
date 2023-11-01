@@ -1,21 +1,14 @@
 import PageWrapper from '@components/common/layout/PageWrapper';
-import { STATUS_ACTIVE, UserTypes } from '@constants';
+import { GROUP_KIND_ADMIN, STATUS_ACTIVE, UserTypes } from '@constants';
 import apiConfig from '@constants/apiConfig';
 import useFetch from '@hooks/useFetch';
 import useSaveBase from '@hooks/useSaveBase';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import PermissionForm from './PermissionForm';
-import { defineMessages } from 'react-intl';
-import useTranslate from '@hooks/useTranslate';
-import { commonMessage } from '@locales/intl';
-
-const message = defineMessages({
-    objectName: 'group permission',
-});
+import routes from '@routes';
 
 const PermissionSavePage = () => {
-    const translate = useTranslate();
     const { id } = useParams();
     const [permissions, setPermissions] = useState([]);
     const { execute: executeGetPermission } = useFetch(apiConfig.groupPermission.getPemissionList, {
@@ -29,8 +22,8 @@ const PermissionSavePage = () => {
             update: apiConfig.groupPermission.update,
         },
         options: {
-            getListUrl: `/group-permission`,
-            objectName: translate.formatMessage(message.objectName),
+            getListUrl: routes.groupPermissionPage.path,
+            objectName: 'role',
         },
         override: (funcs) => {
             funcs.prepareUpdateData = (data) => {
@@ -67,7 +60,7 @@ const PermissionSavePage = () => {
                 size: 1000,
             },
             onCompleted: (res) => {
-                setPermissions(res?.data?.data);
+                setPermissions(res?.data);
             },
         });
     }, []);
@@ -75,12 +68,10 @@ const PermissionSavePage = () => {
     return (
         <PageWrapper
             loading={loading}
-            routes={[
-                { breadcrumbName: translate.formatMessage(commonMessage.groupPermission), path: `/group-permission` },
-                { breadcrumbName: title },
-            ]}
+            routes={[{ breadcrumbName: 'Role', path: routes.groupPermissionPage.path }, { breadcrumbName: title }]}
         >
             <PermissionForm
+                size="normal"
                 setIsChangedFormValues={setIsChangedFormValues}
                 dataDetail={detail ? detail : {}}
                 formId={mixinFuncs.getFormId()}

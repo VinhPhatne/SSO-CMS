@@ -10,6 +10,7 @@ import { defineMessages } from 'react-intl';
 import useTranslate from '@hooks/useTranslate';
 import { commonMessage } from '@locales/intl';
 import { BaseForm } from '@components/common/form/BaseForm';
+import SelectField from '@components/common/form/SelectField';
 
 const message = defineMessages({
     objectName: 'group permission',
@@ -56,12 +57,7 @@ const UserAdminForm = (props) => {
     }, [dataDetail]);
 
     return (
-        <BaseForm
-            id={formId}
-            onFinish={handleSubmit}
-            form={form}
-            onValuesChange={onValuesChange}
-        >
+        <BaseForm id={formId} onFinish={handleSubmit} form={form} onValuesChange={onValuesChange}>
             <Card className="card-form" bordered={false}>
                 <Row gutter={16}>
                     <Col span={12}>
@@ -76,7 +72,7 @@ const UserAdminForm = (props) => {
                 </Row>
                 <Row gutter={16}>
                     <Col span={12}>
-                        <TextField label={translate.formatMessage(commonMessage.username)} name="username" />
+                        <TextField  disabled={isEditing} label={translate.formatMessage(commonMessage.username)} name="username" />
                     </Col>
                     <Col span={12}>
                         <TextField label={translate.formatMessage(commonMessage.fullName)} required name="fullName" />
@@ -97,7 +93,9 @@ const UserAdminForm = (props) => {
                                         if (isTouched) {
                                             const value = form.getFieldValue('password');
                                             if (value.length < 6) {
-                                                throw new Error(translate.formatMessage(commonMessage.validatePassword));
+                                                throw new Error(
+                                                    translate.formatMessage(commonMessage.validatePassword),
+                                                );
                                             }
                                         }
                                     },
@@ -131,7 +129,7 @@ const UserAdminForm = (props) => {
                         <TextField label={translate.formatMessage(commonMessage.email)} name="email" type="email" />
                     </Col>
                     <Col span={12}>
-                        <TextField label={translate.formatMessage(commonMessage.phone)} required name="phone" type="number" />
+                        <SelectField disabled={isEditing} required name={['group', 'id']} label="Group" allowClear={false} options={groups} />
                     </Col>
                 </Row>
                 <div className="footer-card-form">{actions}</div>

@@ -1,5 +1,5 @@
 import PageWrapper from '@components/common/layout/PageWrapper';
-import { STATUS_ACTIVE, UserTypes } from '@constants';
+import { GROUP_KIND_ADMIN, STATUS_ACTIVE, UserTypes } from '@constants';
 import apiConfig from '@constants/apiConfig';
 import useSaveBase from '@hooks/useSaveBase';
 import React from 'react';
@@ -8,6 +8,7 @@ import UserAdminForm from './UserAdminForm';
 import { defineMessages } from 'react-intl';
 import useTranslate from '@hooks/useTranslate';
 import { commonMessage } from '@locales/intl';
+import useFetch from '@hooks/useFetch';
 
 const message = defineMessages({
     objectName: 'UserAdmin',
@@ -16,6 +17,13 @@ const message = defineMessages({
 const UserAdminSavePage = ({ pageOptions }) => {
     const translate = useTranslate();
     const { id } = useParams();
+    const { data } = useFetch(apiConfig.groupPermission.getGroupList, {
+        immediate: true,
+        mappingData: (res) => res.data?.content?.map((item) => ({ value: item.id, label: item.name })),
+        params: {
+            kind: GROUP_KIND_ADMIN,
+        },
+    });
     const { detail, mixinFuncs, loading, onSave, setIsChangedFormValues, isEditing, title } = useSaveBase({
         apiConfig: {
             getById: apiConfig.user.getById,
@@ -32,6 +40,7 @@ const UserAdminSavePage = ({ pageOptions }) => {
                     status: STATUS_ACTIVE,
                     kind: UserTypes.ADMIN,
                     avatarPath: data.avatar,
+                    groupId: data.group.id,
                     ...data,
                     id: id,
                 };
@@ -41,6 +50,8 @@ const UserAdminSavePage = ({ pageOptions }) => {
                     ...data,
                     kind: UserTypes.ADMIN,
                     avatarPath: data.avatar,
+                    status: STATUS_ACTIVE,
+                    groupId: data.group.id,
                 };
             };
 
@@ -61,6 +72,7 @@ const UserAdminSavePage = ({ pageOptions }) => {
                 isEditing={isEditing}
                 actions={mixinFuncs.renderActions()}
                 onSubmit={onSave}
+                groups={data || []}
             />
         </PageWrapper>
     );

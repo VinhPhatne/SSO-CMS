@@ -31,3 +31,9 @@ export const statusOptions = [
     { value: STATUS_PENDING, label: commonMessage.statusPending, color: '#FFBF00' },
     { value: STATUS_INACTIVE, label: commonMessage.statusInactive, color: '#CC0000' },
 ];
+
+export const formSize = {
+    small: '700px',
+    normal: '800px',
+    big: '900px',
+};
