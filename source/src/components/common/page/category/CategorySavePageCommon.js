@@ -27,21 +27,22 @@ const CategorySavePageCommon = ({ routes, kind, getListUrl }) => {
                 return {
                     ...data,
                     status: 1,
-                    id: detail.id,
+                    kind: kind,
+                    categoryId: detail.id,
                 };
             };
             funcs.prepareCreateData = (data) => {
                 return {
                     ...data,
-                    categoryKind: kind,
-                    categoryOrdering: 0,
+                    kind: kind,
+                    ordering: 0,
                 };
             };
         },
     });
 
     return (
-        <PageWrapper loading={loading} routes={[ ...routes, { breadcrumbName: title } ]} title={title}>
+        <PageWrapper loading={loading} routes={[...routes, { breadcrumbName: title }]} title={title}>
             <CategoryFormCommon
                 setIsChangedFormValues={setIsChangedFormValues}
                 dataDetail={detail ? detail : {}}

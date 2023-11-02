@@ -30,7 +30,7 @@ const CategoryListPageCommon = ({ routes, kind }) => {
             funcs.mappingData = (response) => {
                 if (response.result === true) {
                     return {
-                        data: response.data.data,
+                        data: response.data.content,
                         total: response.data.totalElements,
                     };
                 }
@@ -60,7 +60,7 @@ const CategoryListPageCommon = ({ routes, kind }) => {
                 />
             ),
         },
-        { title: translate.formatMessage(message.name), dataIndex: 'categoryName' },
+        { title: translate.formatMessage(message.name), dataIndex: 'name' },
         mixinFuncs.renderActionColumn({ edit: true, delete: true }, { width: '150px' }),
     ];
 
