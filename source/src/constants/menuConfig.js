@@ -59,8 +59,16 @@ const navMenuConfig = [
                 path: routes.groupPermissionPage.path,
                 permission: [apiConfig.groupPermission.getGroupList.baseURL],
             },
+            {
+                label: <FormattedMessage  defaultMessage='Nation'/>,
+                key: 'nation',
+                path: routes.nationListPage.path,
+                // permission: [apiConfig.nation.getList.baseURL],
+            },
+            
         ],
     },
+   
 ];
 
 export default navMenuConfig;
