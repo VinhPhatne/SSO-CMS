@@ -9,8 +9,8 @@ const paths = {
     adminsSavePage: '/admins/:id',
     adminsLeaderListPage: '/admins-leader',
     adminsLeaderSavePage: '/admins-leader/:id',
-    userListPage: '/users',
-    userSavePage: '/users/:id',
+    userListPage: '/user',
+    userSavePage: '/user/:id',
 };
 export default {
     adminsListPage: {
