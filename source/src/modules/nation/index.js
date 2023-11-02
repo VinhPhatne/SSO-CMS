@@ -15,6 +15,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import routes from '@routes';
 import { RightSquareOutlined } from '@ant-design/icons';
 import { FieldTypes } from '@constants/formConfig';
+import styles from './nation.module.scss';
 
 const message = defineMessages({
     objectName: 'Nation',
@@ -66,13 +67,28 @@ const ProvinceListPage = () => {
         },
     });
 
-
+    const handleOnClick = (event, record) => {
+        event.preventDefault();
+        navigate(
+            routes.nationListPage.path +
+                `/district?provinceId=${record.id}&provinceName=${record.name}`,
+        );
+    };
     const columns = [
-        { title: <FormattedMessage defaultMessage="Name" />, dataIndex: 'name' },
+        { title: <FormattedMessage defaultMessage="Name" />, 
+            dataIndex: 'name',
+            render: (name, record) => (
+                <div onClick={(event) => handleOnClick(event, record)} className={styles.customDiv}>
+                    {name}
+                </div>
+            ), 
+        },
         {
             title: <FormattedMessage defaultMessage="Post Code" />,
             width: 180,
             dataIndex: 'postCode',
+            
+               
         },
         {
             title: translate.formatMessage(commonMessage.nation),
@@ -90,7 +106,6 @@ const ProvinceListPage = () => {
 
         mixinFuncs.renderActionColumn(
             {
-                district:true,
                 edit: true,
                 delete: true,
             },

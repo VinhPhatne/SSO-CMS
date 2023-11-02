@@ -31,13 +31,18 @@ const VillageListPage = () => {
     const nationValues = translate.formatKeys(nationKindOptions, ['label']);
     const navigate = useNavigate();
 
-    const { data, mixinFuncs, queryFilter, loading, pagination } = useListBase({
+    const { data, mixinFuncs, queryFilter, loading, pagination,serializeParams } = useListBase({
         apiConfig: apiConfig.nation,
         options: {
             pageSize: DEFAULT_TABLE_ITEM_SIZE,
             objectName: translate.formatMessage(message.objectName),
         },
         override: (funcs) => {
+            funcs.changeFilter = (filter) => {
+                mixinFuncs.setQueryParams(
+                    serializeParams({ ...filter,provinceId: provinceId, provinceName: provinceName, districtId: districtId, districtName: districtName  }),
+                );
+            };
             funcs.mappingData = (response) => {
                 if (response.result === true) {
                     return {
@@ -79,6 +84,8 @@ const VillageListPage = () => {
                 );
             },
         },
+        mixinFuncs.renderStatusColumn({ width: '120px' }),
+
         mixinFuncs.renderActionColumn(
             {
                 edit: true,
@@ -100,14 +107,11 @@ const VillageListPage = () => {
         <PageWrapper
             routes={[
                 { breadcrumbName: <FormattedMessage defaultMessage="Nation" />, path: routes.nationListPage.path },
-                { breadcrumbName: <FormattedMessage defaultMessage="District" />, path: routes.districtListPage.path +`?provinceId=${provinceId}&provinceName=${provinceName}` },
-                { breadcrumbName: <FormattedMessage defaultMessage="Village" /> },
+                { breadcrumbName: `${provinceName}`, path: routes.districtListPage.path +`?provinceId=${provinceId}&provinceName=${provinceName}` },
+                { breadcrumbName: `${districtName}` },
             ]}
         >
             <ListPage
-                title={
-                    <span style={{ fontWeight: 'normal', fontSize: '16px' }}>{provinceName} <RightOutlined /> {districtName}</span>
-                }
                 searchForm={mixinFuncs.renderSearchForm({ fields: searchFields, initialValues: queryFilter })}
                 actionBar={mixinFuncs.renderActionBar()}
                 baseTable={

@@ -514,6 +514,8 @@ const useListBase = ({
             handleFilterSearchChange,
             prepareGetListPathParams,
             generateParams,
+            setQueryParams,
+
         };
 
         override?.(centralizedHandler);
