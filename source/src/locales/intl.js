@@ -30,6 +30,11 @@ export const commonMessage = defineMessages({
     name: 'Name',
     description: 'Description',
     groupPermission: 'Group Permission',
+    nation:'Nation',
+    province: 'Province',
+    district: 'District',
+    village: 'Village',
+    kind: 'Kind',
     user: 'Users',
     birthday: 'Birthday',
 });

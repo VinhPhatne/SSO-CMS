@@ -412,11 +412,11 @@ const useListBase = ({
     };
 
     const getItemDetailLink = (dataRow) => {
-        return `${pagePath}/${dataRow.id}${mixinFuncs.generateParams(options.paramsHolder)}`;
+        return `${pagePath}/${dataRow.id}`;
     };
 
     const getCreateLink = () => {
-        return `${pagePath}/create${mixinFuncs.generateParams(options.paramsHolder)}`;
+        return `${pagePath}/create`;
     };
 
     const generateParams = (params = {}, pageable = true, currentParams = false) => {
@@ -434,7 +434,7 @@ const useListBase = ({
                 selectedRows={selectedRows}
                 onBulkDelete={onBulkDelete}
                 objectName={options.objectName}
-                createLink={`${mixinFuncs.getCreateLink()}${generateParams()}`}
+                createLink={mixinFuncs.getCreateLink()}
                 location={location}
                 type={type}
                 style={style}
