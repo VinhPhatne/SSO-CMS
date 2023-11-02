@@ -42,7 +42,7 @@ const ProvinceListPage = () => {
             };
             funcs.getList = () => {
                 const params = mixinFuncs.prepareGetListParams(queryFilter);
-                mixinFuncs.handleFetchList({ ...params });
+                mixinFuncs.handleFetchList({ ...params,kind:1 });
             };
             funcs.additionalActionColumnButtons = () => ({
                 district: ({ id,name }) => (
@@ -104,12 +104,12 @@ const ProvinceListPage = () => {
             placeholder: translate.formatMessage(commonMessage.name),
         },
 
-        {
-            key: 'kind',
-            placeholder: translate.formatMessage(commonMessage.kind),
-            type: FieldTypes.SELECT,
-            options: nationValues,
-        },
+        // {
+        //     key: 'kind',
+        //     placeholder: translate.formatMessage(commonMessage.kind),
+        //     type: FieldTypes.SELECT,
+        //     options: nationValues,
+        // },
         
     ];
 
