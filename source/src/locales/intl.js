@@ -30,4 +30,6 @@ export const commonMessage = defineMessages({
     name: 'Name',
     description: 'Description',
     groupPermission: 'Group Permission',
+    user: 'Users',
+    birthday: 'Birthday',
 });
