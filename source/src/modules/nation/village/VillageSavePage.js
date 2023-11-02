@@ -10,7 +10,7 @@ import routes from '../routes';
 import useTranslate from '@hooks/useTranslate';
 
 const message = defineMessages({
-    objectName: 'District',
+    objectName: 'Village',
 });
 
 const VillageSavePage = () => {
@@ -35,6 +35,7 @@ const VillageSavePage = () => {
             funcs.prepareUpdateData = (data) => {
                 return {
                     ...data,
+                    id: detail.id,
                 };
             };
             funcs.prepareCreateData = (data) => {
@@ -50,9 +51,8 @@ const VillageSavePage = () => {
             loading={loading }
             routes={[
                 { breadcrumbName: <FormattedMessage defaultMessage="Nation" />, path: routes.nationListPage.path },
-                { breadcrumbName: <FormattedMessage defaultMessage="District" />, path: routes.districtListPage.path+`?provinceId=${provinceId}&provinceName=${provinceName}` },
-                { breadcrumbName: <FormattedMessage defaultMessage="Village" />, path: routes.villagetListPage.path+`?provinceId=${provinceId}&districtId=${districtId}&provinceName=${provinceName}&districtName=${districtName}` },
-
+                { breadcrumbName: `${provinceName}`, path: routes.districtListPage.path+`?provinceId=${provinceId}&provinceName=${provinceName}` },
+                { breadcrumbName: `${districtName}`, path: routes.villagetListPage.path+`?provinceId=${provinceId}&districtId=${districtId}&provinceName=${provinceName}&districtName=${districtName}` },
                 { breadcrumbName: title },
             ]}
             title={title}

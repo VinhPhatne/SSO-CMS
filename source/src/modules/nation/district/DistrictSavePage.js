@@ -48,8 +48,9 @@ const DistrictSavePage = () => {
         <PageWrapper
             loading={loading }
             routes={[
+
                 { breadcrumbName: <FormattedMessage defaultMessage="Nation" />, path: routes.nationListPage.path },
-                { breadcrumbName: <FormattedMessage defaultMessage="District" />, path: routes.districtListPage.path + `?provinceId=${provinceId}&provinceName=${provinceName}` },
+                { breadcrumbName: `${provinceName}`, path: routes.districtListPage.path + `?provinceId=${provinceId}&provinceName=${provinceName}` },
                 { breadcrumbName: title },
             ]}
             title={title}

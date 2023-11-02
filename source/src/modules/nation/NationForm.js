@@ -49,7 +49,7 @@ const NationForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormVal
                     </Col>
                     <Col span={12}>
                         <SelectField
-                            // disabled={isEditing}
+                            disabled={true}
                             required
                             label={<FormattedMessage defaultMessage="Kind" />}
                             name="kind"
