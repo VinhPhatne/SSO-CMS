@@ -32,6 +32,13 @@ const SettingForm = (props) => {
             ...dataDetail,
         });
     }, [dataDetail]);
+    useEffect(() => {
+        if (!isEditing) {
+            form.setFieldsValue({
+                status: statusValues[0].value,
+            });
+        }
+    }, [isEditing]);
     return (
         <BaseForm id={formId} onFinish={handleSubmit} form={form} onValuesChange={onValuesChange}>
             <Card className="card-form" bordered={false}>
