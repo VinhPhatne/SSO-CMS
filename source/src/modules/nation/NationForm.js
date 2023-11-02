@@ -22,6 +22,7 @@ const NationForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormVal
     const handleSubmit = (values) => {
         return mixinFuncs.handleSubmit({
             ...values,
+            kind: 1,
         });
     };
 
@@ -48,28 +49,14 @@ const NationForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormVal
                         <TextField required label={<FormattedMessage defaultMessage="Province Name" />} name="name" />
                     </Col>
                     <Col span={12}>
-                        <SelectField
-                            disabled={true}
-                            required
-                            label={<FormattedMessage defaultMessage="Kind" />}
-                            name="kind"
-                            options={nationValues}
-                        />
-                    </Col>
-                </Row>
-                {/* <Row gutter={10}>
-                    <Col span={12}>
-                        <TextField required label={<FormattedMessage defaultMessage="Paren" />} name="parent" />
-                    </Col>
-                </Row> */}
-                <Row gutter={10}>
-                    <Col span={12}>
                         <TextField
                             required
                             label={<FormattedMessage defaultMessage="PostCode" />}
                             name="postCode"
                         />
                     </Col>
+                </Row>
+                <Row gutter={10}>
                     <Col span={12}>
                         <SelectField
                             required
