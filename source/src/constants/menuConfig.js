@@ -55,9 +55,9 @@ const navMenuConfig = [
                 permission: [apiConfig.groupPermission.getGroupList.baseURL],
             },
             {
-                label: <FormattedMessage defaultMessage="Địa chỉ" />,
+                label: <FormattedMessage defaultMessage="Address" />,
                 key: 'address',
-                path: routes.addressRoutes.addressListPage.pah,
+                path: routes.addressListPage.path,
                 permission: [apiConfig.address.getList.baseURL],
             },
         ],

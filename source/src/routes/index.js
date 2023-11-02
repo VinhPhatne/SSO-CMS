@@ -60,7 +60,7 @@ const routes = {
     },
     ...adminsRoutes,
     ...newsRoutes,
-    addressRoutes,
+    ...addressRoutes,
 
     // keep this at last
     notFound: {

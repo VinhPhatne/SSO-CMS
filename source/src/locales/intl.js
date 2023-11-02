@@ -30,5 +30,8 @@ export const commonMessage = defineMessages({
     name: 'Name',
     description: 'Description',
     groupPermission: 'Group Permission',
-    address: 'Địa chỉ',
+    address: 'Address',
+    ward: 'Ward',
+    district: 'District',
+    province: 'Province',
 });
