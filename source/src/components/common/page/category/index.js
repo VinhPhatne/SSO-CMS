@@ -61,7 +61,7 @@ const CategoryListPageCommon = ({ routes, kind }) => {
             ),
         },
         { title: translate.formatMessage(message.name), dataIndex: 'categoryName' },
-        mixinFuncs.renderActionColumn({ edit: true, delete: true }, { width: '90px' }),
+        mixinFuncs.renderActionColumn({ edit: true, delete: true }, { width: '150px' }),
     ];
 
     const searchFields = [
