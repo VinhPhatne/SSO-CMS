@@ -5,6 +5,7 @@ import Dashboard from '@modules/entry';
 import ProfilePage from '@modules/profile/index';
 import adminsRoutes from '@modules/user/routes';
 import newsRoutes from '@modules/news/routes';
+import addressRoutes from '@modules/address/routes';
 
 import GroupPermissionListPage from '@modules/groupPermission';
 import PermissionSavePage from '@modules/groupPermission/PermissionSavePage';
@@ -59,6 +60,7 @@ const routes = {
     },
     ...adminsRoutes,
     ...newsRoutes,
+    addressRoutes,
 
     // keep this at last
     notFound: {
