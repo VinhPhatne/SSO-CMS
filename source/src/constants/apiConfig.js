@@ -205,6 +205,38 @@ const apiConfig = {
             headers: baseHeader,
         },
     },
+    nation: {
+        getList: {
+            baseURL: `${apiUrl}v1/nation/list`,
+            method: 'GET',
+            headers: baseHeader,
+        },
+        getById: {
+            baseURL: `${apiUrl}v1/nation/get/:id`,
+            method: 'GET',
+            headers: baseHeader,
+        },
+        create: {
+            baseURL: `${apiUrl}v1/nation/create`,
+            method: 'POST',
+            headers: baseHeader,
+        },
+        update: {
+            baseURL: `${apiUrl}v1/nation/update`,
+            method: 'PUT',
+            headers: baseHeader,
+        },
+        delete: {
+            baseURL: `${apiUrl}v1/nation/delete/:id`,
+            method: 'DELETE',
+            headers: baseHeader,
+        },
+        autocomplete: {
+            baseURL: `${apiUrl}v1/nation/auto-complete`,
+            method: 'GET',
+            headers: baseHeader,
+        },
+    },
 };
 
 export default apiConfig;
