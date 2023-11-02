@@ -22,6 +22,7 @@ const AddressForm = (props) => {
     const { formId, actions, dataDetail, onSubmit, setIsChangedFormValues, groups, branchs, isEditing } = props;
     const { execute: executeUpFile } = useFetch(apiConfig.file.upload);
     const [imageUrl, setImageUrl] = useState(null);
+    const [isHasProvince, setIsHasProvince] = useState(isEditing ? true : false);
 
     const { form, mixinFuncs, onValuesChange } = useBasicForm({
         onSubmit,
@@ -74,7 +75,7 @@ const AddressForm = (props) => {
                             apiConfig={apiConfig.nation.autocomplete}
                             mappingOptions={(item) => ({ value: item.id, label: item.name })}
                             initialSearchParams={{ kind: 1 }}
-                            searchParams={(text) => ({ name: text })}
+                            searchParams={(text) => ({ name: text, kind: 1 })}
                             required
                         />
                     </Col>
@@ -85,7 +86,7 @@ const AddressForm = (props) => {
                             apiConfig={apiConfig.nation.autocomplete}
                             mappingOptions={(item) => ({ value: item.id, label: item.name })}
                             initialSearchParams={{ kind: 2 }}
-                            searchParams={(text) => ({ name: text })}
+                            searchParams={(text) => ({ name: text, kind: 2 })}
                             required
                         />
                     </Col>
@@ -96,7 +97,7 @@ const AddressForm = (props) => {
                             apiConfig={apiConfig.nation.autocomplete}
                             mappingOptions={(item) => ({ value: item.id, label: item.name })}
                             initialSearchParams={{ kind: 3 }}
-                            searchParams={(text) => ({ name: text })}
+                            searchParams={(text) => ({ name: text, kind: 3 })}
                             required
                         />
                     </Col>
