@@ -48,18 +48,18 @@ const UserAdminListPage = ({ pageOptions }) => {
                 />
             ),
         },
-        { title: translate.formatMessage(commonMessage.username), dataIndex: 'username' },
-        isAdmin() && { title: translate.formatMessage(commonMessage.fullName), dataIndex: 'fullName' },
+        { title: translate.formatMessage(commonMessage.username), dataIndex: 'name' },
+        isAdmin() && { title: translate.formatMessage(commonMessage.email), dataIndex: 'email' },
         // { title: translate.formatMessage(commonMessage.phone), dataIndex: 'phone', width: '130px' },
         {
-            title: translate.formatMessage(commonMessage.group),
-            dataIndex: 'group',
+            title: translate.formatMessage(commonMessage.phone),
+            dataIndex: 'phone',
             width: '200px',
-            render: (group) => group?.name || '-',
+            // render: (group) => group?.name || '-',
         },
         {
-            title: translate.formatMessage(commonMessage.createdDate),
-            dataIndex: 'createdDate',
+            title: translate.formatMessage(commonMessage.birthday),
+            dataIndex: 'birthday',
             width: '180px',
             // render: (createdDate) => convertUtcToTimezone(createdDate),
         },
@@ -69,13 +69,13 @@ const UserAdminListPage = ({ pageOptions }) => {
 
     const searchFields = [
         {
-            key: 'username',
+            key: 'name',
             placeholder: translate.formatMessage(commonMessage.username),
         },
-        {
-            key: 'fullName',
-            placeholder: translate.formatMessage(commonMessage.fullName),
-        },
+        // {
+        //     key: 'fullName',
+        //     placeholder: translate.formatMessage(commonMessage.fullName),
+        // },
     ];
 
     return (
