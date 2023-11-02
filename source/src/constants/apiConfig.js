@@ -43,28 +43,33 @@ const apiConfig = {
     },
     user: {
         getList: {
-            baseURL: `${apiUrl}v1/account/list`,
+            baseURL: `${apiUrl}v1/user/list`,
             method: `GET`,
             headers: baseHeader,
         },
         getById: {
-            baseURL: `${apiUrl}v1/account/get/:id`,
+            baseURL: `${apiUrl}v1/user/get/:id`,
             method: `GET`,
             headers: baseHeader,
         },
         create: {
-            baseURL: `${apiUrl}v1/account/create_admin`,
+            baseURL: `${apiUrl}v1/user/create`,
             method: `POST`,
             headers: baseHeader,
         },
         update: {
-            baseURL: `${apiUrl}v1/account/update_admin`,
+            baseURL: `${apiUrl}v1/user/update`,
             method: `PUT`,
             headers: baseHeader,
         },
         delete: {
-            baseURL: `${apiUrl}v1/account/delete/:id`,
+            baseURL: `${apiUrl}v1/user/delete/:id`,
             method: `DELETE`,
+            headers: baseHeader,
+        },
+        autocomplete: {
+            baseURL: `${apiUrl}v1/user/auto-complete`,
+            method: `GET`,
             headers: baseHeader,
         },
     },

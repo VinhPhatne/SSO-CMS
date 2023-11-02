@@ -38,7 +38,6 @@ const UserSavePage = ({ pageOptions }) => {
             funcs.prepareUpdateData = (data) => {
                 return {
                     status: STATUS_ACTIVE,
-                    kind: UserTypes.ADMIN,
                     avatarPath: data.avatar,
                     ...data,
                     id: id,
@@ -47,7 +46,6 @@ const UserSavePage = ({ pageOptions }) => {
             funcs.prepareCreateData = (data) => {
                 return {
                     ...data,
-                    kind: UserTypes.ADMIN,
                     avatarPath: data.avatar,
                     status: STATUS_ACTIVE,
                 };

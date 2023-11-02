@@ -51,8 +51,7 @@ const UserListPage = ({ pageOptions }) => {
                 />
             ),
         },
-        // { title: translate.formatMessage(commonMessage.username), dataIndex: 'username' },
-        { title: translate.formatMessage(commonMessage.fullName), dataIndex: 'fullName' },
+        { title: translate.formatMessage(commonMessage.fullName), dataIndex: 'name' },
         { title: translate.formatMessage(commonMessage.phone), dataIndex: 'phone', width: '130px' },
         { title: translate.formatMessage(commonMessage.email), dataIndex: 'email' },
         {
@@ -62,39 +61,29 @@ const UserListPage = ({ pageOptions }) => {
                 const result = convertUtcToLocalTime(birthday, DEFAULT_FORMAT, DATE_FORMAT_VALUE);
                 return <div>{result}</div>;
             },
-        },
-
-        // {
-        //     title: translate.formatMessage(commonMessage.group),
-        //     dataIndex: 'group',
-        //     width: '200px',
-        //     render: (group) => group?.name || '-',
-        // },
-        {
-            title: translate.formatMessage(commonMessage.createdDate),
-            dataIndex: 'createdDate',
             width: '180px',
-            // render: (createdDate) => convertUtcToTimezone(createdDate),
         },
-        mixinFuncs.renderStatusColumn({ width: '90px' }),
+        // {
+        //     title: translate.formatMessage(commonMessage.createdDate),
+        //     dataIndex: 'createdDate',
+        //     width: '180px',
+        //     render: (createdDate) => convertUtcToTimezone(createdDate),
+        // },
+        // mixinFuncs.renderStatusColumn({ width: '90px' }),
         mixinFuncs.renderActionColumn({ edit: true, delete: true }, { width: '90px' }),
     ];
 
     const searchFields = [
-        // {
-        //     key: 'username',
-        //     placeholder: translate.formatMessage(commonMessage.username),
-        // },
         {
-            key: 'fullName',
+            key: 'name',
             placeholder: translate.formatMessage(commonMessage.fullName),
         },
-        {
-            key: 'status',
-            placeholder: translate.formatMessage(commonMessage.status),
-            type: FieldTypes.SELECT,
-            options: statusValues,
-        },
+        // {
+        //     key: 'status',
+        //     placeholder: translate.formatMessage(commonMessage.status),
+        //     type: FieldTypes.SELECT,
+        //     options: statusValues,
+        // },
     ];
 
     return (
