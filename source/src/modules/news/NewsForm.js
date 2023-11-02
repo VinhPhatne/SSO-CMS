@@ -81,7 +81,7 @@ const NewsForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormValue
                         <CropImageField
                             label={<FormattedMessage defaultMessage="Avatar" />}
                             name="image"
-                            imageUrl={avatarUrl && `${AppConstants.mediaRootUrl}${avatarUrl}`}
+                            imageUrl={avatarUrl && `${AppConstants.contentRootUrl}${avatarUrl}`}
                             aspect={1 / 1}
                             uploadFile={(...args) => uploadFile(...args, setAvatarUrl)}
                         />
@@ -90,7 +90,7 @@ const NewsForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormValue
                         <CropImageField
                             label={<FormattedMessage defaultMessage="Banner" />}
                             name="banner"
-                            imageUrl={bannerUrl && `${AppConstants.mediaRootUrl}${bannerUrl}`}
+                            imageUrl={bannerUrl && `${AppConstants.contentRootUrl}${bannerUrl}`}
                             aspect={16 / 9}
                             uploadFile={(...args) => uploadFile(...args, setBannerUrl)}
                         />
