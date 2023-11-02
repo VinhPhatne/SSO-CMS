@@ -64,7 +64,7 @@ const UserAdminListPage = ({ pageOptions }) => {
             // render: (createdDate) => convertUtcToTimezone(createdDate),
         },
         mixinFuncs.renderStatusColumn({ width: '90px' }),
-        mixinFuncs.renderActionColumn({ edit: true, delete: true }, { width: '90px' }),
+        mixinFuncs.renderActionColumn({ edit: true, delete: true }, { width: '150px' }),
     ];
 
     const searchFields = [
