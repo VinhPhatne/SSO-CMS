@@ -49,7 +49,7 @@ const DistrictForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormV
             <Card className="card-form" bordered={false}>
                 <Row gutter={10}>
                     <Col span={12}>
-                        <TextField required label={<FormattedMessage defaultMessage="Name" />} name="name" />
+                        <TextField required label={<FormattedMessage defaultMessage="District Name" />} name="name" />
                     </Col>
                     <Col span={12}>
                         <SelectField
