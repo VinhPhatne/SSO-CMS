@@ -27,7 +27,8 @@ const CategorySavePageCommon = ({ routes, kind, getListUrl }) => {
                 return {
                     ...data,
                     status: 1,
-                    id: detail.id,
+                    kind: kind,
+                    categoryId: detail.id,
                 };
             };
             funcs.prepareCreateData = (data) => {

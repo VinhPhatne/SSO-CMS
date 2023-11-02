@@ -151,16 +151,16 @@ const NewsListPage = () => {
             width: 180,
             dataIndex: 'createdDate',
         },
-        {
-            title: <FormattedMessage defaultMessage="Pin top" />,
-            width: 80,
-            align: 'center',
-            render: (dataRow) => {
-                const Icon = dataRow.pinTop ? IconPin : IconPinnedOff;
+        // {
+        //     title: <FormattedMessage defaultMessage="Pin top" />,
+        //     width: 80,
+        //     align: 'center',
+        //     render: (dataRow) => {
+        //         const Icon = dataRow.pinTop ? IconPin : IconPinnedOff;
 
-                return <Icon onClick={() => handleUpdatePinTop(dataRow)} size={18} />;
-            },
-        },
+        //         return <Icon onClick={() => handleUpdatePinTop(dataRow)} size={18} />;
+        //     },
+        // },
         mixinFuncs.renderStatusColumn({ width: '90px' }),
         mixinFuncs.renderActionColumn(
             {

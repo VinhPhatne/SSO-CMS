@@ -112,6 +112,7 @@ const NewsForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormValue
                 <Row gutter={10}>
                     <Col span={12}>
                         <AutoCompleteField
+                            required
                             label={<FormattedMessage defaultMessage="Danh mục tin tức" />}
                             name="categoryId"
                             apiConfig={apiConfig.category.autocomplete}
@@ -129,7 +130,7 @@ const NewsForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormValue
                         />
                     </Col>
                 </Row>
-                <Space align="center" style={{ marginBottom: 24 }}>
+                {/* <Space align="center" style={{ marginBottom: 24 }}>
                     <label htmlFor="pinTop">
                         <FormattedMessage defaultMessage="Pin Top" />
                     </label>
@@ -139,7 +140,7 @@ const NewsForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormValue
                         }}
                         name="pinTop"
                     />
-                </Space>
+                </Space> */}
 
                 <RichTextField
                     label={<FormattedMessage defaultMessage="Content" />}
