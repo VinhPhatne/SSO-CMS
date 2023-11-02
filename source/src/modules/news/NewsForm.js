@@ -80,7 +80,7 @@ const NewsForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormValue
                     <Col span={12}>
                         <CropImageField
                             label={<FormattedMessage defaultMessage="Avatar" />}
-                            name="categoryImage"
+                            name="image"
                             imageUrl={avatarUrl && `${AppConstants.mediaRootUrl}${avatarUrl}`}
                             aspect={1 / 1}
                             uploadFile={(...args) => uploadFile(...args, setAvatarUrl)}

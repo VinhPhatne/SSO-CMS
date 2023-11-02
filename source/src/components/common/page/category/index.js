@@ -49,18 +49,19 @@ const CategoryListPageCommon = ({ routes, kind }) => {
     const columns = [
         {
             title: '#',
-            dataIndex: 'categoryImage',
+            dataIndex: 'image',
             align: 'center',
-            width: 100,
+            width: 80,
             render: (avatar) => (
                 <AvatarField
                     size="large"
                     icon={<UserOutlined />}
-                    src={avatar ? `${AppConstants.mediaRootUrl}${avatar}` : null}
+                    src={avatar ? `${AppConstants.contentRootUrl}${avatar}` : null}
                 />
             ),
         },
         { title: translate.formatMessage(message.name), dataIndex: 'name' },
+        mixinFuncs.renderStatusColumn({ width: '90px' }, { width: '150px' }),
         mixinFuncs.renderActionColumn({ edit: true, delete: true }, { width: '150px' }),
     ];
 
