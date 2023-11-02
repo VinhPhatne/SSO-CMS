@@ -41,7 +41,7 @@ const NewsListPage = () => {
             funcs.mappingData = (response) => {
                 if (response.result === true) {
                     return {
-                        data: response.data.data,
+                        data: response.data.content,
                         total: response.data.totalElements,
                     };
                 }
@@ -92,8 +92,17 @@ const NewsListPage = () => {
         loading: getCategoriesLoading,
         execute: executeGetCategories,
     } = useFetch(apiConfig.category.autocomplete, {
-        immediate: false,
-        mappingData: ({ data }) => data.data.map((item) => ({ value: String(item.id), label: item.categoryName })),
+        immediate: true,
+        mappingData: ({ data }) =>
+            data.content
+                .map((item) => ({
+                    value: item?.id,
+                    label: item?.name,
+                }))
+                .filter((item, index, self) => {
+                    // Lọc ra các phần tử duy nhất bằng cách so sánh value
+                    return index === self.findIndex((t) => t.value === item.value);
+                }),
     });
 
     const handleUpdatePinTop = (item) => {
@@ -126,16 +135,16 @@ const NewsListPage = () => {
         {
             title: <FormattedMessage defaultMessage="Category" />,
             width: 120,
-            dataIndex: 'categoryId',
-            render: (dataRow) => {
-                const category = categories?.find((item) => item.value == dataRow);
+            dataIndex: ['category', 'name'],
+            // render: (dataRow) => {
+            //     const category = categories?.find((item) => item.value == dataRow);
 
-                return (
-                    <Tag color="#108ee9">
-                        <div style={{ padding: '0 4px', fontSize: 14 }}>{category?.label}</div>
-                    </Tag>
-                );
-            },
+            //     return (
+            //         <Tag color="#108ee9">
+            //             <div style={{ padding: '0 4px', fontSize: 14 }}>{category?.label}</div>
+            //         </Tag>
+            //     );
+            // },
         },
         {
             title: <FormattedMessage defaultMessage="Created Date" />,

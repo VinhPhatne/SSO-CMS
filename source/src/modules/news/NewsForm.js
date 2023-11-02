@@ -14,7 +14,7 @@ import CheckboxField from '@components/common/form/CheckboxField';
 import './NewsForm.scss';
 import { FormattedMessage } from 'react-intl';
 import { BaseForm } from '@components/common/form/BaseForm';
-
+import AutoCompleteField from '@components/common/form/AutoCompleteField';
 const NewsForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormValues, categories, isEditing }) => {
     const { execute: executeUpFile } = useFetch(apiConfig.file.upload);
     const [avatarUrl, setAvatarUrl] = useState(null);
@@ -57,6 +57,7 @@ const NewsForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormValue
     useEffect(() => {
         form.setFieldsValue({
             ...dataDetail,
+            categoryId: dataDetail?.category?.id,
         });
 
         setAvatarUrl(dataDetail.avatar);
@@ -78,7 +79,6 @@ const NewsForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormValue
                 <Row gutter={10}>
                     <Col span={12}>
                         <CropImageField
-                            required
                             label={<FormattedMessage defaultMessage="Avatar" />}
                             name="categoryImage"
                             imageUrl={avatarUrl && `${AppConstants.mediaRootUrl}${avatarUrl}`}
@@ -88,7 +88,6 @@ const NewsForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormValue
                     </Col>
                     <Col span={12}>
                         <CropImageField
-                            required
                             label={<FormattedMessage defaultMessage="Banner" />}
                             name="banner"
                             imageUrl={bannerUrl && `${AppConstants.mediaRootUrl}${bannerUrl}`}
@@ -112,11 +111,13 @@ const NewsForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormValue
                 </Row>
                 <Row gutter={10}>
                     <Col span={12}>
-                        <SelectField
-                            required
-                            label={<FormattedMessage defaultMessage="Category" />}
+                        <AutoCompleteField
+                            label={<FormattedMessage defaultMessage="Danh mục tin tức" />}
                             name="categoryId"
-                            options={categories}
+                            apiConfig={apiConfig.category.autocomplete}
+                            mappingOptions={(item) => ({ value: item.id, label: item.name })}
+                            initialSearchParams={{ kind: 1 }}
+                            searchParams={(text) => ({ fullName: text })}
                         />
                     </Col>
                     <Col span={12}>
