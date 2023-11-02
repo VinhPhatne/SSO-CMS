@@ -137,8 +137,6 @@ const NewsListPage = () => {
             width: 120,
             dataIndex: ['category', 'name'],
             render: (dataRow) => {
-                // const category = categories?.find((item) => item.value == dataRow);
-
                 return (
                     <Tag color="#108ee9">
                         <div style={{ padding: '0 4px', fontSize: 14 }}>{dataRow}</div>
