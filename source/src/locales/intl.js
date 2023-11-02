@@ -35,4 +35,6 @@ export const commonMessage = defineMessages({
     district: 'District',
     village: 'Village',
     kind: 'Kind',
+    user: 'Users',
+    birthday: 'Birthday',
 });

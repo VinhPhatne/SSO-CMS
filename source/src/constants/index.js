@@ -29,7 +29,7 @@ export const THEMES = {
 };
 
 export const defaultLocale = 'en';
-export const locales = [ 'en', 'vi' ];
+export const locales = ['en', 'vi'];
 
 export const activityType = {
     GAME: 'game',
@@ -41,6 +41,9 @@ export const activityType = {
 export const DATE_DISPLAY_FORMAT = 'DD-MM-YYYY HH:mm';
 export const DATE_SHORT_MONTH_FORMAT = 'DD MMM YYYY';
 export const TIME_FORMAT_DISPLAY = 'HH:mm';
+export const DATE_FORMAT_VALUE = 'DD/MM/YYYY';
+export const DATE_FORMAT_DISPLAY = 'DD/MM/YYYY';
+export const DEFAULT_FORMAT = 'DD/MM/YYYY HH:mm:ss';
 
 export const navigateTypeEnum = {
     PUSH: 'PUSH',
@@ -110,7 +113,6 @@ export const groupPermissionKindsOptions = [
     { label: 'Admin', value: GROUP_KIND_ADMIN },
     { label: 'Manager', value: GROUP_KIND_MANAGER },
 ];
-
 export const PROVINCE_KIND = 1;
 export const DISTRICT_KIND = 2;
 export const VILLAGE_KIND = 3;

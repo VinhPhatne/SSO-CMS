@@ -56,7 +56,7 @@ const DistrictListPage = () => {
             };
             funcs.additionalActionColumnButtons = () => ({
                 district: ({ id,name }) => (
-                    <BaseTooltip title={translate.formatMessage(commonMessage.district)}>
+                    <BaseTooltip title={translate.formatMessage(commonMessage.village)}>
                         <Button
                             type="link"
                             style={{ padding: 0 }}
