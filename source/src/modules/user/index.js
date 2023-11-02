@@ -63,7 +63,7 @@ const UserAdminListPage = ({ pageOptions }) => {
             width: '180px',
             // render: (createdDate) => convertUtcToTimezone(createdDate),
         },
-        mixinFuncs.renderStatusColumn({ width: '90px' }),
+        // mixinFuncs.renderStatusColumn({ width: '90px' }),
         mixinFuncs.renderActionColumn({ edit: true, delete: true }, { width: '90px' }),
     ];
 

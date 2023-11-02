@@ -39,7 +39,6 @@ const statusMessage = {
     [commonStatus.PENDING]: defineStatusMessage.pending,
     [commonStatus.INACTIVE]: defineStatusMessage.inactive,
 };
-
 const useListBase = ({
     apiConfig = {
         getList: null,
