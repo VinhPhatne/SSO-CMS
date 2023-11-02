@@ -39,7 +39,7 @@ const VillageForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormVa
     useEffect(() => {
         if (!isEditing) {
             form.setFieldsValue({
-                status: statusValues[2].value,
+                status: statusValues[0].value,
             });
         }
     }, [isEditing]);
@@ -49,7 +49,7 @@ const VillageForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormVa
             <Card className="card-form" bordered={false}>
                 <Row gutter={10}>
                     <Col span={12}>
-                        <TextField required label={<FormattedMessage defaultMessage="Name" />} name="name" />
+                        <TextField required label={<FormattedMessage defaultMessage="Village Name" />} name="name" />
                     </Col>
                     <Col span={12}>
                         <SelectField

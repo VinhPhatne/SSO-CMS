@@ -45,11 +45,11 @@ const NationForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormVal
             <Card className="card-form" bordered={false}>
                 <Row gutter={10}>
                     <Col span={12}>
-                        <TextField required label={<FormattedMessage defaultMessage="Name" />} name="name" />
+                        <TextField required label={<FormattedMessage defaultMessage="Province Name" />} name="name" />
                     </Col>
                     <Col span={12}>
                         <SelectField
-                            disabled={isEditing}
+                            // disabled={isEditing}
                             required
                             label={<FormattedMessage defaultMessage="Kind" />}
                             name="kind"
