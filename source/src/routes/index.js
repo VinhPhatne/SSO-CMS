@@ -5,9 +5,13 @@ import Dashboard from '@modules/entry';
 import ProfilePage from '@modules/profile/index';
 import adminsRoutes from '@modules/user/routes';
 import newsRoutes from '@modules/news/routes';
+import nationRoutes from '@modules/nation/routes';
+import addressRoutes from '@modules/address/routes';
 
 import GroupPermissionListPage from '@modules/groupPermission';
 import PermissionSavePage from '@modules/groupPermission/PermissionSavePage';
+import SettingListPage from '@modules/listSetting';
+import SettingSavePage from '@modules/listSetting/SettingSavePage';
 /*
 	auth
 		+ null: access login and not login
@@ -57,8 +61,22 @@ const routes = {
         auth: true,
         title: 'Profile page',
     },
+    listSettingsPage:{
+        path:'/settings',
+        component:SettingListPage,
+        auth: true,
+        title: 'Settings page',
+    },
+    listSettingsPageSavePage: {
+        path: '/settings/:id',
+        component: SettingSavePage,
+        auth: true,
+        title: 'Settings page',
+    },
     ...adminsRoutes,
     ...newsRoutes,
+    ...nationRoutes,
+    ...addressRoutes,
 
     // keep this at last
     notFound: {

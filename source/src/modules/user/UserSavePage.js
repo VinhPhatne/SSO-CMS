@@ -4,7 +4,7 @@ import apiConfig from '@constants/apiConfig';
 import useSaveBase from '@hooks/useSaveBase';
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import UserAdminForm from './UserAdminForm';
+import UserForm from './UserForm';
 import { defineMessages } from 'react-intl';
 import useTranslate from '@hooks/useTranslate';
 import { commonMessage } from '@locales/intl';
@@ -14,7 +14,7 @@ const message = defineMessages({
     objectName: 'UserAdmin',
 });
 
-const UserAdminSavePage = ({ pageOptions }) => {
+const UserSavePage = ({ pageOptions }) => {
     const translate = useTranslate();
     const { id } = useParams();
     const { data } = useFetch(apiConfig.groupPermission.getGroupList, {
@@ -38,9 +38,7 @@ const UserAdminSavePage = ({ pageOptions }) => {
             funcs.prepareUpdateData = (data) => {
                 return {
                     status: STATUS_ACTIVE,
-                    kind: UserTypes.ADMIN,
                     avatarPath: data.avatar,
-                    groupId: data.group.id,
                     ...data,
                     id: id,
                 };
@@ -48,10 +46,8 @@ const UserAdminSavePage = ({ pageOptions }) => {
             funcs.prepareCreateData = (data) => {
                 return {
                     ...data,
-                    kind: UserTypes.ADMIN,
                     avatarPath: data.avatar,
                     status: STATUS_ACTIVE,
-                    groupId: data.group.id,
                 };
             };
 
@@ -65,7 +61,7 @@ const UserAdminSavePage = ({ pageOptions }) => {
 
     return (
         <PageWrapper loading={loading} routes={pageOptions.renderBreadcrumbs(commonMessage, translate, title)}>
-            <UserAdminForm
+            <UserForm
                 setIsChangedFormValues={setIsChangedFormValues}
                 dataDetail={detail ? detail : {}}
                 formId={mixinFuncs.getFormId()}
@@ -78,4 +74,4 @@ const UserAdminSavePage = ({ pageOptions }) => {
     );
 };
 
-export default UserAdminSavePage;
+export default UserSavePage;

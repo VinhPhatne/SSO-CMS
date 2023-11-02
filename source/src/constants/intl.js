@@ -13,3 +13,9 @@ export const commonLabel = defineMessages({
 export const commonButton = defineMessages({
     login: 'Login',
 });
+
+export const nationKindMessage = defineMessages({
+    province: 'Province',
+    district: 'District',
+    village: 'Village',
+});

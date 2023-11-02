@@ -1,30 +1,28 @@
 import apiConfig from '@constants/apiConfig';
 import useListBase from '@hooks/useListBase';
 import { Avatar } from 'antd';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import BaseTable from '@components/common/table/BaseTable';
 
 import { UserOutlined } from '@ant-design/icons';
 import { AppConstants, DEFAULT_TABLE_ITEM_SIZE } from '@constants';
 import PageWrapper from '@components/common/layout/PageWrapper';
 import ListPage from '@components/common/layout/ListPage';
-import useTranslate from '@hooks/useTranslate';
 import { defineMessages } from 'react-intl';
+import useTranslate from '@hooks/useTranslate';
 import AvatarField from '@components/common/form/AvatarField';
+import { commonMessage } from '@locales/intl';
+import useAuth from '@hooks/useAuth';
+import useFetch from '@hooks/useFetch';
+import { FieldTypes } from '@constants/formConfig';
 
-const message = defineMessages({
-    objectName: 'category',
-    name: 'Name',
-});
-
-const CategoryListPageCommon = ({ routes, kind }) => {
+const AddressListPage = ({ pageOptions }) => {
     const translate = useTranslate();
-
     const { data, mixinFuncs, queryFilter, loading, pagination } = useListBase({
-        apiConfig: apiConfig.category,
+        apiConfig: apiConfig.address,
         options: {
             pageSize: DEFAULT_TABLE_ITEM_SIZE,
-            objectName: translate.formatMessage(message.objectName),
+            objectName: translate.formatMessage(pageOptions.objectName),
         },
         override: (funcs) => {
             funcs.mappingData = (response) => {
@@ -35,48 +33,43 @@ const CategoryListPageCommon = ({ routes, kind }) => {
                     };
                 }
             };
-
-            const prepareGetListParams = funcs.prepareGetListParams;
-            funcs.prepareGetListParams = (params) => {
-                return {
-                    ...prepareGetListParams(params),
-                    kind: kind,
-                };
-            };
         },
     });
-
     const columns = [
         {
-            title: '#',
-            dataIndex: 'image',
-            align: 'center',
-            width: 80,
-            render: (avatar) => (
-                <AvatarField
-                    size="large"
-                    icon={<UserOutlined />}
-                    src={avatar ? `${AppConstants.contentRootUrl}${avatar}` : null}
-                />
-            ),
+            title: translate.formatMessage(commonMessage.name),
+            dataIndex: 'name',
+            width: '150',
         },
-        { title: translate.formatMessage(message.name), dataIndex: 'name' },
-        mixinFuncs.renderStatusColumn({ width: '90px' }, { width: '150px' }),
-        mixinFuncs.renderActionColumn({ edit: true, delete: true }, { width: '150px' }),
-    ];
+        {
+            title: translate.formatMessage(commonMessage.address),
+            dataIndex: 'address',
+            width: '280',
+            render: (address, dataRow) => {
+                return <div>{address}, {dataRow?.wardInfo.name},  {dataRow?.districtInfo.name}, {dataRow?.provinceInfo.name}</div>;
+            },
+        },
+        {
+            title: translate.formatMessage(commonMessage.phone),
+            dataIndex: 'phone',
+            width: '30',
+        },
 
+        mixinFuncs.renderStatusColumn({ width: '60px' }),
+        mixinFuncs.renderActionColumn({ edit: true, delete: true }, { width: '90px' }),
+    ];
+   
     const searchFields = [
         {
             key: 'name',
-            placeholder: translate.formatMessage(message.name),
+            placeholder: translate.formatMessage(commonMessage.name),
         },
     ];
 
     return (
-        <PageWrapper routes={routes}>
+        <PageWrapper routes={pageOptions.renderBreadcrumbs(commonMessage, translate)}>
             <ListPage
                 searchForm={mixinFuncs.renderSearchForm({ fields: searchFields, initialValues: queryFilter })}
-                actionBar={mixinFuncs.renderActionBar()}
                 baseTable={
                     <BaseTable
                         onChange={mixinFuncs.changePagination}
@@ -91,4 +84,4 @@ const CategoryListPageCommon = ({ routes, kind }) => {
     );
 };
 
-export default CategoryListPageCommon;
+export default AddressListPage;

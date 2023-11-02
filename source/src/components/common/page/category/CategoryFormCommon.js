@@ -34,6 +34,7 @@ const CategoryFormCommon = (props) => {
                 if (response.result === true) {
                     onSuccess();
                     setImageUrl(response.data.filePath);
+                    setIsChangedFormValues(true);
                 }
             },
             onError: (error) => {
@@ -43,35 +44,37 @@ const CategoryFormCommon = (props) => {
     };
 
     const handleSubmit = (values) => {
-        return mixinFuncs.handleSubmit({ ...values, categoryImage: imageUrl });
+        return mixinFuncs.handleSubmit({ ...values, image: imageUrl });
     };
 
     useEffect(() => {
         form.setFieldsValue({
             ...dataDetail,
         });
-        setImageUrl(dataDetail.categoryImage);
+        setImageUrl(dataDetail?.image);
     }, [dataDetail]);
 
     return (
         <BaseForm id={formId} onFinish={handleSubmit} form={form} onValuesChange={onValuesChange}>
             <Card className="card-form" bordered={false}>
-                <CropImageField
-                    label={<FormattedMessage defaultMessage="Avatar" />}
-                    name="categoryImage"
-                    imageUrl={imageUrl && `${AppConstants.mediaRootUrl}${imageUrl}`}
-                    aspect={1 / 1}
-                    uploadFile={uploadFile}
-                />
+                <Col span={12}>
+                    <CropImageField
+                        label={<FormattedMessage defaultMessage="Avatar" />}
+                        name="avatar"
+                        imageUrl={imageUrl && `${AppConstants.contentRootUrl}${imageUrl}`}
+                        aspect={1 / 1}
+                        uploadFile={uploadFile}
+                    />
+                </Col>
                 <Row gutter={10}>
                     <Col span={12}>
-                        <TextField required label={<FormattedMessage defaultMessage="Name" />} name="categoryName" />
+                        <TextField required label={<FormattedMessage defaultMessage="Name" />} name="name" />
                     </Col>
                     <Col span={12}>
                         <TextField
                             required
                             label={<FormattedMessage defaultMessage="Description" />}
-                            name="categoryDescription"
+                            name="description"
                             type="textarea"
                         />
                     </Col>

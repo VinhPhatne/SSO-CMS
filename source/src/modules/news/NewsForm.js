@@ -14,7 +14,7 @@ import CheckboxField from '@components/common/form/CheckboxField';
 import './NewsForm.scss';
 import { FormattedMessage } from 'react-intl';
 import { BaseForm } from '@components/common/form/BaseForm';
-
+import AutoCompleteField from '@components/common/form/AutoCompleteField';
 const NewsForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormValues, categories, isEditing }) => {
     const { execute: executeUpFile } = useFetch(apiConfig.file.upload);
     const [avatarUrl, setAvatarUrl] = useState(null);
@@ -37,6 +37,7 @@ const NewsForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormValue
                 if (response.result === true) {
                     onSuccess();
                     setImageUrl(response.data.filePath);
+                    setIsChangedFormValues(true);
                 }
             },
             onError: (error) => {
@@ -57,6 +58,7 @@ const NewsForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormValue
     useEffect(() => {
         form.setFieldsValue({
             ...dataDetail,
+            categoryId: dataDetail?.category?.id,
         });
 
         setAvatarUrl(dataDetail.avatar);
@@ -64,7 +66,7 @@ const NewsForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormValue
     }, [dataDetail]);
 
     useEffect(() => {
-        if (!isEditing && categories?.length > 0) {
+        if (!isEditing) {
             form.setFieldsValue({
                 status: statusValues[0].value,
                 categoryId: categories?.[0].value,
@@ -78,45 +80,40 @@ const NewsForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormValue
                 <Row gutter={10}>
                     <Col span={12}>
                         <CropImageField
-                            required
                             label={<FormattedMessage defaultMessage="Avatar" />}
-                            name="categoryImage"
-                            imageUrl={avatarUrl && `${AppConstants.mediaRootUrl}${avatarUrl}`}
+                            name="image"
+                            imageUrl={avatarUrl && `${AppConstants.contentRootUrl}${avatarUrl}`}
                             aspect={1 / 1}
                             uploadFile={(...args) => uploadFile(...args, setAvatarUrl)}
                         />
                     </Col>
                     <Col span={12}>
                         <CropImageField
-                            required
                             label={<FormattedMessage defaultMessage="Banner" />}
                             name="banner"
-                            imageUrl={bannerUrl && `${AppConstants.mediaRootUrl}${bannerUrl}`}
+                            imageUrl={bannerUrl && `${AppConstants.contentRootUrl}${bannerUrl}`}
                             aspect={16 / 9}
                             uploadFile={(...args) => uploadFile(...args, setBannerUrl)}
                         />
                     </Col>
                 </Row>
                 <Row gutter={10}>
-                    <Col span={12}>
+                    <Col span={24}>
                         <TextField required label={<FormattedMessage defaultMessage="Title" />} name="title" />
                     </Col>
-                    <Col span={12}>
-                        <TextField
-                            required
-                            label={<FormattedMessage defaultMessage="Description" />}
-                            name="description"
-                            type="textarea"
-                        />
-                    </Col>
+                    
                 </Row>
                 <Row gutter={10}>
+
                     <Col span={12}>
-                        <SelectField
+                        <AutoCompleteField
                             required
-                            label={<FormattedMessage defaultMessage="Category" />}
+                            label={<FormattedMessage defaultMessage="Danh mục tin tức" />}
                             name="categoryId"
-                            options={categories}
+                            apiConfig={apiConfig.category.autocomplete}
+                            mappingOptions={(item) => ({ value: item.id, label: item.name })}
+                            initialSearchParams={{ kind: 1 }}
+                            searchParams={(text) => ({ fullName: text })}
                         />
                     </Col>
                     <Col span={12}>
@@ -127,8 +124,16 @@ const NewsForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormValue
                             options={statusValues}
                         />
                     </Col>
+                    <Col span={24}>
+                        <TextField
+                            required
+                            label={<FormattedMessage defaultMessage="Description" />}
+                            name="description"
+                            type="textarea"
+                        />
+                    </Col>
                 </Row>
-                <Space align="center" style={{ marginBottom: 24 }}>
+                {/* <Space align="center" style={{ marginBottom: 24 }}>
                     <label htmlFor="pinTop">
                         <FormattedMessage defaultMessage="Pin Top" />
                     </label>
@@ -138,7 +143,7 @@ const NewsForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormValue
                         }}
                         name="pinTop"
                     />
-                </Space>
+                </Space> */}
 
                 <RichTextField
                     label={<FormattedMessage defaultMessage="Content" />}

@@ -3,9 +3,9 @@ import useListBase from '@hooks/useListBase';
 import { Avatar } from 'antd';
 import React from 'react';
 import BaseTable from '@components/common/table/BaseTable';
-
+import { FieldTypes } from '@constants/formConfig';
 import { UserOutlined } from '@ant-design/icons';
-import { AppConstants, DEFAULT_TABLE_ITEM_SIZE } from '@constants';
+import { AppConstants, DATE_FORMAT_VALUE, DEFAULT_FORMAT, DEFAULT_TABLE_ITEM_SIZE } from '@constants';
 import PageWrapper from '@components/common/layout/PageWrapper';
 import ListPage from '@components/common/layout/ListPage';
 import { defineMessages } from 'react-intl';
@@ -13,10 +13,13 @@ import useTranslate from '@hooks/useTranslate';
 import AvatarField from '@components/common/form/AvatarField';
 import { commonMessage } from '@locales/intl';
 import useAuth from '@hooks/useAuth';
+import { convertUtcToLocalTime } from '@utils/index';
+import { statusOptions } from '@constants/masterData';
 
-const UserAdminListPage = ({ pageOptions }) => {
+const UserListPage = ({ pageOptions }) => {
     const translate = useTranslate();
-    const { isAdmin } = useAuth();
+    // const { isCustomer } = useAuth();
+    const statusValues = translate.formatKeys(statusOptions, ['label']);
     const { data, mixinFuncs, queryFilter, loading, pagination } = useListBase({
         apiConfig: apiConfig.user,
         options: {
@@ -37,7 +40,7 @@ const UserAdminListPage = ({ pageOptions }) => {
     const columns = [
         {
             title: '#',
-            dataIndex: 'avatarPath',
+            dataIndex: 'avatar',
             align: 'center',
             width: 100,
             render: (avatar) => (
@@ -48,34 +51,39 @@ const UserAdminListPage = ({ pageOptions }) => {
                 />
             ),
         },
-        { title: translate.formatMessage(commonMessage.username), dataIndex: 'username' },
-        isAdmin() && { title: translate.formatMessage(commonMessage.fullName), dataIndex: 'fullName' },
-        // { title: translate.formatMessage(commonMessage.phone), dataIndex: 'phone', width: '130px' },
+        { title: translate.formatMessage(commonMessage.fullName), dataIndex: 'name' },
+        { title: translate.formatMessage(commonMessage.phone), dataIndex: 'phone', width: '130px' },
+        { title: translate.formatMessage(commonMessage.email), dataIndex: 'email' },
         {
-            title: translate.formatMessage(commonMessage.group),
-            dataIndex: 'group',
-            width: '200px',
-            render: (group) => group?.name || '-',
-        },
-        {
-            title: translate.formatMessage(commonMessage.createdDate),
-            dataIndex: 'createdDate',
+            title: translate.formatMessage(commonMessage.birthday),
+            dataIndex: 'birthday',
+            render: (birthday) => {
+                const result = convertUtcToLocalTime(birthday, DEFAULT_FORMAT, DATE_FORMAT_VALUE);
+                return <div>{result}</div>;
+            },
             width: '180px',
-            // render: (createdDate) => convertUtcToTimezone(createdDate),
         },
-        mixinFuncs.renderStatusColumn({ width: '90px' }),
+        // {
+        //     title: translate.formatMessage(commonMessage.createdDate),
+        //     dataIndex: 'createdDate',
+        //     width: '180px',
+        //     render: (createdDate) => convertUtcToTimezone(createdDate),
+        // },
+        // mixinFuncs.renderStatusColumn({ width: '90px' }),
         mixinFuncs.renderActionColumn({ edit: true, delete: true }, { width: '90px' }),
     ];
 
     const searchFields = [
         {
-            key: 'username',
-            placeholder: translate.formatMessage(commonMessage.username),
-        },
-        {
-            key: 'fullName',
+            key: 'name',
             placeholder: translate.formatMessage(commonMessage.fullName),
         },
+        // {
+        //     key: 'status',
+        //     placeholder: translate.formatMessage(commonMessage.status),
+        //     type: FieldTypes.SELECT,
+        //     options: statusValues,
+        // },
     ];
 
     return (
@@ -98,4 +106,4 @@ const UserAdminListPage = ({ pageOptions }) => {
     );
 };
 
-export default UserAdminListPage;
+export default UserListPage;

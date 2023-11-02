@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import useBasicForm from '@hooks/useBasicForm';
 import TextField from '@components/common/form/TextField';
 import CropImageField from '@components/common/form/CropImageField';
-import { AppConstants } from '@constants';
+import { AppConstants, DATE_FORMAT_VALUE, DEFAULT_FORMAT } from '@constants';
 import useFetch from '@hooks/useFetch';
 import apiConfig from '@constants/apiConfig';
 import { defineMessages } from 'react-intl';
@@ -11,12 +11,15 @@ import useTranslate from '@hooks/useTranslate';
 import { commonMessage } from '@locales/intl';
 import { BaseForm } from '@components/common/form/BaseForm';
 import SelectField from '@components/common/form/SelectField';
+import DatePickerField from '@components/common/form/DatePickerField';
+import dayjs from 'dayjs';
+import { formatDateString } from '@utils';
 
 const message = defineMessages({
     objectName: 'group permission',
 });
 
-const UserAdminForm = (props) => {
+const UserForm = (props) => {
     const translate = useTranslate();
     const { formId, actions, dataDetail, onSubmit, setIsChangedFormValues, groups, branchs, isEditing } = props;
     const { execute: executeUpFile } = useFetch(apiConfig.file.upload);
@@ -37,7 +40,7 @@ const UserAdminForm = (props) => {
                 if (response.result === true) {
                     onSuccess();
                     setImageUrl(response.data.filePath);
-                    setIsChangedFormValues();
+                    setIsChangedFormValues(true);
                 }
             },
             onError: (error) => {
@@ -47,15 +50,26 @@ const UserAdminForm = (props) => {
     };
 
     const handleSubmit = (values) => {
+        values.birthday = formatDateString(values?.birthday, DATE_FORMAT_VALUE) + ' 00:00:00';
         return mixinFuncs.handleSubmit({ ...values, avatar: imageUrl });
     };
 
+    const validateDate = (_, value) => {
+        const date = dayjs(formatDateString(new Date(), DEFAULT_FORMAT), DATE_FORMAT_VALUE);
+        if (date && value && value.isAfter(date)) {
+            return Promise.reject('Ngày sinh phải nhỏ hơn ngày hiện tại');
+        }
+        return Promise.resolve();
+    };
+
     useEffect(() => {
+        dataDetail.birthday = dataDetail?.birthday && dayjs(dataDetail?.birthday, DATE_FORMAT_VALUE);
         form.setFieldsValue({
             ...dataDetail,
         });
         setImageUrl(dataDetail.avatar);
     }, [dataDetail]);
+
     return (
         <BaseForm id={formId} onFinish={handleSubmit} form={form} onValuesChange={onValuesChange}>
             <Card className="card-form" bordered={false}>
@@ -72,14 +86,41 @@ const UserAdminForm = (props) => {
                 </Row>
                 <Row gutter={16}>
                     <Col span={12}>
+                        <TextField label={translate.formatMessage(commonMessage.fullName)} required name="name" />
+                    </Col>
+                    <Col span={12}>
+                        <DatePickerField
+                            name="birthday"
+                            placeholder="Ngày sinh"
+                            style={{ width: '100%' }}
+                            label={translate.formatMessage(commonMessage.birthday)}
+                            format={DATE_FORMAT_VALUE}
+                            required={isEditing ? false : true}
+                            rules={[
+                                {
+                                    validator: validateDate,
+                                },
+                            ]}
+                        />
+                    </Col>
+                </Row>
+
+                <Row gutter={16}>
+                    <Col span={12}>
                         <TextField
-                            disabled={isEditing}
-                            label={translate.formatMessage(commonMessage.username)}
-                            name="username"
+                            label={translate.formatMessage(commonMessage.email)}
+                            name="email"
+                            type="email"
+                            required={!isEditing}
                         />
                     </Col>
                     <Col span={12}>
-                        <TextField label={translate.formatMessage(commonMessage.fullName)} required name="fullName" />
+                        <TextField
+                            label={translate.formatMessage(commonMessage.phone)}
+                            type="number"
+                            name="phone"
+                            required
+                        />
                     </Col>
                 </Row>
 
@@ -127,26 +168,10 @@ const UserAdminForm = (props) => {
                         />
                     </Col>
                 </Row>
-
-                <Row gutter={16}>
-                    <Col span={12}>
-                        <TextField label={translate.formatMessage(commonMessage.email)} name="email" type="email" />
-                    </Col>
-                    <Col span={12}>
-                        <SelectField
-                            disabled={isEditing}
-                            required
-                            name={['group', 'id']}
-                            label="Group"
-                            allowClear={false}
-                            options={groups}
-                        />
-                    </Col>
-                </Row>
                 <div className="footer-card-form">{actions}</div>
             </Card>
         </BaseForm>
     );
 };
 
-export default UserAdminForm;
+export default UserForm;

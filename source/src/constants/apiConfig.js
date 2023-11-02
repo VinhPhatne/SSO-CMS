@@ -43,28 +43,33 @@ const apiConfig = {
     },
     user: {
         getList: {
-            baseURL: `${apiUrl}v1/account/list`,
+            baseURL: `${apiUrl}v1/user/list`,
             method: `GET`,
             headers: baseHeader,
         },
         getById: {
-            baseURL: `${apiUrl}v1/account/get/:id`,
+            baseURL: `${apiUrl}v1/user/get/:id`,
             method: `GET`,
             headers: baseHeader,
         },
         create: {
-            baseURL: `${apiUrl}v1/account/create_admin`,
+            baseURL: `${apiUrl}v1/user/create`,
             method: `POST`,
             headers: baseHeader,
         },
         update: {
-            baseURL: `${apiUrl}v1/account/update_admin`,
+            baseURL: `${apiUrl}v1/user/update`,
             method: `PUT`,
             headers: baseHeader,
         },
         delete: {
-            baseURL: `${apiUrl}v1/account/delete/:id`,
+            baseURL: `${apiUrl}v1/user/delete/:id`,
             method: `DELETE`,
+            headers: baseHeader,
+        },
+        autocomplete: {
+            baseURL: `${apiUrl}v1/user/auto-complete`,
+            method: `GET`,
             headers: baseHeader,
         },
     },
@@ -197,6 +202,102 @@ const apiConfig = {
         delete: {
             baseURL: `${apiUrl}v1/news/delete/:id`,
             method: 'DELETE',
+            headers: baseHeader,
+        },
+    },
+    address: {
+        getList: {
+            baseURL: `${apiUrl}v1/address/list`,
+            method: 'GET',
+            headers: baseHeader,
+        },
+        getById: {
+            baseURL: `${apiUrl}v1/address/get/:id`,
+            method: 'GET',
+            headers: baseHeader,
+        },
+        create: {
+            baseURL: `${apiUrl}v1/address/create`,
+            method: 'POST',
+            headers: baseHeader,
+        },
+        update: {
+            baseURL: `${apiUrl}v1/address/update`,
+            method: 'PUT',
+            headers: baseHeader,
+        },
+        delete: {
+            baseURL: `${apiUrl}v1/address/delete/:id`,
+            method: 'DELETE',
+            headers: baseHeader,
+        },
+    },
+    nation: {
+        getList: {
+            baseURL: `${apiUrl}v1/nation/list`,
+            method: 'GET',
+            headers: baseHeader,
+        },
+        getById: {
+            baseURL: `${apiUrl}v1/nation/get/:id`,
+            method: 'GET',
+            headers: baseHeader,
+        },
+        create: {
+            baseURL: `${apiUrl}v1/nation/create`,
+            method: 'POST',
+            headers: baseHeader,
+        },
+        update: {
+            baseURL: `${apiUrl}v1/nation/update`,
+            method: 'PUT',
+            headers: baseHeader,
+        },
+        delete: {
+            baseURL: `${apiUrl}v1/nation/delete/:id`,
+            method: 'DELETE',
+            headers: baseHeader,
+        },
+        autocomplete: {
+            baseURL: `${apiUrl}v1/nation/auto-complete`,
+            method: 'GET',
+            headers: baseHeader,
+        },
+    },
+    settings:{
+        getSettingsList: {
+            baseURL: `${apiUrl}v1/settings/list`,
+            method: 'GET',
+            headers: baseHeader,
+        },
+        getList: {
+            baseURL: `${apiUrl}v1/settings/list`,
+            method: 'GET',
+            headers: baseHeader,
+        },
+        getById: {
+            baseURL: `${apiUrl}v1/settings/get/:id`,
+            method: 'GET',
+            headers: baseHeader,
+        },
+        create: {
+            baseURL: `${apiUrl}v1/settings/create`,
+            method: 'POST',
+            headers: baseHeader,
+        },
+        update: {
+            baseURL: `${apiUrl}v1/settings/update`,
+            method: 'PUT',
+            headers: baseHeader,
+        },
+        delete: {
+            baseURL: `${apiUrl}v1/settings/delete/:id`,
+            method: 'DELETE',
+            headers: baseHeader,
+        },
+        autocomplete: {
+            baseURL: `${apiUrl}v1/settings/auto-complete`,
+            method: 'GET',
             headers: baseHeader,
         },
     },
