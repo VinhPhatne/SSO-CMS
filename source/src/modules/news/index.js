@@ -127,7 +127,7 @@ const NewsListPage = () => {
                 <AvatarField
                     size="large"
                     icon={<UserOutlined />}
-                    src={avatar ? `${AppConstants.mediaRootUrl}${avatar}` : null}
+                    src={avatar ? `${AppConstants.contentRootUrl}${avatar}` : null}
                 />
             ),
         },

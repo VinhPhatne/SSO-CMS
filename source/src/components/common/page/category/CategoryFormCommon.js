@@ -34,6 +34,7 @@ const CategoryFormCommon = (props) => {
                 if (response.result === true) {
                     onSuccess();
                     setImageUrl(response.data.filePath);
+                    setIsChangedFormValues(true);
                 }
             },
             onError: (error) => {
