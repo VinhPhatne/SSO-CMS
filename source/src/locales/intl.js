@@ -37,5 +37,13 @@ export const commonMessage = defineMessages({
     isEditable:"Is Editable",
     isSystem:"Is System",
     settingKey:"Setting Key",
-
+    address: 'Address',
+    ward: 'Ward',
+    district: 'District',
+    province: 'Province',
+    nation:'Nation',
+    village: 'Village',
+    kind: 'Kind',
+    user: 'Users',
+    birthday: 'Birthday',
 });

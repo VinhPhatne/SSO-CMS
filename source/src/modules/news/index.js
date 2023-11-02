@@ -41,7 +41,7 @@ const NewsListPage = () => {
             funcs.mappingData = (response) => {
                 if (response.result === true) {
                     return {
-                        data: response.data.data,
+                        data: response.data.content,
                         total: response.data.totalElements,
                     };
                 }
@@ -92,8 +92,17 @@ const NewsListPage = () => {
         loading: getCategoriesLoading,
         execute: executeGetCategories,
     } = useFetch(apiConfig.category.autocomplete, {
-        immediate: false,
-        mappingData: ({ data }) => data.data.map((item) => ({ value: String(item.id), label: item.categoryName })),
+        immediate: true,
+        mappingData: ({ data }) =>
+            data.content
+                .map((item) => ({
+                    value: item?.id,
+                    label: item?.name,
+                }))
+                .filter((item, index, self) => {
+                    // Lọc ra các phần tử duy nhất bằng cách so sánh value
+                    return index === self.findIndex((t) => t.value === item.value);
+                }),
     });
 
     const handleUpdatePinTop = (item) => {
@@ -126,13 +135,11 @@ const NewsListPage = () => {
         {
             title: <FormattedMessage defaultMessage="Category" />,
             width: 120,
-            dataIndex: 'categoryId',
+            dataIndex: ['category', 'name'],
             render: (dataRow) => {
-                const category = categories?.find((item) => item.value == dataRow);
-
                 return (
                     <Tag color="#108ee9">
-                        <div style={{ padding: '0 4px', fontSize: 14 }}>{category?.label}</div>
+                        <div style={{ padding: '0 4px', fontSize: 14 }}>{dataRow}</div>
                     </Tag>
                 );
             },
@@ -142,16 +149,16 @@ const NewsListPage = () => {
             width: 180,
             dataIndex: 'createdDate',
         },
-        {
-            title: <FormattedMessage defaultMessage="Pin top" />,
-            width: 80,
-            align: 'center',
-            render: (dataRow) => {
-                const Icon = dataRow.pinTop ? IconPin : IconPinnedOff;
+        // {
+        //     title: <FormattedMessage defaultMessage="Pin top" />,
+        //     width: 80,
+        //     align: 'center',
+        //     render: (dataRow) => {
+        //         const Icon = dataRow.pinTop ? IconPin : IconPinnedOff;
 
-                return <Icon onClick={() => handleUpdatePinTop(dataRow)} size={18} />;
-            },
-        },
+        //         return <Icon onClick={() => handleUpdatePinTop(dataRow)} size={18} />;
+        //     },
+        // },
         mixinFuncs.renderStatusColumn({ width: '90px' }),
         mixinFuncs.renderActionColumn(
             {

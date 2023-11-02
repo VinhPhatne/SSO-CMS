@@ -1,49 +1,55 @@
 import PageWrapper from '@components/common/layout/PageWrapper';
+import { categoryKind } from '@constants';
 import apiConfig from '@constants/apiConfig';
+import useFetch from '@hooks/useFetch';
 import useSaveBase from '@hooks/useSaveBase';
-import React from 'react';
-import CategoryFormCommon from './CategoryFormCommon';
-import { defineMessages } from 'react-intl';
+import React, { useEffect } from 'react';
+import { FormattedMessage, defineMessages } from 'react-intl';
+import NationForm from './NationForm';
+import routes from './routes';
 import useTranslate from '@hooks/useTranslate';
 
 const message = defineMessages({
-    objectName: 'category',
+    objectName: 'Nation',
 });
 
-const CategorySavePageCommon = ({ routes, kind, getListUrl }) => {
+const NationSavePage = () => {
     const translate = useTranslate();
     const { detail, mixinFuncs, loading, setIsChangedFormValues, isEditing, title } = useSaveBase({
         apiConfig: {
-            getById: apiConfig.category.getById,
-            create: apiConfig.category.create,
-            update: apiConfig.category.update,
+            getById: apiConfig.nation.getById,
+            create: apiConfig.nation.create,
+            update: apiConfig.nation.update,
         },
         options: {
-            getListUrl,
+            getListUrl: routes.nationListPage.path,
             objectName: translate.formatMessage(message.objectName),
         },
         override: (funcs) => {
             funcs.prepareUpdateData = (data) => {
                 return {
                     ...data,
-                    status: 1,
-                    kind: kind,
-                    categoryId: detail.id,
+                    id: detail.id,
                 };
             };
             funcs.prepareCreateData = (data) => {
                 return {
                     ...data,
-                    kind: kind,
-                    ordering: 0,
                 };
             };
         },
     });
 
     return (
-        <PageWrapper loading={loading} routes={[...routes, { breadcrumbName: title }]} title={title}>
-            <CategoryFormCommon
+        <PageWrapper
+            loading={loading }
+            routes={[
+                { breadcrumbName: <FormattedMessage defaultMessage="Nation" />, path: routes.nationListPage.path },
+                { breadcrumbName: title },
+            ]}
+            title={title}
+        >
+            <NationForm
                 setIsChangedFormValues={setIsChangedFormValues}
                 dataDetail={detail ? detail : {}}
                 formId={mixinFuncs.getFormId()}
@@ -55,4 +61,4 @@ const CategorySavePageCommon = ({ routes, kind, getListUrl }) => {
     );
 };
 
-export default CategorySavePageCommon;
+export default NationSavePage;

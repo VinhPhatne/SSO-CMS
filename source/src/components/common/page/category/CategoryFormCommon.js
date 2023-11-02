@@ -50,7 +50,7 @@ const CategoryFormCommon = (props) => {
         form.setFieldsValue({
             ...dataDetail,
         });
-        setImageUrl(dataDetail.categoryImage);
+        setImageUrl(dataDetail?.image);
     }, [dataDetail]);
 
     return (
@@ -58,20 +58,20 @@ const CategoryFormCommon = (props) => {
             <Card className="card-form" bordered={false}>
                 <CropImageField
                     label={<FormattedMessage defaultMessage="Avatar" />}
-                    name="categoryImage"
+                    name="image"
                     imageUrl={imageUrl && `${AppConstants.mediaRootUrl}${imageUrl}`}
                     aspect={1 / 1}
                     uploadFile={uploadFile}
                 />
                 <Row gutter={10}>
                     <Col span={12}>
-                        <TextField required label={<FormattedMessage defaultMessage="Name" />} name="categoryName" />
+                        <TextField required label={<FormattedMessage defaultMessage="Name" />} name="name" />
                     </Col>
                     <Col span={12}>
                         <TextField
                             required
                             label={<FormattedMessage defaultMessage="Description" />}
-                            name="categoryDescription"
+                            name="description"
                             type="textarea"
                         />
                     </Col>

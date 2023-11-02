@@ -37,10 +37,10 @@ const SettingListPage = () => {
     const columns = [
         { title: translate.formatMessage(commonMessage.groupName), dataIndex: 'groupName' },
         { title: translate.formatMessage(commonMessage.description), dataIndex: 'description' },
-        { title: translate.formatMessage(commonMessage.isEditable), dataIndex: 'isEditable' },
-        { title: translate.formatMessage(commonMessage.isSystem), dataIndex: 'isSystem' },
-        // { title: translate.formatMessage(commonMessage.settingKey), dataIndex: 'settingKey' },
-        // { title: translate.formatMessage(commonMessage.settingValue), dataIndex: 'settingValue' },
+        // { title: translate.formatMessage(commonMessage.isEditable), dataIndex: 'isEditable' },
+        // { title: translate.formatMessage(commonMessage.isSystem), dataIndex: 'isSystem' },
+        { title: translate.formatMessage(commonMessage.settingKey), dataIndex: 'settingKey' },
+        { title: translate.formatMessage(commonMessage.settingValue), dataIndex: 'settingValue' },
         {
             title: translate.formatMessage(commonMessage.modifiedDate),
             dataIndex: 'modifiedDate',

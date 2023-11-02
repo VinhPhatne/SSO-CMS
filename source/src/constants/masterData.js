@@ -1,6 +1,8 @@
-import { STATUS_ACTIVE, STATUS_INACTIVE, STATUS_PENDING } from '@constants';
+import { STATUS_ACTIVE, STATUS_INACTIVE, STATUS_PENDING,PROVINCE_KIND,DISTRICT_KIND,VILLAGE_KIND } from '@constants';
 import { defineMessages } from 'react-intl';
-
+import {
+    nationKindMessage,
+} from './intl';
 
 const commonMessage = defineMessages({
     statusActive: 'Active',
@@ -37,3 +39,18 @@ export const formSize = {
     normal: '800px',
     big: '900px',
 };
+
+export const nationKindOptions = [
+    {
+        value: PROVINCE_KIND,
+        label: nationKindMessage.province,
+    },
+    {
+        value: DISTRICT_KIND,
+        label: nationKindMessage.district,
+    },
+    {
+        value: VILLAGE_KIND,
+        label: nationKindMessage.village,
+    },
+];
