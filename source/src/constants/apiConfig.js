@@ -264,6 +264,43 @@ const apiConfig = {
             headers: baseHeader,
         },
     },
+    settings:{
+        getSettingsList: {
+            baseURL: `${apiUrl}v1/settings/list`,
+            method: 'GET',
+            headers: baseHeader,
+        },
+        getList: {
+            baseURL: `${apiUrl}v1/settings/list`,
+            method: 'GET',
+            headers: baseHeader,
+        },
+        getById: {
+            baseURL: `${apiUrl}v1/settings/get/:id`,
+            method: 'GET',
+            headers: baseHeader,
+        },
+        create: {
+            baseURL: `${apiUrl}v1/settings/create`,
+            method: 'POST',
+            headers: baseHeader,
+        },
+        update: {
+            baseURL: `${apiUrl}v1/settings/update`,
+            method: 'PUT',
+            headers: baseHeader,
+        },
+        delete: {
+            baseURL: `${apiUrl}v1/settings/delete/:id`,
+            method: 'DELETE',
+            headers: baseHeader,
+        },
+        autocomplete: {
+            baseURL: `${apiUrl}v1/settings/auto-complete`,
+            method: 'GET',
+            headers: baseHeader,
+        },
+    },
 };
 
 export default apiConfig;
