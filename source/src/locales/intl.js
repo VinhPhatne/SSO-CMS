@@ -34,4 +34,9 @@ export const commonMessage = defineMessages({
     ward: 'Ward',
     district: 'District',
     province: 'Province',
+    nation:'Nation',
+    village: 'Village',
+    kind: 'Kind',
+    user: 'Users',
+    birthday: 'Birthday',
 });

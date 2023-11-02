@@ -16,6 +16,12 @@ const navMenuConfig = [
                 path: routes.adminsListPage.path,
                 permission: [apiConfig.user.getList.baseURL],
             },
+            {
+                label: <FormattedMessage defaultMessage="Users" />,
+                key: 'user',
+                path: routes.userListPage.path,
+                permission: [apiConfig.user.getList.baseURL],
+            },
             // {
             //     label: <FormattedMessage  defaultMessage='Admins Leader'/>,
             //     key: 'admin-leader',
@@ -60,8 +66,16 @@ const navMenuConfig = [
                 path: routes.addressListPage.path,
                 permission: [apiConfig.address.getList.baseURL],
             },
+            {
+                label: <FormattedMessage  defaultMessage='Nation'/>,
+                key: 'nation',
+                path: routes.nationListPage.path,
+                // permission: [apiConfig.nation.getList.baseURL],
+            },
+            
         ],
     },
+   
 ];
 
 export default navMenuConfig;
