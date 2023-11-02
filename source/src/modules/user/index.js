@@ -18,7 +18,12 @@ const UserAdminListPage = ({ pageOptions }) => {
     const translate = useTranslate();
     const { isAdmin } = useAuth();
     const { data, mixinFuncs, queryFilter, loading, pagination } = useListBase({
-        apiConfig: apiConfig.user,
+        apiConfig: {
+            getList: apiConfig.account.getList,
+            getById: apiConfig.account.getById,
+            update: apiConfig.account.updateAdmin,
+            delete: apiConfig.account.delete,
+        },
         options: {
             pageSize: DEFAULT_TABLE_ITEM_SIZE,
             objectName: translate.formatMessage(pageOptions.objectName),
@@ -48,34 +53,28 @@ const UserAdminListPage = ({ pageOptions }) => {
                 />
             ),
         },
-        { title: translate.formatMessage(commonMessage.username), dataIndex: 'name' },
+        { title: translate.formatMessage(commonMessage.fullName), dataIndex: 'fullName' },
+        { title: translate.formatMessage(commonMessage.username), dataIndex: 'username' },
+
         isAdmin() && { title: translate.formatMessage(commonMessage.email), dataIndex: 'email' },
-        // { title: translate.formatMessage(commonMessage.phone), dataIndex: 'phone', width: '130px' },
         {
             title: translate.formatMessage(commonMessage.phone),
             dataIndex: 'phone',
             width: '200px',
-            // render: (group) => group?.name || '-',
         },
-        {
-            title: translate.formatMessage(commonMessage.birthday),
-            dataIndex: 'birthday',
-            width: '180px',
-            // render: (createdDate) => convertUtcToTimezone(createdDate),
-        },
-        // mixinFuncs.renderStatusColumn({ width: '90px' }),
+        mixinFuncs.renderStatusColumn({ width: '90px' }),
         mixinFuncs.renderActionColumn({ edit: true, delete: true }, { width: '150px' }),
     ];
 
     const searchFields = [
         {
-            key: 'name',
+            key: 'username',
             placeholder: translate.formatMessage(commonMessage.username),
         },
-        // {
-        //     key: 'fullName',
-        //     placeholder: translate.formatMessage(commonMessage.fullName),
-        // },
+        {
+            key: 'fullName',
+            placeholder: translate.formatMessage(commonMessage.fullName),
+        },
     ];
 
     return (

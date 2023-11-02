@@ -17,7 +17,7 @@ export default {
         path: paths.adminsListPage,
         auth: true,
         component: UserAdminListPage,
-        permission: [apiConfig.user.getList.baseURL],
+        permission: [apiConfig.account.getList.baseURL],
         pageOptions: {
             objectName: commonMessage.admins,
             renderBreadcrumbs: (messages, t, title, options = {}) => {
@@ -30,7 +30,7 @@ export default {
         component: UserAdminSavePage,
         separateCheck: true,
         auth: true,
-        permission: [apiConfig.user.create.baseURL, apiConfig.user.update.baseURL],
+        permission: [apiConfig.account.createAdmin.baseURL, apiConfig.account.updateAdmin.baseURL],
         pageOptions: {
             objectName: commonMessage.admins,
             listPageUrl: paths.adminsListPage,

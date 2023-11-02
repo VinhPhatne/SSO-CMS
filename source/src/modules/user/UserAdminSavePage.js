@@ -26,9 +26,9 @@ const UserAdminSavePage = ({ pageOptions }) => {
     });
     const { detail, mixinFuncs, loading, onSave, setIsChangedFormValues, isEditing, title } = useSaveBase({
         apiConfig: {
-            getById: apiConfig.user.getById,
-            create: apiConfig.user.create,
-            update: apiConfig.user.update,
+            getById: apiConfig.account.getById,
+            create: apiConfig.account.createAdmin,
+            update: apiConfig.account.updateAdmin,
         },
         options: {
             getListUrl: pageOptions.listPageUrl,
