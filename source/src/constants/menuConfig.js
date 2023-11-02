@@ -11,12 +11,6 @@ const navMenuConfig = [
         icon: <UsergroupAddOutlined />,
         children: [
             {
-                label: <FormattedMessage defaultMessage="Admins" />,
-                key: 'admin',
-                path: routes.adminsListPage.path,
-                permission: [apiConfig.user.getList.baseURL],
-            },
-            {
                 label: <FormattedMessage defaultMessage="Users" />,
                 key: 'user',
                 path: routes.userListPage.path,
