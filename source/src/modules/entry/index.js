@@ -3,7 +3,7 @@ import React from 'react';
 import { Navigate } from 'react-router-dom';
 
 const Dashboard = () => {
-    return <Navigate to={routes.adminsListPage.path} />;
+    return <Navigate to={routes.userListPage.path} />;
 };
 
 export default Dashboard;

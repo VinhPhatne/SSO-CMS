@@ -66,7 +66,7 @@ const NewsForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormValue
     }, [dataDetail]);
 
     useEffect(() => {
-        if (!isEditing && categories?.length > 0) {
+        if (!isEditing) {
             form.setFieldsValue({
                 status: statusValues[0].value,
                 categoryId: categories?.[0].value,
@@ -98,19 +98,13 @@ const NewsForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormValue
                     </Col>
                 </Row>
                 <Row gutter={10}>
-                    <Col span={12}>
+                    <Col span={24}>
                         <TextField required label={<FormattedMessage defaultMessage="Title" />} name="title" />
                     </Col>
-                    <Col span={12}>
-                        <TextField
-                            required
-                            label={<FormattedMessage defaultMessage="Description" />}
-                            name="description"
-                            type="textarea"
-                        />
-                    </Col>
+                    
                 </Row>
                 <Row gutter={10}>
+
                     <Col span={12}>
                         <AutoCompleteField
                             required
@@ -128,6 +122,14 @@ const NewsForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormValue
                             label={<FormattedMessage defaultMessage="Status" />}
                             name="status"
                             options={statusValues}
+                        />
+                    </Col>
+                    <Col span={24}>
+                        <TextField
+                            required
+                            label={<FormattedMessage defaultMessage="Description" />}
+                            name="description"
+                            type="textarea"
                         />
                     </Col>
                 </Row>
