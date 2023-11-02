@@ -62,7 +62,7 @@ const AddressForm = (props) => {
             <Card className="card-form" bordered={false}>
                 <Row gutter={16}>
                     <Col span={12}>
-                        <TextField label={translate.formatMessage(commonMessage.fullName)} name="name" />
+                        <TextField label={translate.formatMessage(commonMessage.name)} name="name" />
                     </Col>
                     <Col span={12}>
                         <TextField label={translate.formatMessage(commonMessage.phone)} name="phone" />
