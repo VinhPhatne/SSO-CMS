@@ -6,6 +6,8 @@ import ProfilePage from '@modules/profile/index';
 import adminsRoutes from '@modules/user/routes';
 import newsRoutes from '@modules/news/routes';
 import nationRoutes from '@modules/nation/routes';
+import addressRoutes from '@modules/address/routes';
+
 import GroupPermissionListPage from '@modules/groupPermission';
 import PermissionSavePage from '@modules/groupPermission/PermissionSavePage';
 /*
@@ -60,6 +62,8 @@ const routes = {
     ...adminsRoutes,
     ...newsRoutes,
     ...nationRoutes,
+    ...addressRoutes,
+
     // keep this at last
     notFound: {
         component: PageNotFound,

@@ -205,6 +205,33 @@ const apiConfig = {
             headers: baseHeader,
         },
     },
+    address: {
+        getList: {
+            baseURL: `${apiUrl}v1/address/list`,
+            method: 'GET',
+            headers: baseHeader,
+        },
+        getById: {
+            baseURL: `${apiUrl}v1/address/get/:id`,
+            method: 'GET',
+            headers: baseHeader,
+        },
+        create: {
+            baseURL: `${apiUrl}v1/address/create`,
+            method: 'POST',
+            headers: baseHeader,
+        },
+        update: {
+            baseURL: `${apiUrl}v1/address/update`,
+            method: 'PUT',
+            headers: baseHeader,
+        },
+        delete: {
+            baseURL: `${apiUrl}v1/address/delete/:id`,
+            method: 'DELETE',
+            headers: baseHeader,
+        },
+    },
     nation: {
         getList: {
             baseURL: `${apiUrl}v1/nation/list`,

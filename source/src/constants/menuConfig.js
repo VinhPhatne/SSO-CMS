@@ -61,6 +61,12 @@ const navMenuConfig = [
                 permission: [apiConfig.groupPermission.getGroupList.baseURL],
             },
             {
+                label: <FormattedMessage defaultMessage="Address" />,
+                key: 'address',
+                path: routes.addressListPage.path,
+                permission: [apiConfig.address.getList.baseURL],
+            },
+            {
                 label: <FormattedMessage  defaultMessage='Nation'/>,
                 key: 'nation',
                 path: routes.nationListPage.path,
