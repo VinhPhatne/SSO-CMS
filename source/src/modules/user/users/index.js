@@ -40,7 +40,7 @@ const UserListPage = ({ pageOptions }) => {
     const columns = [
         {
             title: '#',
-            dataIndex: 'avatarPath',
+            dataIndex: 'avatar',
             align: 'center',
             width: 100,
             render: (avatar) => (

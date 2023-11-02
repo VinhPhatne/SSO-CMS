@@ -40,7 +40,7 @@ const UserForm = (props) => {
                 if (response.result === true) {
                     onSuccess();
                     setImageUrl(response.data.filePath);
-                    setIsChangedFormValues();
+                    setIsChangedFormValues(true);
                 }
             },
             onError: (error) => {
