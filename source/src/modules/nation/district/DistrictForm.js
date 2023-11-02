@@ -13,6 +13,8 @@ const DistrictForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormV
 
     const queryParameters = new URLSearchParams(window.location.search);
     const parentId = queryParameters.get('parentId');
+    const provinceName = queryParameters.get('provinceName');
+
     const nationValues = translate.formatKeys(nationKindOptions, ['label']);
     const statusValues = translate.formatKeys(statusOptions, ['label']);
 
@@ -26,13 +28,13 @@ const DistrictForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormV
         return mixinFuncs.handleSubmit({
             ...values,
             parentId: parentId,
+            kind: 2,
         });
     };
 
     useEffect(() => {
         form.setFieldsValue({
             ...dataDetail,
-            kind: 2,
         });
     }, [dataDetail]);
 
@@ -49,16 +51,16 @@ const DistrictForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormV
             <Card className="card-form" bordered={false}>
                 <Row gutter={10}>
                     <Col span={12}>
-                        <TextField required label={<FormattedMessage defaultMessage="District Name" />} name="name" />
-                    </Col>
-                    <Col span={12}>
-                        <SelectField
+                        <TextField
                             required
                             disabled={true}
-                            label={<FormattedMessage defaultMessage="Kind" />}
-                            name="kind"
-                            options={nationValues}
+                            label={<FormattedMessage defaultMessage="Province Name" />}
+                            name="provinceName"
+                            initialValue={provinceName}
                         />
+                    </Col>
+                    <Col span={12}>
+                        <TextField required label={<FormattedMessage defaultMessage="District Name" />} name="name" />
                     </Col>
                 </Row>
                 {/* <Row gutter={10}>

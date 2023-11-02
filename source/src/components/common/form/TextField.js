@@ -17,6 +17,7 @@ const TextField = (props) => {
         className,
         onChange,
         readOnly,
+        initialValue,
     } = props;
 
     const getMaxLengthMsg = () => {
@@ -55,6 +56,7 @@ const TextField = (props) => {
             label={label}
             name={name}
             validateStatus={validateStatus}
+            initialValue={initialValue}
             help={help}
             rules={[ ...rules, getTextFieldRules() ]}
         >

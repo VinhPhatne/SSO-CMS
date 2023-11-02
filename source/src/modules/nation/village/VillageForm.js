@@ -13,6 +13,8 @@ const VillageForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormVa
 
     const queryParameters = new URLSearchParams(window.location.search);
     const districtId = queryParameters.get('districtId');
+    const districtName = queryParameters.get('districtName');
+
     const nationValues = translate.formatKeys(nationKindOptions, ['label']);
     const statusValues = translate.formatKeys(statusOptions, ['label']);
 
@@ -26,6 +28,7 @@ const VillageForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormVa
         return mixinFuncs.handleSubmit({
             ...values,
             parentId: districtId,
+            kind: 3,
         });
     };
 
@@ -49,16 +52,17 @@ const VillageForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormVa
             <Card className="card-form" bordered={false}>
                 <Row gutter={10}>
                     <Col span={12}>
-                        <TextField required label={<FormattedMessage defaultMessage="Village Name" />} name="name" />
-                    </Col>
-                    <Col span={12}>
-                        <SelectField
+                        <TextField
                             required
                             disabled={true}
-                            label={<FormattedMessage defaultMessage="Kind" />}
-                            name="kind"
-                            options={nationValues}
+                            label={<FormattedMessage defaultMessage="District Name" />}
+                            name="districtName"
+                            initialValue={districtName}
+                            
                         />
+                    </Col>
+                    <Col span={12}>
+                        <TextField required label={<FormattedMessage defaultMessage="Village Name" />} name="name" />
                     </Col>
                 </Row>
                 {/* <Row gutter={10}>
