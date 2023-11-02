@@ -43,7 +43,7 @@ const CategoryFormCommon = (props) => {
     };
 
     const handleSubmit = (values) => {
-        return mixinFuncs.handleSubmit({ ...values, categoryImage: imageUrl });
+        return mixinFuncs.handleSubmit({ ...values, image: imageUrl });
     };
 
     useEffect(() => {
@@ -56,13 +56,15 @@ const CategoryFormCommon = (props) => {
     return (
         <BaseForm id={formId} onFinish={handleSubmit} form={form} onValuesChange={onValuesChange}>
             <Card className="card-form" bordered={false}>
-                <CropImageField
-                    label={<FormattedMessage defaultMessage="Avatar" />}
-                    name="image"
-                    imageUrl={imageUrl && `${AppConstants.mediaRootUrl}${imageUrl}`}
-                    aspect={1 / 1}
-                    uploadFile={uploadFile}
-                />
+                <Col span={12}>
+                    <CropImageField
+                        label={<FormattedMessage defaultMessage="Avatar" />}
+                        name="avatar"
+                        imageUrl={imageUrl && `${AppConstants.contentRootUrl}${imageUrl}`}
+                        aspect={1 / 1}
+                        uploadFile={uploadFile}
+                    />
+                </Col>
                 <Row gutter={10}>
                     <Col span={12}>
                         <TextField required label={<FormattedMessage defaultMessage="Name" />} name="name" />
