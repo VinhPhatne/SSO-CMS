@@ -59,6 +59,12 @@ const navMenuConfig = [
                 path: routes.groupPermissionPage.path,
                 permission: [apiConfig.groupPermission.getGroupList.baseURL],
             },
+            {
+                label: <FormattedMessage  defaultMessage='List Setting'/>,
+                key: 'list-setting',
+                path: routes.listSettingsPage.path,
+                permission: [apiConfig.settings.getSettingsList.baseURL],
+            },
         ],
     },
 ];

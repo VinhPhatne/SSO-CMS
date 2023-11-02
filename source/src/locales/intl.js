@@ -15,6 +15,7 @@ export const commonMessage = defineMessages({
     phone: 'Phone',
     group: 'Group',
     createdDate: 'Created date',
+    modifiedDate: 'Modified Date',
     userAdmin: 'Admins',
     userAdminLeader: 'Admins Leader',
     profile: 'Profile',
@@ -30,4 +31,11 @@ export const commonMessage = defineMessages({
     name: 'Name',
     description: 'Description',
     groupPermission: 'Group Permission',
+    listSetting:"List Setting",
+    settingValue:"Setting Value",
+    groupName:"Group Name",
+    isEditable:"Is Editable",
+    isSystem:"Is System",
+    settingKey:"Setting Key",
+
 });

@@ -8,6 +8,8 @@ import newsRoutes from '@modules/news/routes';
 
 import GroupPermissionListPage from '@modules/groupPermission';
 import PermissionSavePage from '@modules/groupPermission/PermissionSavePage';
+import SettingListPage from '@modules/listSetting';
+import SettingSavePage from '@modules/listSetting/SettingSavePage';
 /*
 	auth
 		+ null: access login and not login
@@ -56,6 +58,18 @@ const routes = {
         component: PermissionSavePage,
         auth: true,
         title: 'Profile page',
+    },
+    listSettingsPage:{
+        path:'/settings',
+        component:SettingListPage,
+        auth: true,
+        title: 'Settings page',
+    },
+    listSettingsPageSavePage: {
+        path: '/settings/:id',
+        component: SettingSavePage,
+        auth: true,
+        title: 'Settings page',
     },
     ...adminsRoutes,
     ...newsRoutes,
