@@ -15,6 +15,7 @@ const VillageForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormVa
     const queryParameters = new URLSearchParams(window.location.search);
     const districtId = queryParameters.get('districtId');
     const districtName = queryParameters.get('districtName');
+    const provinceName = queryParameters.get('provinceName');
 
     const nationValues = translate.formatKeys(nationKindOptions, ['label']);
     const statusValues = translate.formatKeys(statusOptions, ['label']);
@@ -53,16 +54,21 @@ const VillageForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormVa
                 <Row gutter={10}>
                     <Col span={12}>
                         <TextField
-                            required
+                            disabled={true}
+                            label={translate.formatMessage(commonMessage.District)}
+                            name="provinceName"
+                            initialValue={provinceName}
+                        />
+                    </Col>
+                    <Col span={12}>
+                        <TextField
                             disabled={true}
                             label={translate.formatMessage(commonMessage.District)}
                             name="districtName"
                             initialValue={districtName}
                         />
                     </Col>
-                    <Col span={12}>
-                        <TextField required label={translate.formatMessage(commonMessage.Village)} name="name" />
-                    </Col>
+                    
                 </Row>
                 {/* <Row gutter={10}>
                     <Col span={12}>
@@ -70,6 +76,9 @@ const VillageForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormVa
                     </Col>
                 </Row> */}
                 <Row gutter={10}>
+                    <Col span={12}>
+                        <TextField required label={translate.formatMessage(commonMessage.Village)} name="name" />
+                    </Col>
                     <Col span={12}>
                         <TextField required label={<FormattedMessage defaultMessage="PostCode" />} name="postCode" />
                     </Col>

@@ -86,10 +86,11 @@ const UserForm = (props) => {
                 </Row>
                 <Row gutter={16}>
                     <Col span={12}>
-                        <TextField label={translate.formatMessage(commonMessage.fullName)} required name="name" />
+                        <TextField label={translate.formatMessage(commonMessage.fullName)} required name="fullName" />
                     </Col>
                     <Col span={12}>
                         <DatePickerField
+                            disabled={isEditing}
                             name="birthday"
                             placeholder="Ngày sinh"
                             style={{ width: '100%' }}

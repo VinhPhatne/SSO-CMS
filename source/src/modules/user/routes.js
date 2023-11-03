@@ -4,6 +4,8 @@ import UserAdminSavePage from './UserAdminSavePage';
 import UserListPage from './users';
 import UserSavePage from './users/UserSavePage';
 import { commonMessage } from '@locales/intl';
+import AddressListPage from './address';
+import AddressSavePage from './address/AddressSavePage';
 const paths = {
     adminsListPage: '/admins',
     adminsSavePage: '/admins/:id',
@@ -11,6 +13,8 @@ const paths = {
     adminsLeaderSavePage: '/admins-leader/:id',
     userListPage: '/user',
     userSavePage: '/user/:id',
+    addressListPage:'/user/address',
+    addressSavePage: '/user/address/:id',
 };
 export default {
     adminsListPage: {
@@ -101,6 +105,39 @@ export default {
             renderBreadcrumbs: (messages, t, title, options = {}) => {
                 return [
                     { breadcrumbName: t.formatMessage(messages.user), path: paths.userListPage },
+                    { breadcrumbName: title },
+                ];
+            },
+        },
+    },
+    addressListPage: {
+        path: paths.addressListPage,
+        auth: true,
+        component: AddressListPage,
+        permission: [apiConfig.address.getList.baseURL],
+        pageOptions: {
+            objectName: commonMessage.address,
+            renderBreadcrumbs: (messages, t, title, options = {}) => {
+                return [
+                    { breadcrumbName: t.formatMessage(messages.user), path: paths.userListPage },
+                    { breadcrumbName: t.formatMessage(messages.address) },
+                ];
+            },
+        },
+    },
+    addressSavePage: {
+        path: paths.addressSavePage,
+        component: AddressSavePage,
+        separateCheck: true,
+        auth: true,
+        permission: [apiConfig.address.create.baseURL, apiConfig.address.update.baseURL],
+        pageOptions: {
+            objectName: commonMessage.address,
+            listPageUrl: paths.addressListPage,
+            renderBreadcrumbs: (messages, t, title, options = {}) => {
+                return [
+                    { breadcrumbName: t.formatMessage(messages.user), path: paths.userListPage },
+                    { breadcrumbName: t.formatMessage(commonMessage.address), path: paths.addressListPage+`?userId=${options.userId}` },
                     { breadcrumbName: title },
                 ];
             },
