@@ -33,12 +33,13 @@ const SettingSavePage = () => {
             objectName: translate.formatMessage(message.objectName),
         },
         override: (funcs) => {
-            // funcs.prepareUpdateData = (data) => {
-            //     return {
-            //         ...data,
-            //         id: id,
-            //     };
-            // };
+            funcs.prepareUpdateData = (data) => {
+                return {
+                    ...data,
+                    id: id,
+                    status: 1,
+                };
+            };
             // funcs.prepareCreateData = (data) => {
             //     return {
             //         ...data,

@@ -88,7 +88,7 @@ const SettingListPage = () => {
             <ListPage
                 searchForm={mixinFuncs.renderSearchForm({
                     fields: searchFields,
-                    initialValues: { isSystem: 1, ...queryFilter },
+                    initialValues: { isSystem: isSystemSettingOptions[0].value, ...queryFilter },
                 })}
                 // actionBar={mixinFuncs.renderActionBar()}
                 baseTable={
