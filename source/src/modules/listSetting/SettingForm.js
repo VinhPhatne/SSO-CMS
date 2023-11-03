@@ -1,5 +1,5 @@
 import { Card, Col, Row } from 'antd';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import useBasicForm from '@hooks/useBasicForm';
 import TextField from '@components/common/form/TextField';
 import { defineMessages } from 'react-intl';
@@ -8,6 +8,7 @@ import { commonMessage } from '@locales/intl';
 import { BaseForm } from '@components/common/form/BaseForm';
 import SelectField from '@components/common/form/SelectField';
 import { formSize, statusOptions } from '@constants/masterData';
+import timezone from '@constants/timezone.json';
 
 const message = defineMessages({
     objectName: 'setting',
@@ -17,6 +18,7 @@ const SettingForm = (props) => {
     const translate = useTranslate();
     const { formId, actions, dataDetail, onSubmit, setIsChangedFormValues, groups, isEditing, size = 'small' } = props;
     const statusValues = translate.formatKeys(statusOptions, ['label']);
+    const [otherData, setOther] = useState({});
 
     const { form, mixinFuncs, onValuesChange } = useBasicForm({
         onSubmit,
@@ -24,12 +26,15 @@ const SettingForm = (props) => {
     });
 
     const handleSubmit = (values) => {
-        return mixinFuncs.handleSubmit({ ...values });
+        return mixinFuncs.handleSubmit({ ...values, settingValue: JSON.stringify(otherData) });
     };
-
+    const onSelectTimezone = (value, item) => {
+        setOther({ name: value, offset: item.offset });
+    };
     useEffect(() => {
         form.setFieldsValue({
             ...dataDetail,
+            timezone: dataDetail.groupName == 'Timezone' ? JSON.parse(dataDetail.settingValue).name : '',
         });
     }, [dataDetail]);
     useEffect(() => {
@@ -50,15 +55,26 @@ const SettingForm = (props) => {
             <Card className="card-form" bordered={false}>
                 <Row>
                     <Col span={12}>
-                        <TextField
-                            label={translate.formatMessage(commonMessage.settingValue)}
-                            required
-                            name="settingValue"
-                        />
+                        {dataDetail.groupName == 'Timezone' ? (
+                            <SelectField
+                                onSelect={onSelectTimezone}
+                                name="timezone"
+                                label={translate.formatMessage(commonMessage.settingValue)}
+                                options={timezone}
+                                // initialValue="Africa/Abidjan"
+                                // optionOther="offset"
+                            />
+                        ) : (
+                            <TextField
+                                label={translate.formatMessage(commonMessage.settingValue)}
+                                required
+                                name="settingValue"
+                            />
+                        )}
                     </Col>
                 </Row>
                 <Row>
-                    <Col span={12}>
+                    <Col span={24}>
                         <TextField
                             label={translate.formatMessage(commonMessage.description)}
                             type="textarea"

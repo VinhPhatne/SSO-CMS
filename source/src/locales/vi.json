@@ -171,5 +171,7 @@
     "locales.intl.commonMessage.District": "Quận, huyện",
     "locales.intl.commonMessage.Village": "Phường xã",
     "locales.intl.commonMessage.nation": "Cấp",
-    "locales.intl.commonMessage.Nation": "Danh mục tỉnh thành"
+    "locales.intl.commonMessage.Nation": "Danh mục tỉnh thành",
+    "locales.intl.commonMessage.showSystemSettings": "Hiển thị cài đặt hệ thống",
+    "locales.intl.commonMessage.hideSystemSettings": "Ẩn cài đặt hệ thống"
 }

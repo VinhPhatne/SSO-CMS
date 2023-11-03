@@ -107,6 +107,8 @@
   "locales.intl.commonMessage.validatePassword": "Password must be at least 6 characters",
   "locales.intl.commonMessage.village": "Village",
   "locales.intl.commonMessage.ward": "Ward",
+  "locales.intl.commonMessage.showSystemSettings": "Show system settings",
+  "locales.intl.commonMessage.hideSystemSettings": "Hide system settings",
   "modules.address.AddressForm.objectName": "group permission",
   "modules.address.AddressSavePage.objectName": "address",
   "modules.listSetting.SettingForm.objectName": "setting",
