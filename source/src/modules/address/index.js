@@ -37,7 +37,7 @@ const AddressListPage = ({ pageOptions }) => {
     });
     const columns = [
         {
-            title: translate.formatMessage(commonMessage.name),
+            title: translate.formatMessage(commonMessage.Name),
             dataIndex: 'name',
             width: '150',
         },
@@ -46,7 +46,11 @@ const AddressListPage = ({ pageOptions }) => {
             dataIndex: 'address',
             width: '280',
             render: (address, dataRow) => {
-                return <div>{address}, {dataRow?.wardInfo.name},  {dataRow?.districtInfo.name}, {dataRow?.provinceInfo.name}</div>;
+                return (
+                    <div>
+                        {address}, {dataRow?.wardInfo.name}, {dataRow?.districtInfo.name}, {dataRow?.provinceInfo.name}
+                    </div>
+                );
             },
         },
         {
@@ -56,13 +60,13 @@ const AddressListPage = ({ pageOptions }) => {
         },
 
         mixinFuncs.renderStatusColumn({ width: '60px' }),
-        mixinFuncs.renderActionColumn({ edit: true, delete: true }, { width: '90px' }),
+        mixinFuncs.renderActionColumn({ edit: true, delete: true }, { width: '130px' }),
     ];
-   
+
     const searchFields = [
         {
             key: 'name',
-            placeholder: translate.formatMessage(commonMessage.name),
+            placeholder: translate.formatMessage(commonMessage.Name),
         },
     ];
 

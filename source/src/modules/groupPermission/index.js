@@ -9,9 +9,12 @@ import ListPage from '@components/common/layout/ListPage';
 import { FieldTypes } from '@constants/formConfig';
 import useQueryParams from '@hooks/useQueryParams';
 import { getData } from '@utils/localStorage';
+import useTranslate from '@hooks/useTranslate';
+import { commonMessage } from '@locales/intl';
 
 const GroupPermissionListPage = () => {
     const { setQueryParams } = useQueryParams();
+    const translate = useTranslate();
     const useKind = getData(storageKeys.USER_KIND) || UserTypes.ADMIN;
     const { data, mixinFuncs, queryFilter, loading, pagination } = useListBase({
         apiConfig: apiConfig.groupPermission,
@@ -37,15 +40,15 @@ const GroupPermissionListPage = () => {
     });
 
     const columns = [
-        { title: 'Name', dataIndex: 'name' },
-        { title: 'Description', dataIndex: 'description' },
-        mixinFuncs.renderActionColumn({ edit: true }, { width: '100px' }),
+        { title: translate.formatMessage(commonMessage.Name), dataIndex: 'name' },
+        { title: translate.formatMessage(commonMessage.description), dataIndex: 'description' },
+        mixinFuncs.renderActionColumn({ edit: true }, { width: '130px' }),
     ];
 
     const searchFields = [
         {
             key: 'name',
-            placeholder: 'Name',
+            placeholder: translate.formatMessage(commonMessage.Name),
         },
         {
             key: 'kind',

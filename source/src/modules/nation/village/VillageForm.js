@@ -4,9 +4,10 @@ import useBasicForm from '@hooks/useBasicForm';
 import TextField from '@components/common/form/TextField';
 import SelectField from '@components/common/form/SelectField';
 import useTranslate from '@hooks/useTranslate';
-import { nationKindOptions,statusOptions } from '@constants/masterData';
+import { nationKindOptions, statusOptions } from '@constants/masterData';
 import { FormattedMessage } from 'react-intl';
 import { BaseForm } from '@components/common/form/BaseForm';
+import { commonMessage } from '@locales/intl';
 
 const VillageForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormValues, isEditing }) => {
     const translate = useTranslate();
@@ -22,7 +23,6 @@ const VillageForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormVa
         onSubmit,
         setIsChangedFormValues,
     });
-
 
     const handleSubmit = (values) => {
         return mixinFuncs.handleSubmit({
@@ -55,14 +55,13 @@ const VillageForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormVa
                         <TextField
                             required
                             disabled={true}
-                            label={<FormattedMessage defaultMessage="District Name" />}
+                            label={translate.formatMessage(commonMessage.District)}
                             name="districtName"
                             initialValue={districtName}
-                            
                         />
                     </Col>
                     <Col span={12}>
-                        <TextField required label={<FormattedMessage defaultMessage="Village Name" />} name="name" />
+                        <TextField required label={translate.formatMessage(commonMessage.Village)} name="name" />
                     </Col>
                 </Row>
                 {/* <Row gutter={10}>
@@ -72,16 +71,12 @@ const VillageForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormVa
                 </Row> */}
                 <Row gutter={10}>
                     <Col span={12}>
-                        <TextField
-                            required
-                            label={<FormattedMessage defaultMessage="PostCode" />}
-                            name="postCode"
-                        />
+                        <TextField required label={<FormattedMessage defaultMessage="PostCode" />} name="postCode" />
                     </Col>
                     <Col span={12}>
                         <SelectField
                             required
-                            label={<FormattedMessage defaultMessage="Status" />}
+                            label={translate.formatMessage(commonMessage.status)}
                             name="status"
                             options={statusValues}
                         />

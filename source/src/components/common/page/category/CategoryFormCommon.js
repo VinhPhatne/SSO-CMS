@@ -11,6 +11,7 @@ import useTranslate from '@hooks/useTranslate';
 import { statusOptions } from '@constants/masterData';
 import { FormattedMessage } from 'react-intl';
 import { BaseForm } from '@components/common/form/BaseForm';
+import { commonMessage } from '@locales/intl';
 
 const CategoryFormCommon = (props) => {
     const { formId, actions, dataDetail, onSubmit, setIsChangedFormValues } = props;
@@ -68,7 +69,7 @@ const CategoryFormCommon = (props) => {
                 </Col>
                 <Row gutter={10}>
                     <Col span={12}>
-                        <TextField required label={<FormattedMessage defaultMessage="Name" />} name="name" />
+                        <TextField required label={translate.formatMessage(commonMessage.name)} name="name" />
                     </Col>
                     <Col span={12}>
                         <TextField

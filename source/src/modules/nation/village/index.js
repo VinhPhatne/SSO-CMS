@@ -8,12 +8,12 @@ import ListPage from '@components/common/layout/ListPage';
 import useTranslate from '@hooks/useTranslate';
 import { defineMessages, FormattedMessage } from 'react-intl';
 import { commonMessage } from '@locales/intl';
-import { nationKindOptions,statusOptions } from '@constants/masterData';
+import { nationKindOptions, statusOptions } from '@constants/masterData';
 import { Button, Tag } from 'antd';
 import { BaseTooltip } from '@components/common/form/BaseTooltip';
 import { useLocation, useNavigate } from 'react-router-dom';
 import routes from '@routes';
-import { TeamOutlined, RightOutlined, UserOutlined,CommentOutlined } from '@ant-design/icons';
+import { TeamOutlined, RightOutlined, UserOutlined, CommentOutlined } from '@ant-design/icons';
 
 const message = defineMessages({
     objectName: 'Nation',
@@ -31,7 +31,7 @@ const VillageListPage = () => {
     const nationValues = translate.formatKeys(nationKindOptions, ['label']);
     const navigate = useNavigate();
 
-    const { data, mixinFuncs, queryFilter, loading, pagination,serializeParams } = useListBase({
+    const { data, mixinFuncs, queryFilter, loading, pagination, serializeParams } = useListBase({
         apiConfig: apiConfig.nation,
         options: {
             pageSize: DEFAULT_TABLE_ITEM_SIZE,
@@ -40,7 +40,13 @@ const VillageListPage = () => {
         override: (funcs) => {
             funcs.changeFilter = (filter) => {
                 mixinFuncs.setQueryParams(
-                    serializeParams({ ...filter,provinceId: provinceId, provinceName: provinceName, districtId: districtId, districtName: districtName  }),
+                    serializeParams({
+                        ...filter,
+                        provinceId: provinceId,
+                        provinceName: provinceName,
+                        districtId: districtId,
+                        districtName: districtName,
+                    }),
                 );
             };
             funcs.mappingData = (response) => {
@@ -53,7 +59,14 @@ const VillageListPage = () => {
             };
             funcs.getList = () => {
                 const params = mixinFuncs.prepareGetListParams(queryFilter);
-                mixinFuncs.handleFetchList({ ...params, parentId: districtId,provinceId:null,districtId:null ,provinceName:null,districtName:null });
+                mixinFuncs.handleFetchList({
+                    ...params,
+                    parentId: districtId,
+                    provinceId: null,
+                    districtId: null,
+                    provinceName: null,
+                    districtName: null,
+                });
             };
             funcs.getCreateLink = () => {
                 return `${pagePath}/create?provinceId=${provinceId}&districtId=${districtId}&provinceName=${provinceName}&districtName=${districtName}`;
@@ -64,9 +77,8 @@ const VillageListPage = () => {
         },
     });
 
-
     const columns = [
-        { title: <FormattedMessage defaultMessage="Name" />, dataIndex: 'name' },
+        { title: translate.formatMessage(commonMessage.Village), dataIndex: 'name' },
         {
             title: <FormattedMessage defaultMessage="Post Code" />,
             width: 180,
@@ -79,9 +91,7 @@ const VillageListPage = () => {
             width: 120,
             render(dataRow) {
                 const kind = nationValues.find((item) => item.value == dataRow);
-                return (
-                    <div style={{ padding: '0 4px', fontSize: 14 }}>{kind.label}</div>
-                );
+                return <div style={{ padding: '0 4px', fontSize: 14 }}>{kind.label}</div>;
             },
         },
         mixinFuncs.renderStatusColumn({ width: '120px' }),
@@ -98,16 +108,18 @@ const VillageListPage = () => {
     const searchFields = [
         {
             key: 'name',
-            placeholder: translate.formatMessage(commonMessage.name),
+            placeholder: translate.formatMessage(commonMessage.Village),
         },
-        
     ];
 
     return (
         <PageWrapper
             routes={[
-                { breadcrumbName: <FormattedMessage defaultMessage="Nation" />, path: routes.nationListPage.path },
-                { breadcrumbName: `${provinceName}`, path: routes.districtListPage.path +`?provinceId=${provinceId}&provinceName=${provinceName}` },
+                { breadcrumbName: translate.formatMessage(commonMessage.Province), path: routes.nationListPage.path },
+                {
+                    breadcrumbName: `${provinceName}`,
+                    path: routes.districtListPage.path + `?provinceId=${provinceId}&provinceName=${provinceName}`,
+                },
                 { breadcrumbName: `${districtName}` },
             ]}
         >
