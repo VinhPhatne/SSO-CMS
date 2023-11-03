@@ -53,7 +53,7 @@ const SettingListPage = () => {
             // render: (createdDate) => convertUtcToTimezone(createdDate),
         },
         mixinFuncs.renderStatusColumn({ width: '90px' }),
-        mixinFuncs.renderActionColumn({ edit: true }, { width: '90px' }),
+        mixinFuncs.renderActionColumn({ edit: true }, { width: '130px' }),
     ];
 
     const searchFields = [
