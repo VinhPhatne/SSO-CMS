@@ -39,6 +39,7 @@ const SettingForm = (props) => {
             ...dataDetail,
             timezone: dataDetail.groupName == 'Timezone' ? JSON.parse(dataDetail.settingValue).name : '',
         });
+        localStorage.setItem('activeSettingTab', dataDetail?.groupName);
     }, [dataDetail]);
     useEffect(() => {
         if (!isEditing) {
