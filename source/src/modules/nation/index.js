@@ -80,11 +80,11 @@ const ProvinceListPage = () => {
                 </div>
             ),
         },
-        {
-            title: <FormattedMessage defaultMessage="Post Code" />,
-            width: 180,
-            dataIndex: 'postCode',
-        },
+        // {
+        //     title: <FormattedMessage defaultMessage="Post Code" />,
+        //     width: 180,
+        //     dataIndex: 'postCode',
+        // },
         mixinFuncs.renderStatusColumn({ width: '120px' }),
 
         mixinFuncs.renderActionColumn(
