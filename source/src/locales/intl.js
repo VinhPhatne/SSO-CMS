@@ -51,4 +51,6 @@ export const commonMessage = defineMessages({
     District: 'District',
     Village: 'Village',
     Nation: 'Nation',
+    showSystemSettings: 'Show system settings',
+    hideSystemSettings: 'Hide system settings',
 });

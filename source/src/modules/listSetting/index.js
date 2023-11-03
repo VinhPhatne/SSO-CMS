@@ -46,7 +46,6 @@ const SettingListPage = () => {
                         setting[item.groupName].total++;
                         setting[item.groupName].data.push(item);
                     });
-
                     return {
                         data: setting,
                         total: response.data.totalElements,
@@ -89,9 +88,9 @@ const SettingListPage = () => {
             <ListPage
                 searchForm={mixinFuncs.renderSearchForm({
                     fields: searchFields,
-                    initialValues: { isSystem: 1, ...queryFilter },
+                    initialValues: { isSystem: isSystemSettingOptions[0].value, ...queryFilter },
                 })}
-                actionBar={mixinFuncs.renderActionBar()}
+                // actionBar={mixinFuncs.renderActionBar()}
                 baseTable={
                     <Tabs
                         style={{ marginTop: 20 }}
