@@ -19,7 +19,7 @@ const message = defineMessages({
 const SettingListPage = () => {
     const translate = useTranslate();
     const [activeTab, setActiveTab] = useState(localStorage.getItem('activeSettingTab') ?? 'Money');
-    const { profile, isAdmin } = useAuth();
+    const { isAdmin } = useAuth();
     const { data, mixinFuncs, queryFilter, loading, pagination } = useListBase({
         apiConfig: apiConfig.settings,
         options: {
