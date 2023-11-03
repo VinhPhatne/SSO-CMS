@@ -40,6 +40,26 @@ const apiConfig = {
             method: 'GET',
             headers: baseHeader,
         },
+        getList: {
+            baseURL: `${apiUrl}v1/account/list`,
+            method: `GET`,
+            headers: baseHeader,
+        },
+        createAdmin: {
+            baseURL: `${apiUrl}v1/account/create_admin`,
+            method: `POST`,
+            headers: baseHeader,
+        },
+        updateAdmin: {
+            baseURL: `${apiUrl}v1/account/update_admin`,
+            method: `PUT`,
+            headers: baseHeader,
+        },
+        delete: {
+            baseURL: `${apiUrl}v1/account/delete/:id`,
+            method: `DELETE`,
+            headers: baseHeader,
+        },
     },
     user: {
         getList: {

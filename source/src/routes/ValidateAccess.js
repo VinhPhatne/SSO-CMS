@@ -26,7 +26,7 @@ const ValidateAccess = ({
     const { id } = useParams();
     const getRedirect = (authRequire) => {
         if (authRequire === accessRouteTypeEnum.NOT_LOGIN && isAuthenticated) {
-            return routes.userListPage.path;
+            return routes.adminsListPage.path;
         }
 
         if (authRequire === accessRouteTypeEnum.REQUIRE_LOGIN && !isAuthenticated) {
