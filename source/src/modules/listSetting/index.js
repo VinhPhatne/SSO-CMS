@@ -10,7 +10,6 @@ import { defineMessages } from 'react-intl';
 import useTranslate from '@hooks/useTranslate';
 import { commonMessage } from '@locales/intl';
 import useAuth from '@hooks/useAuth';
-import { FieldTypes } from '@constants/formConfig';
 import SelectField from '@components/common/form/SelectField';
 import { Tabs } from 'antd';
 
@@ -19,6 +18,7 @@ const message = defineMessages({
 });
 const SettingListPage = () => {
     const translate = useTranslate();
+    const [activeTab, setActiveTab] = useState(localStorage.getItem('activeSettingTab') ?? 'Money');
     const { profile } = useAuth();
     const { data, mixinFuncs, queryFilter, loading, pagination } = useListBase({
         apiConfig: apiConfig.settings,
@@ -80,7 +80,12 @@ const SettingListPage = () => {
             key: 'isSystem',
             submitOnChanged: true,
             placeholder: 'System settings',
-            component: (props) => profile?.isSuperAdmin && <SelectField {...props} />,
+            component: (props) =>
+                profile?.isSuperAdmin && (
+                    <div style={{ width: '250px' }}>
+                        <SelectField {...props} />
+                    </div>
+                ),
         },
     ];
     return (
@@ -88,13 +93,18 @@ const SettingListPage = () => {
             <ListPage
                 searchForm={mixinFuncs.renderSearchForm({
                     fields: searchFields,
+                    hiddenAction: true,
                     initialValues: { isSystem: isSystemSettingOptions[0].value, ...queryFilter },
                 })}
-                // actionBar={mixinFuncs.renderActionBar()}
                 baseTable={
                     <Tabs
                         style={{ marginTop: 20 }}
                         type="card"
+                        onTabClick={(key) => {
+                            setActiveTab(key);
+                            localStorage.setItem('activeSettingTab', key);
+                        }}
+                        activeKey={activeTab}
                         items={Object.keys(data).map((item) => {
                             return {
                                 label: item,
@@ -112,15 +122,7 @@ const SettingListPage = () => {
                                 ),
                             };
                         })}
-                    >
-                        {/* <BaseTable
-                            onChange={mixinFuncs.changePagination}
-                            columns={columns}
-                            dataSource={data}
-                            loading={loading}
-                            pagination={pagination}
-                        /> */}
-                    </Tabs>
+                    />
                 }
             />
         </PageWrapper>
