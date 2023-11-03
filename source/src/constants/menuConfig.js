@@ -66,13 +66,6 @@ const navMenuConfig = [
                 path: routes.listSettingsPage.path,
                 permission: [apiConfig.settings.getSettingsList.baseURL],
             },
-
-            {
-                label: <FormattedMessage defaultMessage="Address" />,
-                key: 'address',
-                path: routes.addressListPage.path,
-                permission: [apiConfig.address.getList.baseURL],
-            },
             {
                 label: <FormattedMessage defaultMessage="Nation" />,
                 key: 'nation',

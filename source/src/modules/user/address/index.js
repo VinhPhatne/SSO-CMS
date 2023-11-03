@@ -15,9 +15,13 @@ import { commonMessage } from '@locales/intl';
 import useAuth from '@hooks/useAuth';
 import useFetch from '@hooks/useFetch';
 import { FieldTypes } from '@constants/formConfig';
+import { useLocation,useNavigate } from 'react-router-dom';
 
 const AddressListPage = ({ pageOptions }) => {
     const translate = useTranslate();
+    const { pathname: pagePath } = useLocation();
+    const queryParameters = new URLSearchParams(window.location.search);
+    const userId = queryParameters.get('userId');
     const { data, mixinFuncs, queryFilter, loading, pagination } = useListBase({
         apiConfig: apiConfig.address,
         options: {
@@ -32,6 +36,13 @@ const AddressListPage = ({ pageOptions }) => {
                         total: response.data.totalElements,
                     };
                 }
+            };
+
+            funcs.getCreateLink = () => {
+                return `${pagePath}/create?userId=${userId}`;
+            };
+            funcs.getItemDetailLink = (dataRow) => {
+                return `${pagePath}/${dataRow.id}?userId=${userId}`;
             };
         },
     });
