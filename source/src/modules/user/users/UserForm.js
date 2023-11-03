@@ -50,6 +50,8 @@ const UserForm = (props) => {
     };
 
     const handleSubmit = (values) => {
+        values.fullName= values.account.fullName;
+        values.phone= values.account.phone;
         values.birthday = formatDateString(values?.birthday, DATE_FORMAT_VALUE) + ' 00:00:00';
         return mixinFuncs.handleSubmit({ ...values, avatar: imageUrl });
     };

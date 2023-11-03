@@ -99,6 +99,7 @@ const UserListPage = ({ pageOptions }) => {
         // },
         // mixinFuncs.renderStatusColumn({ width: '90px' }),
         mixinFuncs.renderActionColumn({ address:true, edit: true, delete: true }, { width: '120px' }),
+
     ];
 
     const searchFields = [

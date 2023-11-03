@@ -108,10 +108,12 @@ export const appAccount = {
 
 export const GROUP_KIND_ADMIN = 1;
 export const GROUP_KIND_MANAGER = 2;
+export const GROUP_KIND_USER = 3;
 
 export const groupPermissionKindsOptions = [
     { label: 'Admin', value: GROUP_KIND_ADMIN },
     { label: 'Manager', value: GROUP_KIND_MANAGER },
+    { label: 'User', value: GROUP_KIND_USER },
 ];
 export const PROVINCE_KIND = 1;
 export const DISTRICT_KIND = 2;
