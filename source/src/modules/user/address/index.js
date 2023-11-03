@@ -70,7 +70,7 @@ const AddressListPage = ({ pageOptions }) => {
             width: '30',
         },
 
-        mixinFuncs.renderStatusColumn({ width: '60px' }),
+        mixinFuncs.renderStatusColumn({ width: '150px' }),
         mixinFuncs.renderActionColumn({ edit: true, delete: true }, { width: '130px' }),
     ];
 
