@@ -1,25 +1,22 @@
+import BaseTable from '@components/common/table/BaseTable';
 import apiConfig from '@constants/apiConfig';
 import useListBase from '@hooks/useListBase';
-import { Avatar, Button, Modal, Tag } from 'antd';
+import { Button, Modal, Tag } from 'antd';
 import React, { useEffect, useState } from 'react';
-import BaseTable from '@components/common/table/BaseTable';
-
-import { UserOutlined } from '@ant-design/icons';
-import { AppConstants, categoryKind, DEFAULT_TABLE_ITEM_SIZE } from '@constants';
-import PageWrapper from '@components/common/layout/PageWrapper';
-import ListPage from '@components/common/layout/ListPage';
-import useFetch from '@hooks/useFetch';
-import { FieldTypes } from '@constants/formConfig';
-import useTranslate from '@hooks/useTranslate';
-import { statusOptions } from '@constants/masterData';
-import { EyeOutlined } from '@ant-design/icons';
-import useNotification from '@hooks/useNotification';
-import styles from './index.module.scss';
-import { defineMessages, FormattedMessage } from 'react-intl';
-import { IconPinnedOff, IconPin } from '@tabler/icons-react';
+import { EyeOutlined, UserOutlined } from '@ant-design/icons';
 import AvatarField from '@components/common/form/AvatarField';
+import ListPage from '@components/common/layout/ListPage';
+import PageWrapper from '@components/common/layout/PageWrapper';
+import { AppConstants, categoryKind, DEFAULT_FORMAT, DEFAULT_TABLE_ITEM_SIZE } from '@constants';
+import { FieldTypes } from '@constants/formConfig';
+import { statusOptions } from '@constants/masterData';
+import useFetch from '@hooks/useFetch';
+import useNotification from '@hooks/useNotification';
+import useTranslate from '@hooks/useTranslate';
 import { commonMessage } from '@locales/intl';
-
+import { convertUtcToLocalTime } from '@utils';
+import { defineMessages, FormattedMessage } from 'react-intl';
+import styles from './index.module.scss';
 const message = defineMessages({
     objectName: 'news',
 });
@@ -148,6 +145,10 @@ const NewsListPage = () => {
             title: <FormattedMessage defaultMessage="Created Date" />,
             width: 180,
             dataIndex: 'createdDate',
+            render: (createdDate) => {
+                const createdDateLocal = convertUtcToLocalTime(createdDate, DEFAULT_FORMAT, DEFAULT_FORMAT);
+                return <div>{createdDateLocal}</div>;
+            },
         },
         // {
         //     title: <FormattedMessage defaultMessage="Pin top" />,
