@@ -63,13 +63,16 @@ const UserForm = (props) => {
     };
 
     useEffect(() => {
+        dataDetail.phone=dataDetail?.account?.phone;
+        dataDetail.fullName=dataDetail?.account?.fullName;
+        dataDetail.email=dataDetail?.account?.email;
+
         dataDetail.birthday = dataDetail?.birthday && dayjs(dataDetail?.birthday, DATE_FORMAT_VALUE);
         form.setFieldsValue({
             ...dataDetail,
         });
         setImageUrl(dataDetail.avatar);
     }, [dataDetail]);
-
     return (
         <BaseForm id={formId} onFinish={handleSubmit} form={form} onValuesChange={onValuesChange}>
             <Card className="card-form" bordered={false}>
