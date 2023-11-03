@@ -201,6 +201,7 @@ const useListBase = ({
             content: '',
             okText: intl.formatMessage(notificationMessage.ok),
             cancelText: intl.formatMessage(notificationMessage.cancel),
+            centered: true,
             onOk: () => {
                 mixinFuncs.handleDeleteItem(id);
             },
