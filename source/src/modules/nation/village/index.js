@@ -79,11 +79,11 @@ const VillageListPage = () => {
 
     const columns = [
         { title: translate.formatMessage(commonMessage.Village), dataIndex: 'name' },
-        {
-            title: <FormattedMessage defaultMessage="Post Code" />,
-            width: 180,
-            dataIndex: 'postCode',
-        },
+        // {
+        //     title: <FormattedMessage defaultMessage="Post Code" />,
+        //     width: 180,
+        //     dataIndex: 'postCode',
+        // },
         mixinFuncs.renderStatusColumn({ width: '120px' }),
 
         mixinFuncs.renderActionColumn(
