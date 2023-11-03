@@ -62,7 +62,7 @@ const AppHeader = ({ collapsed, onCollapse }) => {
                             <Space>
                                 <Avatar
                                     icon={<UserOutlined />}
-                                    src={profile.avatar && `${AppConstants.mediaRootUrl}${profile.avatar}`}
+                                    src={profile.avatar && `${AppConstants.contentRootUrl}${profile.avatar}`}
                                 />
                                 {profile?.fullName}
                                 <DownOutlined />
