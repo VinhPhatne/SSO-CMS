@@ -150,5 +150,22 @@
     "locales.intl.commonMessage.settingKey": "Key cài đặt",
     "locales.intl.commonMessage.description": "Mô tả",
     "locales.intl.commonMessage.status": "Trạng thái",
-    "locales.intl.commonMessage.home": "Trang chủ"
+    "locales.intl.commonMessage.home": "Trang chủ",
+    "locales.intl.commonMessage.fullName": "Họ tên",
+    "locales.intl.commonMessage.phone": "Số điện thoại",
+    "locales.intl.commonMessage.birthday":"Ngày sinh",
+    "locales.intl.commonMessage.user":"Người dùng",
+    "locales.intl.commonMessage.news": "Tin tức",
+    "locales.intl.commonMessage.name": "Danh mục tin tức",
+    "locales.intl.commonMessage.title": "Tiêu đề",
+    "locales.intl.commonMessage.category": "Danh mục",
+    "locales.intl.commonMessage.password":"Mật khẩu",
+    "locales.intl.commonMessage.confirmPassword": "Xác nhận mật khẩu",
+    "locales.intl.commonMessage.Name": "Tên",
+    "locales.intl.commonMessage.address": "Địa chỉ",
+    "locales.intl.commonMessage.Province": "Tỉnh, thành phố",
+    "locales.intl.commonMessage.District": "Quận, huyện",
+    "locales.intl.commonMessage.Village": "Phường xã",
+    "locales.intl.commonMessage.nation": "Cấp",
+    "locales.intl.commonMessage.Nation": "Danh mục tỉnh thành"
 }

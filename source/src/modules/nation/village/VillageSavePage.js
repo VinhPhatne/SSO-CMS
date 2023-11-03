@@ -8,6 +8,7 @@ import { FormattedMessage, defineMessages } from 'react-intl';
 import VillageForm from './VillageForm';
 import routes from '../routes';
 import useTranslate from '@hooks/useTranslate';
+import { commonMessage } from '@locales/intl';
 
 const message = defineMessages({
     objectName: 'Village',
@@ -29,7 +30,7 @@ const VillageSavePage = () => {
         },
         options: {
             getListUrl: routes.villagetListPage.path,
-            objectName: translate.formatMessage(message.objectName),
+            objectName: translate.formatMessage(commonMessage.Village),
         },
         override: (funcs) => {
             funcs.prepareUpdateData = (data) => {
@@ -48,11 +49,19 @@ const VillageSavePage = () => {
 
     return (
         <PageWrapper
-            loading={loading }
+            loading={loading}
             routes={[
-                { breadcrumbName: <FormattedMessage defaultMessage="Nation" />, path: routes.nationListPage.path },
-                { breadcrumbName: `${provinceName}`, path: routes.districtListPage.path+`?provinceId=${provinceId}&provinceName=${provinceName}` },
-                { breadcrumbName: `${districtName}`, path: routes.villagetListPage.path+`?provinceId=${provinceId}&districtId=${districtId}&provinceName=${provinceName}&districtName=${districtName}` },
+                { breadcrumbName: translate.formatMessage(commonMessage.Province), path: routes.nationListPage.path },
+                {
+                    breadcrumbName: `${provinceName}`,
+                    path: routes.districtListPage.path + `?provinceId=${provinceId}&provinceName=${provinceName}`,
+                },
+                {
+                    breadcrumbName: `${districtName}`,
+                    path:
+                        routes.villagetListPage.path +
+                        `?provinceId=${provinceId}&districtId=${districtId}&provinceName=${provinceName}&districtName=${districtName}`,
+                },
                 { breadcrumbName: title },
             ]}
             title={title}

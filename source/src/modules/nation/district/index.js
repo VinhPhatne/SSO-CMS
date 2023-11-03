@@ -8,7 +8,7 @@ import ListPage from '@components/common/layout/ListPage';
 import useTranslate from '@hooks/useTranslate';
 import { defineMessages, FormattedMessage } from 'react-intl';
 import { commonMessage } from '@locales/intl';
-import { nationKindOptions,statusOptions } from '@constants/masterData';
+import { nationKindOptions, statusOptions } from '@constants/masterData';
 import { Button, Tag } from 'antd';
 import { BaseTooltip } from '@components/common/form/BaseTooltip';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -30,7 +30,7 @@ const DistrictListPage = () => {
     const nationValues = translate.formatKeys(nationKindOptions, ['label']);
     const navigate = useNavigate();
 
-    const { data, mixinFuncs, queryFilter, loading, pagination,serializeParams } = useListBase({
+    const { data, mixinFuncs, queryFilter, loading, pagination, serializeParams } = useListBase({
         apiConfig: apiConfig.nation,
         options: {
             pageSize: DEFAULT_TABLE_ITEM_SIZE,
@@ -39,7 +39,7 @@ const DistrictListPage = () => {
         override: (funcs) => {
             funcs.changeFilter = (filter) => {
                 mixinFuncs.setQueryParams(
-                    serializeParams({ ...filter,provinceId: provinceId, provinceName: provinceName  }),
+                    serializeParams({ ...filter, provinceId: provinceId, provinceName: provinceName }),
                 );
             };
             funcs.mappingData = (response) => {
@@ -52,7 +52,7 @@ const DistrictListPage = () => {
             };
             funcs.getList = () => {
                 const params = mixinFuncs.prepareGetListParams(queryFilter);
-                mixinFuncs.handleFetchList({ ...params, kind: 2,provinceId:null });
+                mixinFuncs.handleFetchList({ ...params, kind: 2, provinceId: null });
             };
             funcs.getCreateLink = () => {
                 return `${pagePath}/create?provinceId=${provinceId}&provinceName=${provinceName}`;
@@ -60,7 +60,6 @@ const DistrictListPage = () => {
             funcs.getItemDetailLink = (dataRow) => {
                 return `${pagePath}/${dataRow.id}?provinceId=${provinceId}&provinceName=${provinceName}`;
             };
-            
         },
     });
 
@@ -72,13 +71,14 @@ const DistrictListPage = () => {
         );
     };
     const columns = [
-        { title: <FormattedMessage defaultMessage="Name" />, 
+        {
+            title: translate.formatMessage(commonMessage.District),
             dataIndex: 'name',
             render: (name, record) => (
                 <div onClick={(event) => handleOnClick(event, record)} className={styles.customDiv}>
                     {name}
                 </div>
-            ), 
+            ),
         },
         {
             title: <FormattedMessage defaultMessage="Post Code" />,
@@ -92,9 +92,7 @@ const DistrictListPage = () => {
             width: 120,
             render(dataRow) {
                 const kind = nationValues.find((item) => item.value == dataRow);
-                return (
-                    <div style={{ padding: '0 4px', fontSize: 14 }}>{kind.label}</div>
-                );
+                return <div style={{ padding: '0 4px', fontSize: 14 }}>{kind.label}</div>;
             },
         },
         mixinFuncs.renderStatusColumn({ width: '120px' }),
@@ -111,16 +109,16 @@ const DistrictListPage = () => {
     const searchFields = [
         {
             key: 'name',
-            placeholder: translate.formatMessage(commonMessage.name),
+            placeholder: translate.formatMessage(commonMessage.District),
         },
-        
     ];
 
     return (
         <PageWrapper
             routes={[
-                { breadcrumbName: translate.formatMessage(commonMessage.nation),path: routes.nationListPage.path },
-                { breadcrumbName: `${provinceName}` }]}
+                { breadcrumbName: translate.formatMessage(commonMessage.Province), path: routes.nationListPage.path },
+                { breadcrumbName: `${provinceName}` },
+            ]}
         >
             <ListPage
                 searchForm={mixinFuncs.renderSearchForm({ fields: searchFields, initialValues: queryFilter })}

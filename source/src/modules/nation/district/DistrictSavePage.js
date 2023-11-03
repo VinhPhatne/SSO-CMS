@@ -8,6 +8,7 @@ import { FormattedMessage, defineMessages } from 'react-intl';
 import DistrictForm from './DistrictForm';
 import routes from '../routes';
 import useTranslate from '@hooks/useTranslate';
+import { commonMessage } from '@locales/intl';
 
 const message = defineMessages({
     objectName: 'District',
@@ -27,7 +28,7 @@ const DistrictSavePage = () => {
         },
         options: {
             getListUrl: routes.districtListPage.path,
-            objectName: translate.formatMessage(message.objectName),
+            objectName: translate.formatMessage(commonMessage.District),
         },
         override: (funcs) => {
             funcs.prepareUpdateData = (data) => {
@@ -46,11 +47,13 @@ const DistrictSavePage = () => {
 
     return (
         <PageWrapper
-            loading={loading }
+            loading={loading}
             routes={[
-
-                { breadcrumbName: <FormattedMessage defaultMessage="Nation" />, path: routes.nationListPage.path },
-                { breadcrumbName: `${provinceName}`, path: routes.districtListPage.path + `?provinceId=${provinceId}&provinceName=${provinceName}` },
+                { breadcrumbName: translate.formatMessage(commonMessage.Province), path: routes.nationListPage.path },
+                {
+                    breadcrumbName: `${provinceName}`,
+                    path: routes.districtListPage.path + `?provinceId=${provinceId}&provinceName=${provinceName}`,
+                },
                 { breadcrumbName: title },
             ]}
             title={title}
