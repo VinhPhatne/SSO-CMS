@@ -57,7 +57,21 @@ const SettingListPage = () => {
     });
     const columns = [
         { title: translate.formatMessage(commonMessage.description), dataIndex: 'description' },
-        { title: translate.formatMessage(commonMessage.settingValue), dataIndex: 'settingValue' },
+        {
+            title: translate.formatMessage(commonMessage.settingValue),
+            dataIndex: 'settingValue',
+            render: (dataRow, record) => {
+                if (record.groupName == 'Timezone') {
+                    return (
+                        <span>
+                            {JSON.parse(dataRow).name} {JSON.parse(dataRow).offset}
+                        </span>
+                    );
+                } else {
+                    return <span>{dataRow}</span>;
+                }
+            },
+        },
         mixinFuncs.renderActionColumn({ edit: (dataRow) => !!dataRow.isEditable }, { width: '130px' }),
     ];
 
