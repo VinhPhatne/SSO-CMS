@@ -86,10 +86,11 @@ const UserForm = (props) => {
                 </Row>
                 <Row gutter={16}>
                     <Col span={12}>
-                        <TextField label={translate.formatMessage(commonMessage.fullName)} required name="name" />
+                        <TextField label={translate.formatMessage(commonMessage.fullName)} required name={["account","fullName"]} />
                     </Col>
                     <Col span={12}>
                         <DatePickerField
+                            disabled={isEditing}
                             name="birthday"
                             placeholder="Ngày sinh"
                             style={{ width: '100%' }}
@@ -109,7 +110,7 @@ const UserForm = (props) => {
                     <Col span={12}>
                         <TextField
                             label={translate.formatMessage(commonMessage.email)}
-                            name="email"
+                            name={["account","email"]}
                             type="email"
                             required={!isEditing}
                         />
@@ -118,7 +119,7 @@ const UserForm = (props) => {
                         <TextField
                             label={translate.formatMessage(commonMessage.phone)}
                             type="number"
-                            name="phone"
+                            name={["account","phone"]}
                             required
                         />
                     </Col>

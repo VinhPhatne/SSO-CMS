@@ -85,16 +85,6 @@ const ProvinceListPage = () => {
             width: 180,
             dataIndex: 'postCode',
         },
-        {
-            title: translate.formatMessage(commonMessage.nation),
-            dataIndex: 'kind',
-            align: 'center',
-            width: 120,
-            render(dataRow) {
-                const kind = nationValues.find((item) => item.value == dataRow);
-                return <div style={{ padding: '0 4px', fontSize: 14 }}>{kind.label}</div>;
-            },
-        },
         mixinFuncs.renderStatusColumn({ width: '120px' }),
 
         mixinFuncs.renderActionColumn(

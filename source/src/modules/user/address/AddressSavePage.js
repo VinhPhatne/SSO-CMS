@@ -17,6 +17,8 @@ const message = defineMessages({
 const AddressSavePage = ({ pageOptions }) => {
     const translate = useTranslate();
     const { id } = useParams();
+    const queryParameters = new URLSearchParams(window.location.search);
+    const userId = queryParameters.get('userId');
     const { detail, mixinFuncs, loading, onSave, setIsChangedFormValues, isEditing, title } = useSaveBase({
         apiConfig: {
             getById: apiConfig.address.getById,
@@ -24,7 +26,7 @@ const AddressSavePage = ({ pageOptions }) => {
             update: apiConfig.address.update,
         },
         options: {
-            getListUrl: pageOptions.listPageUrl,
+            getListUrl: pageOptions.listPageUrl +`?userId=${userId}`,
             objectName: translate.formatMessage(pageOptions.objectName),
         },
         override: (funcs) => {
@@ -49,7 +51,7 @@ const AddressSavePage = ({ pageOptions }) => {
     });
 
     return (
-        <PageWrapper loading={loading} routes={pageOptions.renderBreadcrumbs(commonMessage, translate, title)}>
+        <PageWrapper loading={loading} routes={pageOptions.renderBreadcrumbs(commonMessage, translate, title,{ userId:userId })}>
             <AddressForm
                 setIsChangedFormValues={setIsChangedFormValues}
                 dataDetail={detail ? detail : {}}
