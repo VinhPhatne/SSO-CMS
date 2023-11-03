@@ -80,7 +80,12 @@ const SettingListPage = () => {
             key: 'isSystem',
             submitOnChanged: true,
             placeholder: 'System settings',
-            component: (props) => profile?.isSuperAdmin && <SelectField {...props} />,
+            component: (props) =>
+                profile?.isSuperAdmin && (
+                    <div style={{ width: '250px' }}>
+                        <SelectField {...props} />
+                    </div>
+                ),
         },
     ];
     return (
@@ -88,6 +93,7 @@ const SettingListPage = () => {
             <ListPage
                 searchForm={mixinFuncs.renderSearchForm({
                     fields: searchFields,
+                    hiddenAction: true,
                     initialValues: { isSystem: isSystemSettingOptions[0].value, ...queryFilter },
                 })}
                 baseTable={
