@@ -1,22 +1,25 @@
 import apiConfig from '@constants/apiConfig';
 import useListBase from '@hooks/useListBase';
-import React from 'react';
+import React, { useState } from 'react';
 import BaseTable from '@components/common/table/BaseTable';
 
-import { DEFAULT_TABLE_ITEM_SIZE } from '@constants';
+import { DEFAULT_TABLE_ITEM_SIZE, isSystemSettingOptions } from '@constants';
 import PageWrapper from '@components/common/layout/PageWrapper';
 import ListPage from '@components/common/layout/ListPage';
 import { defineMessages } from 'react-intl';
 import useTranslate from '@hooks/useTranslate';
 import { commonMessage } from '@locales/intl';
 import useAuth from '@hooks/useAuth';
+import SelectField from '@components/common/form/SelectField';
+import { Tabs } from 'antd';
 
 const message = defineMessages({
     objectName: 'setting',
 });
 const SettingListPage = () => {
     const translate = useTranslate();
-    const { isAdmin } = useAuth();
+    const [activeTab, setActiveTab] = useState(localStorage.getItem('activeSettingTab') ?? 'Money');
+    const { profile } = useAuth();
     const { data, mixinFuncs, queryFilter, loading, pagination } = useListBase({
         apiConfig: apiConfig.settings,
         options: {
@@ -24,10 +27,27 @@ const SettingListPage = () => {
             objectName: translate.formatMessage(message.objectName),
         },
         override: (funcs) => {
+            funcs.prepareGetListParams = (params) => {
+                return {
+                    isSystem: isSystemSettingOptions[0].value,
+                    ...params,
+                };
+            };
             funcs.mappingData = (response) => {
                 if (response.result === true) {
+                    const setting = {};
+                    response.data.content.forEach((item) => {
+                        if (setting[item.groupName] == undefined) {
+                            setting[item.groupName] = {};
+                            setting[item.groupName].data = [];
+                            setting[item.groupName].total = 0;
+                        }
+
+                        setting[item.groupName].total++;
+                        setting[item.groupName].data.push(item);
+                    });
                     return {
-                        data: response.data.content,
+                        data: setting,
                         total: response.data.totalElements,
                     };
                 }
@@ -35,47 +55,67 @@ const SettingListPage = () => {
         },
     });
     const columns = [
-        { title: translate.formatMessage(commonMessage.groupName), dataIndex: 'groupName' },
         { title: translate.formatMessage(commonMessage.description), dataIndex: 'description' },
-        // { title: translate.formatMessage(commonMessage.isEditable), dataIndex: 'isEditable' },
-        // { title: translate.formatMessage(commonMessage.isSystem), dataIndex: 'isSystem' },
-        { title: translate.formatMessage(commonMessage.settingKey), dataIndex: 'settingKey' },
-        { title: translate.formatMessage(commonMessage.settingValue), dataIndex: 'settingValue' },
         {
-            title: translate.formatMessage(commonMessage.modifiedDate),
-            dataIndex: 'modifiedDate',
-            width: '180px',
+            title: translate.formatMessage(commonMessage.settingValue),
+            dataIndex: 'settingValue',
+            render: (dataRow, record) => {
+                if (record.groupName == 'Timezone') {
+                    return (
+                        <span>
+                            {JSON.parse(dataRow).name} {JSON.parse(dataRow).offset}
+                        </span>
+                    );
+                } else {
+                    return <span>{dataRow}</span>;
+                }
+            },
         },
-        {
-            title: translate.formatMessage(commonMessage.createdDate),
-            dataIndex: 'createdDate',
-            width: '180px',
-            // render: (createdDate) => convertUtcToTimezone(createdDate),
-        },
-        mixinFuncs.renderStatusColumn({ width: '90px' }),
-        mixinFuncs.renderActionColumn({ edit: true }, { width: '130px' }),
+        mixinFuncs.renderActionColumn({ edit: (dataRow) => !!dataRow.isEditable }, { width: '130px' }),
     ];
 
     const searchFields = [
         {
-            key: 'groupName',
-            placeholder: translate.formatMessage(commonMessage.groupName),
+            options: isSystemSettingOptions,
+            key: 'isSystem',
+            submitOnChanged: true,
+            placeholder: 'System settings',
+            component: (props) => profile?.isSuperAdmin && <SelectField {...props} />,
         },
     ];
-
     return (
         <PageWrapper routes={[{ breadcrumbName: translate.formatMessage(commonMessage.listSetting) }]}>
             <ListPage
-                searchForm={mixinFuncs.renderSearchForm({ fields: searchFields, initialValues: queryFilter })}
-                actionBar={mixinFuncs.renderActionBar()}
+                searchForm={mixinFuncs.renderSearchForm({
+                    fields: searchFields,
+                    initialValues: { isSystem: isSystemSettingOptions[0].value, ...queryFilter },
+                })}
                 baseTable={
-                    <BaseTable
-                        onChange={mixinFuncs.changePagination}
-                        columns={columns}
-                        dataSource={data}
-                        loading={loading}
-                        rowKey={(record) => record.id}
-                        pagination={pagination}
+                    <Tabs
+                        style={{ marginTop: 20 }}
+                        type="card"
+                        onTabClick={(key) => {
+                            setActiveTab(key);
+                            localStorage.setItem('activeSettingTab', key);
+                        }}
+                        activeKey={activeTab}
+                        items={Object.keys(data).map((item) => {
+                            return {
+                                label: item,
+                                key: item,
+                                children: (
+                                    <BaseTable
+                                        columns={columns}
+                                        dataSource={data[item].data}
+                                        pagination={{
+                                            pageSize: DEFAULT_TABLE_ITEM_SIZE,
+                                            total: data[item].total,
+                                        }}
+                                        loading={loading}
+                                    />
+                                ),
+                            };
+                        })}
                     />
                 }
             />

@@ -115,6 +115,12 @@ export const groupPermissionKindsOptions = [
     { label: 'Manager', value: GROUP_KIND_MANAGER },
     { label: 'User', value: GROUP_KIND_USER },
 ];
+
+export const isSystemSettingOptions = [
+    { label: 'Hiển thị cài đặt hệ thống', value: 1 },
+    { label: 'Ẩn cài đặt hệ thống', value: 0 },
+];
+
 export const PROVINCE_KIND = 1;
 export const DISTRICT_KIND = 2;
 export const VILLAGE_KIND = 3;

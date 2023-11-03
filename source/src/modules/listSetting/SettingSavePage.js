@@ -3,11 +3,10 @@ import apiConfig from '@constants/apiConfig';
 import useSaveBase from '@hooks/useSaveBase';
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import UserAdminForm from './SettingForm';
+import SettingForm from './SettingForm';
 import { defineMessages } from 'react-intl';
 import useTranslate from '@hooks/useTranslate';
 import { commonMessage } from '@locales/intl';
-import useFetch from '@hooks/useFetch';
 import routes from '@routes';
 
 const message = defineMessages({
@@ -17,11 +16,6 @@ const message = defineMessages({
 const SettingSavePage = () => {
     const translate = useTranslate();
     const { id } = useParams();
-    const { data } = useFetch(apiConfig.settings.getSettingsList, {
-        immediate: true,
-        mappingData: (res) => res.data?.content?.map((item) => ({ value: item.id, label: item.name })),
-        params: {},
-    });
     const { detail, mixinFuncs, loading, onSave, setIsChangedFormValues, isEditing, title } = useSaveBase({
         apiConfig: {
             getById: apiConfig.settings.getById,
@@ -37,15 +31,19 @@ const SettingSavePage = () => {
                 return {
                     ...data,
                     id: id,
+                    status: 1,
                 };
             };
-            funcs.prepareCreateData = (data) => {
-                return {
-                    ...data,
-                    isEditable: 0,
-                    isSystem: 0,
-                };
-            };
+            // funcs.prepareCreateData = (data) => {
+            //     return {
+            //         ...data,
+            //         isEditable: 1,
+            //         isSystem: 1,
+            //         status: 1,
+            //         settingKey: 'System Setting test2',
+            //         groupName: 'System',
+            //     };
+            // };
 
             funcs.mappingData = (data) => {
                 return {
@@ -66,14 +64,13 @@ const SettingSavePage = () => {
                 { breadcrumbName: title },
             ]}
         >
-            <UserAdminForm
+            <SettingForm
                 setIsChangedFormValues={setIsChangedFormValues}
                 dataDetail={detail ? detail : {}}
                 formId={mixinFuncs.getFormId()}
                 isEditing={isEditing}
                 actions={mixinFuncs.renderActions()}
                 onSubmit={onSave}
-                groups={data || []}
             />
         </PageWrapper>
     );
