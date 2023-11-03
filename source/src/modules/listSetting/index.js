@@ -46,7 +46,6 @@ const SettingListPage = () => {
                         setting[item.groupName].total++;
                         setting[item.groupName].data.push(item);
                     });
-
                     return {
                         data: setting,
                         total: response.data.totalElements,
@@ -91,7 +90,7 @@ const SettingListPage = () => {
                     fields: searchFields,
                     initialValues: { isSystem: isSystemSettingOptions[0].value, ...queryFilter },
                 })}
-                actionBar={mixinFuncs.renderActionBar()}
+                // actionBar={mixinFuncs.renderActionBar()}
                 baseTable={
                     <Tabs
                         style={{ marginTop: 20 }}

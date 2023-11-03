@@ -26,7 +26,10 @@ const SettingForm = (props) => {
     });
 
     const handleSubmit = (values) => {
-        return mixinFuncs.handleSubmit({ ...values, settingValue: JSON.stringify(otherData) });
+        if (dataDetail.groupName == 'Timezone') {
+            return mixinFuncs.handleSubmit({ ...values, settingValue: JSON.stringify(otherData) });
+        }
+        return mixinFuncs.handleSubmit({ ...values });
     };
     const onSelectTimezone = (value, item) => {
         setOther({ name: value, offset: item.offset });

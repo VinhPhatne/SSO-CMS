@@ -117,8 +117,8 @@ export const groupPermissionKindsOptions = [
 ];
 
 export const isSystemSettingOptions = [
-    { label: 'Show system settings', value: 1 },
-    { label: 'Hide system settings', value: 0 },
+    { label: 'Hiển thị cài đặt hệ thống', value: 1 },
+    { label: 'Ẩn cài đặt hệ thống', value: 0 },
 ];
 
 export const PROVINCE_KIND = 1;
