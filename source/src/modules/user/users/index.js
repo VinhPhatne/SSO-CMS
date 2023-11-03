@@ -1,6 +1,6 @@
 import apiConfig from '@constants/apiConfig';
 import useListBase from '@hooks/useListBase';
-import { Avatar } from 'antd';
+import { Avatar, Button } from 'antd';
 import React from 'react';
 import BaseTable from '@components/common/table/BaseTable';
 import { FieldTypes } from '@constants/formConfig';
@@ -15,9 +15,15 @@ import { commonMessage } from '@locales/intl';
 import useAuth from '@hooks/useAuth';
 import { convertUtcToLocalTime } from '@utils/index';
 import { statusOptions } from '@constants/masterData';
+import { BaseTooltip } from '@components/common/form/BaseTooltip';
+import { useLocation,useNavigate } from 'react-router-dom';
+import routes from '@routes';
+import { HomeOutlined } from '@ant-design/icons';
 
 const UserListPage = ({ pageOptions }) => {
     const translate = useTranslate();
+    const navigate = useNavigate();
+
     // const { isCustomer } = useAuth();
     const statusValues = translate.formatKeys(statusOptions, ['label']);
     const { data, mixinFuncs, queryFilter, loading, pagination } = useListBase({
@@ -35,6 +41,28 @@ const UserListPage = ({ pageOptions }) => {
                     };
                 }
             };
+            funcs.additionalActionColumnButtons = () => ({
+                address: ({ id }) => (
+                    <BaseTooltip title={translate.formatMessage(commonMessage.address)}>
+                        <Button
+                            type="link"
+                            style={{ padding: 0 }}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                navigate(
+                                    routes.userListPage.path +
+                                    `/address?userId=${id}`,
+                                    {
+                                        state: { action: 'taskLog', prevPath: location.pathname },
+                                    },
+                                );
+                            }}
+                        >
+                            <HomeOutlined />
+                        </Button>
+                    </BaseTooltip>
+                ),
+            });
         },
     });
     const columns = [
@@ -51,9 +79,9 @@ const UserListPage = ({ pageOptions }) => {
                 />
             ),
         },
-        { title: translate.formatMessage(commonMessage.fullName), dataIndex: 'name' },
-        { title: translate.formatMessage(commonMessage.phone), dataIndex: 'phone', width: '130px' },
-        { title: translate.formatMessage(commonMessage.email), dataIndex: 'email' },
+        { title: translate.formatMessage(commonMessage.fullName), dataIndex: ['account','fullName'] },
+        { title: translate.formatMessage(commonMessage.phone), dataIndex: ['account','phone'], width: '130px' },
+        { title: translate.formatMessage(commonMessage.email), dataIndex: ['account','email'] },
         {
             title: translate.formatMessage(commonMessage.birthday),
             dataIndex: 'birthday',
@@ -70,7 +98,8 @@ const UserListPage = ({ pageOptions }) => {
         //     render: (createdDate) => convertUtcToTimezone(createdDate),
         // },
         // mixinFuncs.renderStatusColumn({ width: '90px' }),
-        mixinFuncs.renderActionColumn({ edit: true, delete: true }, { width: '130px' }),
+        mixinFuncs.renderActionColumn({ address:true, edit: true, delete: true }, { width: '120px' }),
+
     ];
 
     const searchFields = [

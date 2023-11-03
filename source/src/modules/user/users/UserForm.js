@@ -63,13 +63,16 @@ const UserForm = (props) => {
     };
 
     useEffect(() => {
+        dataDetail.phone=dataDetail?.account?.phone;
+        dataDetail.fullName=dataDetail?.account?.fullName;
+        dataDetail.email=dataDetail?.account?.email;
+
         dataDetail.birthday = dataDetail?.birthday && dayjs(dataDetail?.birthday, DATE_FORMAT_VALUE);
         form.setFieldsValue({
             ...dataDetail,
         });
         setImageUrl(dataDetail.avatar);
     }, [dataDetail]);
-
     return (
         <BaseForm id={formId} onFinish={handleSubmit} form={form} onValuesChange={onValuesChange}>
             <Card className="card-form" bordered={false}>
@@ -86,10 +89,11 @@ const UserForm = (props) => {
                 </Row>
                 <Row gutter={16}>
                     <Col span={12}>
-                        <TextField label={translate.formatMessage(commonMessage.fullName)} required name="name" />
+                        <TextField label={translate.formatMessage(commonMessage.fullName)} required name="fullName" />
                     </Col>
                     <Col span={12}>
                         <DatePickerField
+                            disabled={isEditing}
                             name="birthday"
                             placeholder="Ngày sinh"
                             style={{ width: '100%' }}
