@@ -8,6 +8,7 @@ import { FormattedMessage, defineMessages } from 'react-intl';
 import NationForm from './NationForm';
 import routes from './routes';
 import useTranslate from '@hooks/useTranslate';
+import { commonMessage } from '@locales/intl';
 
 const message = defineMessages({
     objectName: 'Nation',
@@ -23,7 +24,7 @@ const NationSavePage = () => {
         },
         options: {
             getListUrl: routes.nationListPage.path,
-            objectName: translate.formatMessage(message.objectName),
+            objectName: translate.formatMessage(commonMessage.Province),
         },
         override: (funcs) => {
             funcs.prepareUpdateData = (data) => {
@@ -42,9 +43,9 @@ const NationSavePage = () => {
 
     return (
         <PageWrapper
-            loading={loading }
+            loading={loading}
             routes={[
-                { breadcrumbName: <FormattedMessage defaultMessage="Nation" />, path: routes.nationListPage.path },
+                { breadcrumbName: translate.formatMessage(commonMessage.Province), path: routes.nationListPage.path },
                 { breadcrumbName: title },
             ]}
             title={title}

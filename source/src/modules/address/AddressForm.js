@@ -63,14 +63,14 @@ const AddressForm = (props) => {
             <Card className="card-form" bordered={false}>
                 <Row gutter={16}>
                     <Col span={12}>
-                        <TextField label={translate.formatMessage(commonMessage.name)} name="name" />
+                        <TextField label={translate.formatMessage(commonMessage.Name)} name="name" />
                     </Col>
                     <Col span={12}>
                         <TextField label={translate.formatMessage(commonMessage.phone)} name="phone" />
                     </Col>
                     <Col span={12}>
                         <AutoCompleteField
-                            label={translate.formatMessage(commonMessage.province)}
+                            label={translate.formatMessage(commonMessage.Province)}
                             name={['provinceInfo', 'id']}
                             apiConfig={apiConfig.nation.autocomplete}
                             mappingOptions={(item) => ({ value: item.id, label: item.name })}
@@ -81,7 +81,7 @@ const AddressForm = (props) => {
                     </Col>
                     <Col span={12}>
                         <AutoCompleteField
-                            label={translate.formatMessage(commonMessage.district)}
+                            label={translate.formatMessage(commonMessage.District)}
                             name={['districtInfo', 'id']}
                             apiConfig={apiConfig.nation.autocomplete}
                             mappingOptions={(item) => ({ value: item.id, label: item.name })}
@@ -92,7 +92,7 @@ const AddressForm = (props) => {
                     </Col>
                     <Col span={12}>
                         <AutoCompleteField
-                            label={translate.formatMessage(commonMessage.ward)}
+                            label={translate.formatMessage(commonMessage.Village)}
                             name={['wardInfo', 'id']}
                             apiConfig={apiConfig.nation.autocomplete}
                             mappingOptions={(item) => ({ value: item.id, label: item.name })}

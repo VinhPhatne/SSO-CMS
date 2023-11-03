@@ -11,10 +11,10 @@ import ListPage from '@components/common/layout/ListPage';
 import useTranslate from '@hooks/useTranslate';
 import { defineMessages } from 'react-intl';
 import AvatarField from '@components/common/form/AvatarField';
+import { commonMessage } from '@locales/intl';
 
 const message = defineMessages({
     objectName: 'category',
-    name: 'Name',
 });
 
 const CategoryListPageCommon = ({ routes, kind }) => {
@@ -60,7 +60,7 @@ const CategoryListPageCommon = ({ routes, kind }) => {
                 />
             ),
         },
-        { title: translate.formatMessage(message.name), dataIndex: 'name' },
+        { title: translate.formatMessage(commonMessage.name), dataIndex: 'name' },
         mixinFuncs.renderStatusColumn({ width: '90px' }, { width: '150px' }),
         mixinFuncs.renderActionColumn({ edit: true, delete: true }, { width: '150px' }),
     ];
@@ -68,7 +68,7 @@ const CategoryListPageCommon = ({ routes, kind }) => {
     const searchFields = [
         {
             key: 'name',
-            placeholder: translate.formatMessage(message.name),
+            placeholder: translate.formatMessage(commonMessage.name),
         },
     ];
 

@@ -4,9 +4,10 @@ import useBasicForm from '@hooks/useBasicForm';
 import TextField from '@components/common/form/TextField';
 import SelectField from '@components/common/form/SelectField';
 import useTranslate from '@hooks/useTranslate';
-import { nationKindOptions,statusOptions } from '@constants/masterData';
+import { nationKindOptions, statusOptions } from '@constants/masterData';
 import { FormattedMessage } from 'react-intl';
 import { BaseForm } from '@components/common/form/BaseForm';
+import { commonMessage } from '@locales/intl';
 
 const NationForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormValues, isEditing }) => {
     const translate = useTranslate();
@@ -17,7 +18,6 @@ const NationForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormVal
         onSubmit,
         setIsChangedFormValues,
     });
-
 
     const handleSubmit = (values) => {
         return mixinFuncs.handleSubmit({
@@ -46,21 +46,17 @@ const NationForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormVal
             <Card className="card-form" bordered={false}>
                 <Row gutter={10}>
                     <Col span={12}>
-                        <TextField required label={<FormattedMessage defaultMessage="Province Name" />} name="name" />
+                        <TextField required label={translate.formatMessage(commonMessage.Province)} name="name" />
                     </Col>
                     <Col span={12}>
-                        <TextField
-                            required
-                            label={<FormattedMessage defaultMessage="PostCode" />}
-                            name="postCode"
-                        />
+                        <TextField required label={<FormattedMessage defaultMessage="PostCode" />} name="postCode" />
                     </Col>
                 </Row>
                 <Row gutter={10}>
                     <Col span={12}>
                         <SelectField
                             required
-                            label={<FormattedMessage defaultMessage="Status" />}
+                            label={translate.formatMessage(commonMessage.status)}
                             name="status"
                             options={statusValues}
                         />
