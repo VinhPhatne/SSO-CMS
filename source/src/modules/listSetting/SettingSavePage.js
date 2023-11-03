@@ -33,19 +33,22 @@ const SettingSavePage = () => {
             objectName: translate.formatMessage(message.objectName),
         },
         override: (funcs) => {
-            funcs.prepareUpdateData = (data) => {
-                return {
-                    ...data,
-                    id: id,
-                };
-            };
-            funcs.prepareCreateData = (data) => {
-                return {
-                    ...data,
-                    isEditable: 0,
-                    isSystem: 0,
-                };
-            };
+            // funcs.prepareUpdateData = (data) => {
+            //     return {
+            //         ...data,
+            //         id: id,
+            //     };
+            // };
+            // funcs.prepareCreateData = (data) => {
+            //     return {
+            //         ...data,
+            //         isEditable: 1,
+            //         isSystem: 1,
+            //         status: 1,
+            //         settingKey: 'System Setting test2',
+            //         groupName: 'System',
+            //     };
+            // };
 
             funcs.mappingData = (data) => {
                 return {

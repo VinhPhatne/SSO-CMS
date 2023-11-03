@@ -7,7 +7,7 @@ import useTranslate from '@hooks/useTranslate';
 import { commonMessage } from '@locales/intl';
 import { BaseForm } from '@components/common/form/BaseForm';
 import SelectField from '@components/common/form/SelectField';
-import { statusOptions } from '@constants/masterData';
+import { formSize, statusOptions } from '@constants/masterData';
 
 const message = defineMessages({
     objectName: 'setting',
@@ -15,7 +15,7 @@ const message = defineMessages({
 
 const SettingForm = (props) => {
     const translate = useTranslate();
-    const { formId, actions, dataDetail, onSubmit, setIsChangedFormValues, groups, isEditing } = props;
+    const { formId, actions, dataDetail, onSubmit, setIsChangedFormValues, groups, isEditing, size = 'small' } = props;
     const statusValues = translate.formatKeys(statusOptions, ['label']);
 
     const { form, mixinFuncs, onValuesChange } = useBasicForm({
@@ -40,12 +40,24 @@ const SettingForm = (props) => {
         }
     }, [isEditing]);
     return (
-        <BaseForm id={formId} onFinish={handleSubmit} form={form} onValuesChange={onValuesChange}>
+        <BaseForm
+            id={formId}
+            onFinish={handleSubmit}
+            form={form}
+            onValuesChange={onValuesChange}
+            style={{ width: formSize[size] ?? size }}
+        >
             <Card className="card-form" bordered={false}>
-                <Row gutter={16}>
+                <Row>
                     <Col span={12}>
-                        <TextField label={translate.formatMessage(commonMessage.groupName)} required name="groupName" />
+                        <TextField
+                            label={translate.formatMessage(commonMessage.settingValue)}
+                            required
+                            name="settingValue"
+                        />
                     </Col>
+                </Row>
+                <Row>
                     <Col span={12}>
                         <TextField
                             label={translate.formatMessage(commonMessage.description)}
@@ -55,46 +67,6 @@ const SettingForm = (props) => {
                     </Col>
                 </Row>
 
-                {/* <Row gutter={16}>
-                    <Col span={12}>
-                        <TextField
-                            label={translate.formatMessage(commonMessage.isEditable)}
-                            required
-                            name="isEditable"
-                        />
-                    </Col>
-                    <Col span={12}>
-                        <TextField label={translate.formatMessage(commonMessage.isSystem)} required name="isSystem" />
-                    </Col>
-                </Row> */}
-
-                <Row gutter={16}>
-                    <Col span={12}>
-                        <TextField
-                            label={translate.formatMessage(commonMessage.settingKey)}
-                            required
-                            name="settingKey"
-                        />
-                    </Col>
-                    <Col span={12}>
-                        <TextField
-                            label={translate.formatMessage(commonMessage.settingValue)}
-                            required
-                            name="settingValue"
-                        />
-                    </Col>
-                </Row>
-
-                <Row gutter={16}>
-                    <Col span={12}>
-                        <SelectField
-                            required
-                            label={translate.formatMessage(commonMessage.status)}
-                            name="status"
-                            options={statusValues}
-                        />
-                    </Col>
-                </Row>
                 <div className="footer-card-form">{actions}</div>
             </Card>
         </BaseForm>
