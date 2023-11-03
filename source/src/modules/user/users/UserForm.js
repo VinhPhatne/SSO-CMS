@@ -50,8 +50,6 @@ const UserForm = (props) => {
     };
 
     const handleSubmit = (values) => {
-        values.fullName= values.account.fullName;
-        values.phone= values.account.phone;
         values.birthday = formatDateString(values?.birthday, DATE_FORMAT_VALUE) + ' 00:00:00';
         return mixinFuncs.handleSubmit({ ...values, avatar: imageUrl });
     };
@@ -88,7 +86,7 @@ const UserForm = (props) => {
                 </Row>
                 <Row gutter={16}>
                     <Col span={12}>
-                        <TextField label={translate.formatMessage(commonMessage.fullName)} required name={["account","fullName"]} />
+                        <TextField label={translate.formatMessage(commonMessage.fullName)} required name="fullName" />
                     </Col>
                     <Col span={12}>
                         <DatePickerField
@@ -112,7 +110,7 @@ const UserForm = (props) => {
                     <Col span={12}>
                         <TextField
                             label={translate.formatMessage(commonMessage.email)}
-                            name={["account","email"]}
+                            name="email"
                             type="email"
                             required={!isEditing}
                         />
@@ -121,7 +119,7 @@ const UserForm = (props) => {
                         <TextField
                             label={translate.formatMessage(commonMessage.phone)}
                             type="number"
-                            name={["account","phone"]}
+                            name="phone"
                             required
                         />
                     </Col>
