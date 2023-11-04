@@ -52,7 +52,7 @@ const DistrictListPage = () => {
             };
             funcs.getList = () => {
                 const params = mixinFuncs.prepareGetListParams(queryFilter);
-                mixinFuncs.handleFetchList({ ...params, kind: 2, provinceId: null });
+                mixinFuncs.handleFetchList({ ...params, kind: 2, parentId: provinceId, provinceId: null });
             };
             funcs.getCreateLink = () => {
                 return `${pagePath}/create?provinceId=${provinceId}&provinceName=${provinceName}`;
