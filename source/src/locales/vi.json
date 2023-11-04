@@ -131,6 +131,7 @@
     "modules.user.index.username": "Tên đăng nhập",
     "modules.settings.SettingSavePage.objectName": "cài đặt",
     "modules.listSetting.SettingSavePage.objectName": "thiết lập",
+    "modules.listSetting.index.objectName": "thiết lập",
     "constants.menuConfig.106035384": "Quyền hạn",
     "constants.menuConfig.1391686013": "Hệ thống",
     "constants.menuConfig.166378505": "Cài đặt",
@@ -173,5 +174,8 @@
     "locales.intl.commonMessage.nation": "Cấp",
     "locales.intl.commonMessage.Nation": "Danh mục tỉnh thành",
     "locales.intl.commonMessage.showSystemSettings": "Hiển thị cài đặt hệ thống",
-    "locales.intl.commonMessage.hideSystemSettings": "Ẩn cài đặt hệ thống"
+    "locales.intl.commonMessage.hideSystemSettings": "Ẩn cài đặt hệ thống",
+    "locales.intl.commonMessage.timeZone": "Múi giờ",
+    "locales.intl.commonMessage.money": "Tiền tệ",
+    "locales.intl.commonMessage.system": "Hệ thống"
 }

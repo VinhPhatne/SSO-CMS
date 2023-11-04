@@ -20,7 +20,7 @@ const SettingListPage = () => {
     const translate = useTranslate();
     const [activeTab, setActiveTab] = useState(localStorage.getItem('activeSettingTab') ?? 'Money');
     const { isAdmin } = useAuth();
-    const { data, mixinFuncs, queryFilter, loading, pagination } = useListBase({
+    const { data, mixinFuncs, queryFilter, loading } = useListBase({
         apiConfig: apiConfig.settings,
         options: {
             pageSize: DEFAULT_TABLE_ITEM_SIZE,
@@ -36,6 +36,7 @@ const SettingListPage = () => {
             funcs.mappingData = (response) => {
                 if (response.result === true) {
                     const setting = {};
+
                     response.data.content.forEach((item) => {
                         if (setting[item.groupName] == undefined) {
                             setting[item.groupName] = {};
@@ -76,7 +77,7 @@ const SettingListPage = () => {
 
     const searchFields = [
         {
-            options: isSystemSettingOptions,
+            options: translate.formatKeys(isSystemSettingOptions, ['label']),
             key: 'isSystem',
             submitOnChanged: true,
             placeholder: 'System settings',
@@ -88,6 +89,19 @@ const SettingListPage = () => {
                 ),
         },
     ];
+
+    const getTabsTranslatedLabel = (value) => {
+        if (value == 'Timezone') {
+            return translate.formatMessage(commonMessage.timeZone);
+        }
+        if (value == 'Money') {
+            return translate.formatMessage(commonMessage.money);
+        }
+        if (value == 'System') {
+            return translate.formatMessage(commonMessage.system);
+        }
+    };
+
     return (
         <PageWrapper routes={[{ breadcrumbName: translate.formatMessage(commonMessage.listSetting) }]}>
             <ListPage
@@ -107,7 +121,7 @@ const SettingListPage = () => {
                         activeKey={activeTab}
                         items={Object.keys(data).map((item) => {
                             return {
-                                label: item,
+                                label: getTabsTranslatedLabel(item),
                                 key: item,
                                 children: (
                                     <BaseTable

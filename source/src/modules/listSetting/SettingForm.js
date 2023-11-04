@@ -16,7 +16,7 @@ const message = defineMessages({
 
 const SettingForm = (props) => {
     const translate = useTranslate();
-    const { formId, actions, dataDetail, onSubmit, setIsChangedFormValues, groups, isEditing, size = 'small' } = props;
+    const { formId, actions, dataDetail, onSubmit, setIsChangedFormValues, isEditing, size = 'small' } = props;
     const statusValues = translate.formatKeys(statusOptions, ['label']);
     const [otherData, setOther] = useState({});
 
@@ -58,15 +58,13 @@ const SettingForm = (props) => {
         >
             <Card className="card-form" bordered={false}>
                 <Row>
-                    <Col span={12}>
+                    <Col span={24}>
                         {dataDetail.groupName == 'Timezone' ? (
                             <SelectField
                                 onSelect={onSelectTimezone}
                                 name="timezone"
                                 label={translate.formatMessage(commonMessage.settingValue)}
                                 options={timezone}
-                                // initialValue="Africa/Abidjan"
-                                // optionOther="offset"
                             />
                         ) : (
                             <TextField
