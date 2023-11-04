@@ -3,7 +3,7 @@ import useListBase from '@hooks/useListBase';
 import React, { useState } from 'react';
 import BaseTable from '@components/common/table/BaseTable';
 
-import { DEFAULT_TABLE_ITEM_SIZE, isSystemSettingOptions } from '@constants';
+import { DEFAULT_TABLE_ITEM_SIZE, SettingTypes, isSystemSettingOptions } from '@constants';
 import PageWrapper from '@components/common/layout/PageWrapper';
 import ListPage from '@components/common/layout/ListPage';
 import { defineMessages } from 'react-intl';
@@ -18,7 +18,7 @@ const message = defineMessages({
 });
 const SettingListPage = () => {
     const translate = useTranslate();
-    const [activeTab, setActiveTab] = useState(localStorage.getItem('activeSettingTab') ?? 'Money');
+    const [activeTab, setActiveTab] = useState(localStorage.getItem('activeSettingTab') ?? SettingTypes.Money);
     const { isAdmin } = useAuth();
     const { data, mixinFuncs, queryFilter, loading } = useListBase({
         apiConfig: apiConfig.settings,
@@ -91,13 +91,13 @@ const SettingListPage = () => {
     ];
 
     const getTabsTranslatedLabel = (value) => {
-        if (value == 'Timezone') {
+        if (value == SettingTypes.Timezone) {
             return translate.formatMessage(commonMessage.timeZone);
         }
-        if (value == 'Money') {
+        if (value == SettingTypes.Money) {
             return translate.formatMessage(commonMessage.money);
         }
-        if (value == 'System') {
+        if (value == SettingTypes.System) {
             return translate.formatMessage(commonMessage.system);
         }
     };
