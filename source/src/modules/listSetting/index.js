@@ -3,7 +3,7 @@ import useListBase from '@hooks/useListBase';
 import React, { useState } from 'react';
 import BaseTable from '@components/common/table/BaseTable';
 
-import { DEFAULT_TABLE_ITEM_SIZE, isSystemSettingOptions } from '@constants';
+import { DEFAULT_TABLE_ITEM_SIZE, SettingTypes, isSystemSettingOptions } from '@constants';
 import PageWrapper from '@components/common/layout/PageWrapper';
 import ListPage from '@components/common/layout/ListPage';
 import { defineMessages } from 'react-intl';
@@ -18,9 +18,9 @@ const message = defineMessages({
 });
 const SettingListPage = () => {
     const translate = useTranslate();
-    const [activeTab, setActiveTab] = useState(localStorage.getItem('activeSettingTab') ?? 'Money');
+    const [activeTab, setActiveTab] = useState(localStorage.getItem('activeSettingTab') ?? SettingTypes.Money);
     const { isAdmin } = useAuth();
-    const { data, mixinFuncs, queryFilter, loading, pagination } = useListBase({
+    const { data, mixinFuncs, queryFilter, loading } = useListBase({
         apiConfig: apiConfig.settings,
         options: {
             pageSize: DEFAULT_TABLE_ITEM_SIZE,
@@ -36,6 +36,7 @@ const SettingListPage = () => {
             funcs.mappingData = (response) => {
                 if (response.result === true) {
                     const setting = {};
+
                     response.data.content.forEach((item) => {
                         if (setting[item.groupName] == undefined) {
                             setting[item.groupName] = {};
@@ -76,7 +77,7 @@ const SettingListPage = () => {
 
     const searchFields = [
         {
-            options: isSystemSettingOptions,
+            options: translate.formatKeys(isSystemSettingOptions, ['label']),
             key: 'isSystem',
             submitOnChanged: true,
             placeholder: 'System settings',
@@ -88,6 +89,19 @@ const SettingListPage = () => {
                 ),
         },
     ];
+
+    const getTabsTranslatedLabel = (value) => {
+        if (value == SettingTypes.Timezone) {
+            return translate.formatMessage(commonMessage.timeZone);
+        }
+        if (value == SettingTypes.Money) {
+            return translate.formatMessage(commonMessage.money);
+        }
+        if (value == SettingTypes.System) {
+            return translate.formatMessage(commonMessage.system);
+        }
+    };
+
     return (
         <PageWrapper routes={[{ breadcrumbName: translate.formatMessage(commonMessage.listSetting) }]}>
             <ListPage
@@ -107,7 +121,7 @@ const SettingListPage = () => {
                         activeKey={activeTab}
                         items={Object.keys(data).map((item) => {
                             return {
-                                label: item,
+                                label: getTabsTranslatedLabel(item),
                                 key: item,
                                 children: (
                                     <BaseTable

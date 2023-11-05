@@ -1,3 +1,5 @@
+import { commonMessage } from '@locales/intl';
+
 export const apiUrl = process.env.REACT_APP_API;
 export const enableExposure = process.env.REACT_APP_ENABLE_EXPOSURE === 'true';
 
@@ -117,10 +119,16 @@ export const groupPermissionKindsOptions = [
 ];
 
 export const isSystemSettingOptions = [
-    { label: 'Hiển thị cài đặt hệ thống', value: 1 },
-    { label: 'Ẩn cài đặt hệ thống', value: 0 },
+    { label: commonMessage.showSystemSettings, value: 1 },
+    { label: commonMessage.hideSystemSettings, value: 0 },
 ];
 
 export const PROVINCE_KIND = 1;
 export const DISTRICT_KIND = 2;
 export const VILLAGE_KIND = 3;
+
+export const SettingTypes = {
+    Money: 'Money',
+    Timezone: 'Timezone',
+    System: 'System',
+};
