@@ -1,6 +1,6 @@
 import apiConfig from '@constants/apiConfig';
 import useListBase from '@hooks/useListBase';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import BaseTable from '@components/common/table/BaseTable';
 
 import { DEFAULT_TABLE_ITEM_SIZE, SettingTypes, isSystemSettingOptions } from '@constants';
@@ -47,6 +47,10 @@ const SettingListPage = () => {
                         setting[item.groupName].total++;
                         setting[item.groupName].data.push(item);
                     });
+                    if (Object.keys(setting).length > 0) {
+                        localStorage.setItem('activeSettingTab', Object.keys(setting)[0]);
+                        setActiveTab(Object.keys(setting)[0]);
+                    }
                     return {
                         data: setting,
                         total: response.data.totalElements,
