@@ -53,7 +53,7 @@ const LoginPage = () => {
                     onFinish={onFinish}
                     initialValues={{
                         username: 'admin',
-                        password: 'admin123654',
+                        password: '123456',
                     }}
                     layout="vertical"
                 >

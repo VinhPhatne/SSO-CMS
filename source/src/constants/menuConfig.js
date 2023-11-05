@@ -50,7 +50,7 @@ const navMenuConfig = [
         ],
     },
     {
-        label: <FormattedMessage defaultMessage="Settings" />,
+        label: <FormattedMessage defaultMessage="Systems" />,
         key: 'system-management',
         icon: <ControlOutlined />,
         children: [
