@@ -1,6 +1,6 @@
 import apiConfig from '@constants/apiConfig';
 import useListBase from '@hooks/useListBase';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import BaseTable from '@components/common/table/BaseTable';
 
 import { DEFAULT_TABLE_ITEM_SIZE, SettingTypes, isSystemSettingOptions } from '@constants';
