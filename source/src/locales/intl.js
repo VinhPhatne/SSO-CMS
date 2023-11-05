@@ -32,7 +32,7 @@ export const commonMessage = defineMessages({
     description: 'Description',
     groupPermission: 'Group Permission',
     listSetting: 'List Setting',
-    settingValue: 'Setting Value',
+    settingValue: 'Value',
     groupName: 'Group Name',
     isEditable: 'Is Editable',
     isSystem: 'Is System',
@@ -53,4 +53,7 @@ export const commonMessage = defineMessages({
     Nation: 'Nation',
     showSystemSettings: 'Show system settings',
     hideSystemSettings: 'Hide system settings',
+    timeZone: 'Timezone',
+    money: 'Money',
+    system: 'System',
 });

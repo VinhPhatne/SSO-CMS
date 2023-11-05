@@ -13,7 +13,7 @@ const DistrictForm = ({ formId, actions, dataDetail, onSubmit, setIsChangedFormV
     const translate = useTranslate();
 
     const queryParameters = new URLSearchParams(window.location.search);
-    const parentId = queryParameters.get('parentId');
+    const parentId = queryParameters.get('provinceId');
     const provinceName = queryParameters.get('provinceName');
 
     const nationValues = translate.formatKeys(nationKindOptions, ['label']);

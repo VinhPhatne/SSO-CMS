@@ -34,17 +34,6 @@ const SettingSavePage = () => {
                     status: 1,
                 };
             };
-            // funcs.prepareCreateData = (data) => {
-            //     return {
-            //         ...data,
-            //         isEditable: 1,
-            //         isSystem: 1,
-            //         status: 1,
-            //         settingKey: 'System Setting test2',
-            //         groupName: 'System',
-            //     };
-            // };
-
             funcs.mappingData = (data) => {
                 return {
                     ...data.data,

@@ -12,6 +12,7 @@ import useTranslate from '@hooks/useTranslate';
 import { defineMessages } from 'react-intl';
 import AvatarField from '@components/common/form/AvatarField';
 import { commonMessage } from '@locales/intl';
+import { showErrorMessage } from '@services/notifyService';
 
 const message = defineMessages({
     objectName: 'category',
@@ -42,6 +43,11 @@ const CategoryListPageCommon = ({ routes, kind }) => {
                     ...prepareGetListParams(params),
                     kind: kind,
                 };
+            };
+            funcs.handleDeleteItemError = (error) => {
+                if (error) {
+                    showErrorMessage('Danh mục đang được sử dụng, Không xóa được');
+                }
             };
         },
     });
