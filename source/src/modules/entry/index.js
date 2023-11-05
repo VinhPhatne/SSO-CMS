@@ -1,9 +1,7 @@
-import routes from '@routes';
+import notFoundImage from '@assets/images/bg_404.png';
 import React from 'react';
-import { Navigate } from 'react-router-dom';
-
 const Dashboard = () => {
-    return <Navigate to={routes.adminsListPage.path} />;
+    return <img alt="not-found-background" src={notFoundImage} />;
 };
 
 export default Dashboard;

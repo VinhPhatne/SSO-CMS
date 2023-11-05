@@ -3,11 +3,11 @@ import logo from '@assets/images/logo.png';
 import { Layout, Menu } from 'antd';
 import React, { useMemo } from 'react';
 
-import navMenuConfig from '@constants/menuConfig';
 import useAuth from '@hooks/useAuth';
 import { matchPath, useLocation, useNavigate } from 'react-router-dom';
 import styles from './NavSider.module.scss';
 import useValidatePermission from '@hooks/useValidatePermission';
+import { navMenuConfig } from '@constants/menuConfig';
 const { Sider } = Layout;
 
 const NavSider = ({ collapsed, onCollapse, width }) => {

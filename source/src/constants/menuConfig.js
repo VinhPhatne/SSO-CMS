@@ -4,7 +4,7 @@ import routes from '@routes';
 import { FormattedMessage } from 'react-intl';
 import apiConfig from './apiConfig';
 
-const navMenuConfig = [
+export const navMenuConfig = [
     {
         label: <FormattedMessage defaultMessage="User management" />,
         key: 'user-management',
@@ -75,5 +75,3 @@ const navMenuConfig = [
         ],
     },
 ];
-
-export default navMenuConfig;
