@@ -47,6 +47,10 @@ const SettingListPage = () => {
                         setting[item.groupName].total++;
                         setting[item.groupName].data.push(item);
                     });
+                    if (Object.keys(setting).length > 0) {
+                        localStorage.setItem('activeSettingTab', Object.keys(setting)[0]);
+                        setActiveTab(Object.keys(setting)[0]);
+                    }
                     return {
                         data: setting,
                         total: response.data.totalElements,

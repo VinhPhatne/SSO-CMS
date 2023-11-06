@@ -55,7 +55,7 @@ const useListBase = ({
             edit: false,
             delete: false,
         },
-        paramsHolder: {},
+        ignoreQueryParams: [],
     },
     override,
 } = {}) => {
@@ -143,7 +143,15 @@ const useListBase = ({
     };
 
     const getList = (isReload = false) => {
-        const params = mixinFuncs.prepareGetListParams(queryFilter);
+        let querys = queryFilter;
+        if (options.ignoreQueryParams?.length > 0) {
+            Object.entries(queryFilter).forEach(([key, value]) => {
+                if (options.ignoreQueryParams.includes(key)) delete querys[key];
+                else querys[key] = value;
+            });
+        }
+
+        const params = mixinFuncs.prepareGetListParams(querys);
 
         mixinFuncs.handleFetchList({ ...params }, isReload);
     };
@@ -516,7 +524,6 @@ const useListBase = ({
             prepareGetListPathParams,
             generateParams,
             setQueryParams,
-
         };
 
         override?.(centralizedHandler);

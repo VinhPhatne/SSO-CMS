@@ -16,13 +16,16 @@ import { showErrorMessage } from '@services/notifyService';
 import { appAccount, brandName } from '@constants';
 import { commonMessage } from '@locales/intl';
 import { Buffer } from 'buffer';
+import useTranslate from '@hooks/useTranslate';
 window.Buffer = window.Buffer || Buffer;
 const message = defineMessages({
     copyRight: '{brandName} - © Copyright {year}. All Rights Reserved',
+    loginFail: 'Sai tên đăng nhập hoặc mật khẩu !!!',
 });
 
 const LoginPage = () => {
     const intl = useIntl();
+    const translate = useTranslate();
     const base64Credentials = Buffer.from(`${appAccount.APP_USERNAME}:${appAccount.APP_PASSWORD}`).toString('base64');
     const { execute, loading } = useFetch({
         ...apiConfig.account.loginBasic,
@@ -40,7 +43,7 @@ const LoginPage = () => {
                 setCacheAccessToken(res.access_token);
                 executeGetProfile();
             },
-            onError: ({ message }) => showErrorMessage(message),
+            onError: () => showErrorMessage(translate.formatMessage(message.loginFail)),
         });
     };
 
@@ -53,7 +56,7 @@ const LoginPage = () => {
                     onFinish={onFinish}
                     initialValues={{
                         username: 'admin',
-                        password: 'admin123654',
+                        password: '123456',
                     }}
                     layout="vertical"
                 >
